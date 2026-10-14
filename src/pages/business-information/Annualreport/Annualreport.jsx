@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
-import "./AnnualReport.css";
+import "./Annualreport.css";
 
 /* ---- EDIT THESE ---- */
 const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
