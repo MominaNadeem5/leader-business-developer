@@ -1,0 +1,56 @@
+/* ===== Icon Component ===== */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-soft);
+  color: var(--color-icon);
+}
+
+/* Icon Sizes */
+.icon--sm {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+}
+
+.icon--md {
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+}
+
+.icon--lg {
+  width: 58px;
+  height: 58px;
+  font-size: 26px;
+}
+
+.icon--xl {
+  width: 72px;
+  height: 72px;
+  font-size: 32px;
+}
+
+/* Icon Variants */
+.icon--default {
+  /* Default styles applied above */
+}
+
+.icon--dark {
+  background: var(--color-dark);
+  color: var(--color-primary-light);
+}
+
+.icon--border {
+  background: transparent;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.icon--border:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}

@@ -1,0 +1,179 @@
+/* Animated formation card (hero right side) */
+.llc-flow {
+  padding: 22px;
+  background: linear-gradient(160deg, #f6fffa 0%, #ecfdf3 100%);
+  animation: flow-float 6s ease-in-out infinite;
+}
+
+@keyframes flow-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.llc-flow__inner {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 20px 20px;
+  box-shadow: 0 6px 24px rgba(10, 58, 42, 0.08);
+}
+
+.llc-flow__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.llc-flow__headline {
+  animation: flow-fade 0.5s ease both;
+}
+
+.llc-flow__eyebrow {
+  display: block;
+  font-size: 11.5px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.llc-flow__title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #0a3a2a;
+}
+
+.llc-flow__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #0a3a2a;
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  transition: background 0.4s ease;
+}
+
+.llc-flow__badge.is-done {
+  background: #2fa24f;
+}
+
+.llc-flow__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fbbf24;
+  animation: flow-pulse 1.4s ease-in-out infinite;
+}
+
+.llc-flow__badge.is-done .llc-flow__dot {
+  background: #fff;
+  animation: none;
+}
+
+@keyframes flow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+  50% { box-shadow: 0 0 0 5px rgba(251, 191, 36, 0); }
+}
+
+/* Progress */
+.llc-flow__steps {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eef0f2;
+}
+
+.llc-flow__bar {
+  height: 4px;
+  border-radius: 4px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.llc-flow__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 4px;
+  background: #0a3a2a;
+  transition: width 0.6s ease, background 0.3s ease;
+}
+
+.llc-flow__step.is-complete .llc-flow__fill {
+  width: 100%;
+}
+
+.llc-flow__step.is-current .llc-flow__fill {
+  background: linear-gradient(90deg, #d4a017, #fbbf24);
+  animation: flow-fill 2.6s linear forwards;
+}
+
+@keyframes flow-fill {
+  from { width: 8%; }
+  to { width: 100%; }
+}
+
+.llc-flow__label {
+  display: block;
+  margin-top: 8px;
+  font-size: 10.5px;
+  color: #9ca3af;
+  transition: color 0.3s ease;
+}
+
+.llc-flow__step.is-complete .llc-flow__label {
+  color: #6b7280;
+}
+
+.llc-flow__step.is-current .llc-flow__label {
+  color: #0a3a2a;
+  font-weight: 700;
+}
+
+/* Meta row */
+.llc-flow__meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 14px;
+  animation: flow-fade 0.5s ease both;
+}
+
+.llc-flow__meta-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.llc-flow__meta strong {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #0a3a2a;
+}
+
+@keyframes flow-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .llc-flow,
+  .llc-flow__dot,
+  .llc-flow__headline,
+  .llc-flow__meta,
+  .llc-flow__step.is-current .llc-flow__fill {
+    animation: none;
+  }
+  .llc-flow__step.is-current .llc-flow__fill { width: 60%; }
+}

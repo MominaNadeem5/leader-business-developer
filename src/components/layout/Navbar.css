@@ -1,0 +1,311 @@
+/* ===== Navbar Component ===== */
+
+.nav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  gap: var(--space-md);
+}
+
+.nav__logo {
+  height: 44px;
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--space-2xl);
+  align-self: stretch;
+}
+
+.nav__links > li {
+  display: flex;
+}
+
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  color: var(--color-text-nav);
+  transition: color var(--transition-fast);
+}
+
+.nav__link:hover {
+  color: var(--color-primary);
+}
+
+.nav__link.is-active {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin: var(--space-sm);
+}
+
+.nav__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--color-primary);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Business trigger button */
+.nav__trigger {
+  background: none;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.nav__chevron {
+  transition: transform var(--transition-fast);
+}
+
+.nav__chevron.is-flipped {
+  transform: rotate(180deg);
+}
+
+/* ===== Mega dropdown ===== */
+.nav__mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 0 40px;
+  animation: navMegaIn 0.18s ease-out;
+}
+
+@keyframes navMegaIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.nav__mega-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 40px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.nav__mega-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.nav__mega-cta {
+  flex: 0 0 340px;
+}
+
+.nav__mega {
+  max-height: calc(100vh - var(--nav-height));
+  overflow-y: auto;
+}
+
+.nav__mega-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--color-text, inherit);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav__mega-icon {
+  color: var(--color-primary);
+}
+
+.nav__mega-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__mega-link {
+  display: block;
+  padding: 8px 0;
+  font-size: 16px;
+  color: var(--color-text-nav);
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.nav__mega-link:hover {
+  color: var(--color-primary);
+  padding-left: 6px;
+}
+
+.nav__mega-divider {
+  width: 80px;
+  margin: 18px 0;
+  border: 0;
+  border-top: 1px solid var(--color-text-nav);
+}
+
+.nav__mega-all {
+  font-weight: 700;
+  text-decoration: underline;
+  color: var(--color-text, inherit);
+}
+
+.nav__mega-all:hover {
+  color: var(--color-primary);
+}
+
+/* CTA Section in Mega Menu */
+.nav__mega-cta {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: fit-content;
+}
+
+.nav__mega-cta-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #2fa24f, #1f7a3a);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.nav__mega-cta-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #0a3a2a;
+}
+
+.nav__mega-cta-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #2a4a60;
+  margin: 0;
+}
+
+.nav__mega-cta button {
+  width: 100%;
+  justify-content: center;
+}
+
+.nav__mega-cta-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(46, 160, 90, 0.2);
+}
+
+.nav__mega-cta-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #2a4a60;
+}
+
+.nav__mega-cta-contact-item svg {
+  color: #2fa24f;
+  flex-shrink: 0;
+}
+
+.nav__actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.nav__toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: var(--color-text-nav);
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav__toggle {
+    display: block;
+  }
+
+  .nav__actions {
+    display: none;
+  }
+
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    flex-direction: column;
+    gap: 0;
+    align-self: auto;
+    padding: var(--space-sm) var(--space-xl) var(--space-2xl);
+    border-bottom: 1px solid var(--color-border);
+    max-height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+  }
+
+  .nav__links.is-open {
+    display: flex;
+  }
+
+  .nav__links > li {
+    flex-direction: column;
+    padding: var(--space-sm) 0;
+  }
+
+  .nav__link.is-active::after {
+    display: none;
+  }
+
+  /* dropdown mobile par list ke andar khulta hai */
+  .nav__mega {
+    position: static;
+    box-shadow: none;
+    border: 0;
+    padding: 16px 0 0;
+    animation: none;
+  }
+
+  .nav__mega-grid {
+    flex-direction: column;
+    gap: 28px;
+    padding: 0;
+  }
+
+  .nav__mega-col {
+    min-width: 100%;
+  }
+
+  .nav__mega-cta {
+    flex: 0 0 auto;
+    width: 100%;
+    order: -1;
+  }
+}

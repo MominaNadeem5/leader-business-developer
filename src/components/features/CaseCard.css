@@ -1,0 +1,465 @@
+.case-stage {
+  /* timeline defaults (JSX inline style inhe override karta hai) */
+  --t0: 0.7s;
+  --gap: 1s;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1200px;
+  overflow: visible;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.case-box {
+  width: min(460px, 94vw);
+  position: relative;
+  padding: 35px 30px;
+  transform-style: preserve-3d;
+}
+
+/* =========================
+   CASE CARD
+========================= */
+
+.case {
+  position: relative;
+  z-index: 2;
+  padding: 26px 22px 24px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #1a6a68 0%, #0f4348 55%, #08303a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 30px 60px rgba(0, 35, 43, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  opacity: 0;
+}
+
+.case::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.08), transparent 35%);
+  pointer-events: none;
+}
+
+/* =========================
+   TOP
+========================= */
+
+.case__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  opacity: 0;
+}
+
+.case__no {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.case__top h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 23px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* =========================
+   STATUS PILL
+========================= */
+
+.case__pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background: rgba(61, 211, 132, 0.14);
+  color: #58df91;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0;
+}
+
+.pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #57e18e;
+  box-shadow:
+    0 0 0 3px rgba(87, 225, 142, 0.12),
+    0 0 12px rgba(87, 225, 142, 0.45);
+}
+
+/* =========================
+   STEPS
+========================= */
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.case__row {
+  position: relative;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* right padding bada: popups overlap karein to "Done" na dhake */
+  padding: 0 54px 0 14px;
+  border-radius: 13px;
+  background: rgba(3, 38, 47, 0.65);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14.5px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-25px) scale(0.97);
+}
+
+.case__row.is-next {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   CHECK ICON
+========================= */
+
+.case__dot {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.case__dot.is-done {
+  color: #063c2b;
+  background: #54df8d;
+  opacity: 0;
+}
+
+.case__dot.is-empty {
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  background: transparent;
+}
+
+.step-label {
+  flex: 1;
+}
+
+.case__status {
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 12.5px;
+  opacity: 0;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.case__progress {
+  margin-top: 16px;
+  padding: 0 4px;
+  opacity: 0;
+}
+
+.case__progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.case__bar {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+/* width JS se set hoti hai (number ke sath sync) */
+.case__bar i {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: #55df91;
+  box-shadow: 0 0 12px rgba(85, 223, 145, 0.45);
+}
+
+/* =========================
+   FLOATING POPUPS
+========================= */
+
+.chip {
+  /* kab aaye: row ke baad .6s, same row ke 2nd popup ko extra .5s */
+  --in: calc(var(--t0) + var(--i) * var(--gap) + 0.6s + var(--o, 0) * 0.5s);
+  --fx: 0px;
+  --fy: 0px;
+  --fd: -6px;
+
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 9px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.97);
+  color: #173740;
+  font-size: 13px;
+  font-weight: 650;
+  box-shadow:
+    0 16px 32px rgba(0, 30, 40, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(var(--fx), var(--fy)) scale(0.8);
+}
+
+.chip b {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #eaf8f2;
+  color: #087e68;
+}
+
+/* =========================
+   POPUP POSITIONS
+   Saare popups card ke kinaron se chipke hue khulte hain (photo par nahi)
+========================= */
+
+/* Company formed: card ke top edge par, left */
+.c0 {
+  top: 8px;
+  left: 54px;
+  --fx: -35px;
+  --fy: 0px;
+  --fd: 6px;
+}
+
+/* EIN issued: card ke right edge se chipka hua, upar */
+.c1 {
+  top: 34%;
+  left: calc(100% - 44px);
+  right: auto;
+  --fx: 30px;
+  --fy: -16px;
+  --fd: -7px;
+}
+
+/* Bank account opened: card ke right edge se chipka hua, neeche */
+.c2 {
+  top: 63%;
+  left: calc(100% - 44px);
+  right: auto;
+  --fx: 30px;
+  --fy: 16px;
+  --fd: 7px;
+}
+
+/* Stripe connected: bottom edge, right */
+.c3 {
+  bottom: 8px;
+  left: calc(100% - 200px);
+  --fx: 30px;
+  --fy: 28px;
+  --fd: -6px;
+}
+
+/* Website live: bottom edge, left */
+.c4 {
+  bottom: 8px;
+  left: 74px;
+  --fx: -20px;
+  --fy: 30px;
+  --fd: 6px;
+}
+
+/* =========================
+   PLAY (jab section screen par aaye)
+========================= */
+
+/* card */
+.is-play .case {
+  animation: cardReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.is-play .case__top {
+  animation: contentReveal 0.7s 0.2s both;
+}
+
+.is-play .case__pill {
+  animation:
+    pillReveal 0.6s 0.4s both,
+    pillPulse 2.5s 1.5s ease-in-out infinite;
+}
+
+/* rows: ek ek karke */
+.is-play .case__row {
+  animation: stepReveal 0.6s calc(var(--t0) + var(--i) * var(--gap)) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* check mark row ke baad pop hota hai */
+.is-play .case__dot.is-done {
+  animation: checkPop 0.5s calc(var(--t0) + var(--i) * var(--gap) + 0.35s) cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.is-play .case__status {
+  animation: fadeIn 0.4s calc(var(--t0) + var(--i) * var(--gap) + 0.45s) both;
+}
+
+/* "Next" wali row ka dashed circle ghoomta hai */
+.is-play .case__dot.is-empty {
+  animation: spin 6s calc(var(--t0) + var(--i) * var(--gap) + 0.6s) linear infinite;
+}
+
+/* progress area: aakhri row ke baad dikhta hai */
+.is-play .case__progress {
+  animation: fadeIn 0.5s calc(var(--t0) + 3 * var(--gap) + 0.5s) both;
+}
+
+/* popups: row ke sath, phir halka floating */
+.is-play .chip {
+  animation-name: chipIn, chipFloat;
+  animation-duration: 0.7s, 4.5s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1), ease-in-out;
+  animation-delay: var(--in), calc(var(--in) + 0.9s);
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: forwards, none;
+}
+
+/* =========================
+   KEYFRAMES
+========================= */
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px) rotateX(8deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+}
+
+@keyframes contentReveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pillReveal {
+  from { opacity: 0; transform: translateX(15px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes pillPulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(82, 223, 143, 0); }
+  50%      { box-shadow: 0 0 18px rgba(82, 223, 143, 0.15); }
+}
+
+@keyframes stepReveal {
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes checkPop {
+  0%   { opacity: 0; transform: scale(0); }
+  70%  { opacity: 1; transform: scale(1.25); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes chipIn {
+  to { opacity: 1; transform: translate(0, 0) scale(1); }
+}
+
+@keyframes chipFloat {
+  0%, 100% { margin-top: 0; }
+  50%      { margin-top: var(--fd); }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .case-box {
+    width: 94vw;
+    padding: 30px 12px;
+  }
+
+  .case {
+    padding: 22px 15px 18px;
+  }
+
+  .case__row {
+    height: 46px;
+    font-size: 13px;
+    padding-right: 14px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 8px 10px 8px 8px;
+  }
+
+  .chip b {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* mobile par popups sirf upar/neeche ke kinaron par */
+  .c0 { top: 8px; left: 12px; }
+  .c1 { top: 8px; left: auto; right: 14px; --fx: 20px; }
+  .c2 { top: auto; bottom: 8px; left: auto; right: 14px; --fx: 20px; --fy: 20px; }
+  .c3 { display: none; }
+  .c4 { bottom: 8px; left: 12px; }
+}
+
+/* motion kam chahne walon ke liye */
+@media (prefers-reduced-motion: reduce) {
+  .is-play .case,
+  .is-play .case__top,
+  .is-play .case__pill,
+  .is-play .case__row,
+  .is-play .case__dot,
+  .is-play .case__status,
+  .is-play .case__progress,
+  .is-play .chip {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

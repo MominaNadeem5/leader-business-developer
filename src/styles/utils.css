@@ -1,0 +1,100 @@
+/* ===== Utility Classes ===== */
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Section spacing */
+.section {
+  padding: var(--space-1xl) 0;
+}
+
+/* Eyebrow text (small uppercase label) */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* Section headings */
+.section h2 {
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.1;
+  margin: 0 0 2px;
+  letter-spacing: -0.8px;
+}
+
+.section .sub {
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2xl);
+}
+
+/* Grid utilities */
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+/* Icon circle base */
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-soft);
+  color: var(--color-icon);
+  display: grid;
+  place-items: center;
+}
+
+/* Skeleton loading */
+.sk {
+  height: 8px;
+  border-radius: var(--radius-md);
+  background: var(--color-border);
+  margin: var(--space-md) 0;
+}
+
+/* Responsive grids */
+@media (max-width: 900px) {
+  .grid4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .grid4,
+  .grid3,
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}

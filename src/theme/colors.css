@@ -1,0 +1,36 @@
+:root {
+  /* ===== Brand Colors ===== */
+  --color-primary: #2B7C2D;
+  --color-primary-light: #5BBB5B;
+  --color-primary-soft: #d8f1e0;
+  --color-primary-tint: rgba(87, 217, 138, 0.2);
+  --color-icon: #1b5e3a;
+
+  /* ===== Text Colors ===== */
+  --color-text: #001f3f;
+  --color-text-nav: #1b3a66;
+  --color-text-muted: #5a6b7d;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-dark: #ffffff;
+  --color-text-on-dark-muted: #b4cbc7;
+  --color-footer-text: #cfdbe8;
+
+  /* ===== Surface Colors ===== */
+  --color-bg: #f3f8f4;
+  --color-surface: #ffffff;
+  --color-surface-soft: #e6f3ea;
+  --color-border: #dfe9e2;
+  --color-dark: #0f2a47;
+  --color-hero-from: #f7fbf8;
+  --color-hero-to: #e6f3ea;
+
+  /* ===== Overlay Colors ===== */
+  --color-on-dark-surface: rgba(255, 255, 255, 0.08);
+  --color-on-dark-track: rgba(255, 255, 255, 0.18);
+
+  /* ===== Shadow Colors ===== */
+  --color-shadow: rgba(15, 42, 71, 0.18);
+  --color-shadow-soft: rgba(15, 42, 71, 0.07);
+  --color-shadow-strong: rgba(15, 42, 71, 0.25);
+  --color-shimmer: rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,150 @@
+/* ===== Hero ===== */
+.hero { background: linear-gradient(180deg, var(--color-hero-from)); }
+.hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; padding-top: 20px; padding-bottom: 20px; }
+.hero h1 { font-size: clamp(38px, 5.4vw, 64px); line-height: 1.04; margin: 0 0 18px; font-weight: 800; letter-spacing: -1.5px; }
+.hero h1 em { font-style: normal; color: var(--color-primary); }
+.hero p { font-size: 19px; color: var(--color-text-muted); max-width: 460px; margin: 0 0 28px; }
+.hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ===== Case card ===== */
+.case-stage { width: 100%; max-width: 560px; margin-left: auto; padding: 56px 30px 56px 175px; }
+.case-box { position: relative; }
+
+.case { background: var(--color-dark); color: var(--color-text-on-dark); border-radius: 22px; padding: 24px;
+  box-shadow: 0 24px 50px var(--color-shadow-strong); animation: rise 0.7s ease both; }
+.case__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 18px; }
+.case__no { font-size: 14px; color: var(--color-text-on-dark-muted); }
+.case h3 { margin: 2px 0 0; font-size: 22px; }
+
+.case__pill { display: inline-flex; align-items: center; white-space: nowrap; background: var(--color-primary-tint);
+  color: var(--color-primary-light); font-weight: 700; font-size: 13px; padding: 5px 12px; border-radius: 999px; }
+.case__pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; margin-right: 7px;
+  animation: pulse 1.6s ease-out infinite; }
+
+.case__row { display: flex; align-items: center; gap: 10px; background: var(--color-on-dark-surface); border-radius: 12px;
+  padding: 14px; margin-bottom: 12px; font-weight: 700; font-size: 15px;
+  animation: rise 0.5s ease both; animation-delay: calc(0.25s + var(--i) * 0.12s); }
+.case__row.is-next { color: var(--color-text-on-dark-muted); }
+.case__status { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--color-text-on-dark-muted); }
+
+.case__dot { width: 26px; height: 26px; border-radius: 50%; background: var(--color-primary); display: grid; place-items: center; flex: none;
+  animation: pop 0.4s ease both; animation-delay: calc(0.55s + var(--i) * 0.12s); }
+.case__dot.is-empty { background: none; border: 2px dashed var(--color-text-on-dark-muted); animation: spin 8s linear infinite; }
+
+.case__bar { height: 7px; border-radius: 9px; background: var(--color-on-dark-track); margin-top: 18px; overflow: hidden; }
+.case__bar i { display: block; position: relative; overflow: hidden; height: 100%; width: 62%; background: var(--color-primary);
+  border-radius: 9px; animation: fill 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both; }
+.case__bar i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(--color-shimmer), transparent);
+  animation: shimmer 2.2s ease-in-out 2.4s infinite; }
+
+/* Floating chips: card (.case-box) ke hisaab se position */
+.chip { position: absolute; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border);
+  border-radius: 14px; padding: 8px 13px 8px 8px; display: flex; align-items: center; gap: 9px; font-weight: 700; font-size: 13px;
+  white-space: nowrap; box-shadow: 0 10px 28px var(--color-shadow);
+  animation: chip-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.3) both, float 5s ease-in-out infinite; }
+.chip b { width: 30px; height: 30px; border-radius: 8px; background: var(--color-dark); color: var(--color-primary-light);
+  display: grid; place-items: center; }
+
+/* Upar-right kona (In progress ke upar) */
+.c1 { top: -30px; right: -26px; --fy: -8px; animation-delay: 0.5s, 1.1s; animation-duration: 0.6s, 5s; }
+/* Left kinara, "EIN issued" row ke bagal mein */
+.c2 { top: 47%; right: calc(100% - 16px); transform: translateY(-50%); --fy: 8px; animation-delay: 0.8s, 1.4s; animation-duration: 0.6s, 6s; }
+/* Left kinara, "Payments and website" row ke bagal mein */
+.c3 { top: 79%; right: calc(100% - 6px); transform: translateY(-50%); --fy: -8px; animation-delay: 1.1s, 1.7s; animation-duration: 0.6s, 5.5s; }
+/* Neeche-right kona (progress bar ke neeche) */
+.c4 { bottom: -34px; right: -26px; --fy: 8px; animation-delay: 1.4s, 2s; animation-duration: 0.6s, 6.5s; }
+
+/* Animations */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { scale: 0; } 70% { scale: 1.2; } to { scale: 1; } }
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--color-primary-light); } 100% { box-shadow: 0 0 0 8px transparent; } }
+@keyframes fill { from { width: 0; } to { width: 62%; } }
+@keyframes shimmer { from { translate: -100% 0; } to { translate: 100% 0; } }
+@keyframes chip-in { from { opacity: 0; scale: 0.7; } to { opacity: 1; scale: 1; } }
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 var(--fy, -8px); } }
+
+/* ===== Trust bar ===== */
+.trust { display: flex; align-items: center; justify-content: center; gap: 20px; background: var(--color-surface-soft); border-radius: 14px; padding: 14px; color: var(--color-primary);margin: 0px 15px; }
+.trust span { color: var(--color-text); }
+
+/* ===== Service cards ===== */
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.card { position: relative; display: flex; flex-direction: column; background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px 24px 54px;
+  box-shadow: 0 8px 24px var(--color-shadow-soft); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px var(--color-shadow); }
+.card h4 { margin: 16px 0 8px; font-size: 18px; }
+.card p { margin: 0; color: var(--color-text-muted); font-size: 14px; }
+.card__arrow { position: absolute; right: 22px; bottom: 18px; color: var(--color-primary); }
+
+.icon { width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary-soft); color: var(--color-icon); display: grid; place-items: center; }
+.card .icon { width: 58px; height: 58px; font-size: 26px; }
+
+
+
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; padding-top: 40px; }
+  .case-stage { margin: 0 auto; }
+  .grid4 { grid-template-columns: 1fr 1fr; }
+    .pay { grid-template-columns: 1fr; padding: 24px; }
+}
+
+/* Mobile: badges card ke neeche aa jayen */
+@media (max-width: 640px) {
+  .case-stage { padding: 0; }
+  .case-box { display: flex; flex-wrap: wrap; gap: 10px; }
+  .case { flex: 0 0 100%; }
+  .chip { position: static; transform: none; margin: 0; animation: chip-in 0.6s ease 0.5s both; }
+}
+
+@media (max-width: 520px) {
+  .grid4 { grid-template-columns: 1fr; }
+}
+
+/* Jinhon ne device mein "reduce motion" on kiya ho */
+@media (prefers-reduced-motion: reduce) {
+  .case, .case *, .chip { animation: none !important; }
+}
+
+
+/* ===== How it works ===== */
+.how h2 { font-weight: 400; margin-bottom: 32px; }
+.how h2 b { font-weight: 800; }
+
+.how__list { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.how__step { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+.how__badge { display: flex; align-items: center; flex: none; }
+
+.how__num, .how__icon { width: 58px; height: 58px; border-radius: 50%; background: var(--color-primary-soft);
+  display: grid; place-items: center; }
+.how__num { position: relative; z-index: 1; font-size: 20px; font-weight: 800; color: var(--color-text); }
+.how__icon { position: relative; z-index: 2; margin-left: -16px; border: 3px solid var(--color-bg);
+  font-size: 20px; color: var(--color-icon); }
+.how__icon svg { transition: transform 0.35s; }
+.how__step:hover .how__icon svg { transform: scale(1.18) rotate(-8deg); }
+
+.how__body h4 { margin: 0 0 4px; font-size: 16px; }
+.how__body p { margin: 0; max-width: 220px; font-size: 14px; color: var(--color-text-muted); }
+.how__chev { flex: none; font-size: 20px; color: var(--color-icon); }
+
+/* Animation: section screen par aate hi */
+.how__step, .how__chev { opacity: 0; }
+.how .is-in .how__step { animation: rise 0.6s ease both; animation-delay: calc(var(--i) * 0.28s); }
+.how .is-in .how__num { animation: pop 0.45s ease both; animation-delay: calc(var(--i) * 0.28s + 0.1s); }
+.how .is-in .how__icon { animation: slide-out 0.5s ease both; animation-delay: calc(var(--i) * 0.28s + 0.3s); }
+.how .is-in .how__chev { animation: fade-in 0.45s ease both; animation-delay: calc(var(--i) * 0.28s + 0.55s); }
+@keyframes slide-out { from { opacity: 0; translate: -20px 0; scale: 0.6; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes fade-in { from { opacity: 0; translate: -8px 0; } to { opacity: 1; translate: 0 0; } }
+
+@media (max-width: 900px) {
+  .how__list { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .how__chev { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how * { animation: none !important; }
+  .how__step, .how__chev { opacity: 1 !important; }
+}

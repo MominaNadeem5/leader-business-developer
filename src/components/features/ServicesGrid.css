@@ -1,0 +1,202 @@
+/* ===== Services Grid ===== */
+
+.svc {
+  /* background:
+    radial-gradient(700px 420px at 100% 0%, rgba(46, 160, 90, 0.08), transparent 70%),
+    radial-gradient(500px 360px at 0% 100%, rgba(46, 160, 90, 0.07), transparent 70%); */
+}
+
+.svc__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.6fr);
+  gap: clamp(28px, 3.5vw, 56px);
+  align-items: center;
+}
+
+/* ---------- Left ---------- */
+
+.svc__intro > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.svc__intro.is-in > * {
+  animation: rise 0.5s ease both;
+  animation-delay: calc(var(--d, 0) * 0.12s);
+}
+
+.svc__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary, #2a8a3e);
+}
+
+.svc__eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.svc__intro h2 {
+  margin: 0 0 18px;
+  font-size: clamp(1.65rem, 2.6vw, 2.3rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #123a3a;
+}
+
+.svc__intro h2 em {
+  font-style: normal;
+  color: var(--color-primary, #2a8a3e);
+}
+
+.svc__intro p {
+  margin: 0 0 26px;
+  max-width: 440px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text-muted, #5d727c);
+}
+
+.svc__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(46, 160, 90, 0.55);
+  background: rgba(255, 255, 255, 0.7);
+  color: #123a3a;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(20, 90, 60, 0.08);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.svc__btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(20, 90, 60, 0.14);
+}
+
+.svc__btn svg {
+  transition: transform 0.2s ease;
+}
+
+.svc__btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ---------- Right : cards ---------- */
+
+.svc__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.svc__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 118px;
+  padding: 20px 40px 20px 20px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(20, 80, 60, 0.1);
+  box-shadow: 0 10px 28px rgba(20, 90, 60, 0.07);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.svc__grid.is-in .svc__card {
+  animation: rise 0.5s ease both;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.svc__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(46, 160, 90, 0.4);
+  box-shadow: 0 18px 38px rgba(20, 90, 60, 0.14);
+}
+
+.svc__icon {
+  flex: 0 0 66px;
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #17543a;
+  background: radial-gradient(circle at 30% 25%, #eaf8ef, #d3eedd);
+  transition: transform 0.25s ease;
+}
+
+.svc__card:hover .svc__icon {
+  transform: scale(1.06);
+}
+
+.svc__body h4 {
+  margin: 0 0 6px;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #123a3a;
+}
+
+.svc__body p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--color-text-muted, #5d727c);
+}
+
+.svc__arrow {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  color: #123a3a;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.svc__card:hover .svc__arrow {
+  transform: translateX(4px);
+  color: var(--color-primary, #2a8a3e);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .svc__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .svc__grid {
+    grid-template-columns: 1fr;
+  }
+  .svc__card {
+    min-height: 104px;
+  }
+  .svc__icon {
+    flex-basis: 58px;
+    width: 58px;
+    height: 58px;
+    font-size: 26px;
+  }
+}
