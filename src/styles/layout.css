@@ -15,7 +15,7 @@
 /* .nav .btn, .footer .btn { border-radius: var(--radius-btn-nav); padding: 11px 20px; } */
 .nav__toggle { display: none; background: none; border: 0; color: var(--color-text-nav); cursor: pointer; }
 
-.footer { background: var(--color-dark); color: var(--color-footer-text); padding: 32px 0; font-size: 14px; }
+.footer {  color: var(--color-footer-text); padding-top: 32px; font-size: 14px; }
 .footer__row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .footer__logo { height: 60px; }
 .footer__links { display: flex; gap: 20px; flex-wrap: wrap; }

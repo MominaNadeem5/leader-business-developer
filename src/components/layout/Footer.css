@@ -1,7 +1,8 @@
 /* ===== Footer ===== */
 
 .footer {
-  background: linear-gradient(135deg, #0a3a2a 0%, #06261f 100%);
+  background:radial-gradient(600px 300px at 15% 0%, rgba(255, 255, 255, 0.07), transparent 70%),
+    linear-gradient(120deg, #22573f 0%, #2f6e55 55%, #29644c 100%);
   color: #fff;
 }
 
@@ -185,7 +186,6 @@
 
 /* Payment Section */
 .footer__payment {
-  background: rgba(0, 0, 0, 0.2);
   padding: 40px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -267,7 +267,6 @@
 
 /* Copyright Section */
 .footer__copyright {
-  background: rgba(0, 0, 0, 0.3);
   padding: 20px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }

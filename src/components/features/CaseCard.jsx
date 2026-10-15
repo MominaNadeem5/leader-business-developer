@@ -68,7 +68,7 @@ export default function CaseCard({ active = true }) {
           <div className="case__top">
             <div>
               <div className="case__no">Case LBD-1048</div>
-              <h3>Nexora LLC</h3>
+              <h3>GrowSoft LLC</h3>
             </div>
 
             <span className="case__pill">
