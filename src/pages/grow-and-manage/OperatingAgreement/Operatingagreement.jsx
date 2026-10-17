@@ -8,7 +8,7 @@ import {
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
 import { Reveal, FaqList, Testimonials, ContactCards, CtaBand, ServiceFooter } from "../../../components/service";
-import "./OperatingAgreement.css";
+import "./Operatingagreement.css";
 
 /* ---- EDIT THESE ---- */
 // const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
