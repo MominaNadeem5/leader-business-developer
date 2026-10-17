@@ -62,10 +62,10 @@ export default function Hero() {
           </p>
 
           <div className="hero__btns" style={{ "--d": 3 }}>
-            <Button to="/services">
+            <Button to="/get-started">
               Start a Service <ArrowRight size={18} />
             </Button>
-            <Button variant="outline" to="/book">
+            <Button variant="outline" to="/consultation">
               <CalendarDays size={18} /> Schedule a Consultation
             </Button>
           </div>

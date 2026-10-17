@@ -417,7 +417,7 @@ const menus = [
           },
           {
             label: "Book a Consultation",
-            to: "/get-started",
+            to: "/consultation",
           },
           {
             label: "Contact Us",
@@ -488,7 +488,16 @@ export default function Navbar() {
   return (
     <header className="nav">
       <div className="container nav__row">
-        <Link to="/" onClick={closeAll}>
+        <Link
+          to="/"
+          onClick={() => {
+            closeAll();
+            // Already on the landing page: the route won't change, so scroll up ourselves.
+            if (location.pathname === "/" && !location.hash) {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <img
             src={logo}
             alt="Leader Business Developer"
@@ -503,13 +512,15 @@ export default function Navbar() {
           {menus.map((menu) => {
             const isOpen = openMenu === menu.label;
 
-            const active =
-              isOpen ||
-              menu.match.some(
-                (path) =>
-                  location.pathname === path ||
-                  location.pathname.startsWith(`${path}/`)
-              );
+            // While a dropdown is open, only that menu is highlighted;
+            // otherwise highlight the menu for the current page's section.
+            const active = openMenu
+              ? isOpen
+              : menu.match.some(
+                  (path) =>
+                    location.pathname === path ||
+                    location.pathname.startsWith(`${path}/`)
+                );
 
             return (
               <li key={menu.label}>
@@ -648,7 +659,7 @@ export default function Navbar() {
         </ul>
 
         <div className="nav__actions">
-          <Button variant="outline" to="/sign-in">
+          <Button variant="outline" to="/login">
             Sign In
           </Button>
 
