@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, Minus, ChevronDown, ArrowRight, Star, Award, ShieldCheck, Shield, Scale, FileText,
+  Check, Minus, ChevronDown, ArrowRight, /* Star, */ Award, ShieldCheck, Shield, Scale, FileText,
   Phone, Mail, Users, Building2, FileCheck, BookOpen, CreditCard, Building, Tag, TrendingUp, Landmark,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
 import FormationCard from "../FormationCard/FormationCard";
+import { FaqList } from "../../../components/service";
+import { CONTACT } from "../../../data/site";
 import "./StartLLC.css";
 
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 const states = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -114,7 +115,7 @@ export default function StartLLC() {
   };
 
   return (
-    <div className="llc-page">
+    <div className="svc llc-page">
       {/* HERO (compact) */}
       <section className="llc-hero" ref={heroRef}>
         
@@ -125,8 +126,8 @@ export default function StartLLC() {
               Whether you're ready to form an LLC on your own—or want advice every step of the way—we've got your back.
             </h1>
             <p className="llc-hero__subtitle" style={{ "--d": 1 }}>
-              Have questions? Call <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a> or email{" "}
-              <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a> to speak with a business specialist.
+              Have questions? Call <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a> or email{" "}
+              <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> to speak with a business specialist.
             </p>
 
             <div className="llc-hero__form" style={{ "--d": 2 }}>
@@ -138,10 +139,12 @@ export default function StartLLC() {
             </div>
 
             <div className="llc-hero__trust" style={{ "--d": 3 }}>
+              {/* Trustpilot rating hidden for now
               <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />)}</span>
               <strong>Excellent</strong>
               <span className="llc-hero__badge">Trustpilot</span>
               <span className="llc-hero__sep" />
+              */}
               <span className="llc-hero__trust-item"><Award size={16} /> 50,000+ businesses formed</span>
             </div>
           </div>
@@ -271,20 +274,7 @@ export default function StartLLC() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">Frequently asked questions</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item">
-                <summary><span>{q}</span><ChevronDown size={20} /></summary>
-                <p>{a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} />
 
       {/* STATES */}
       <section className="llc-states">
@@ -324,8 +314,8 @@ export default function StartLLC() {
             <h3>Questions?</h3>
             <p>Talk to a business specialist. We're happy to help.</p>
             <div className="llc-contact__links">
-              <a href={`tel:${contactInfo.phone}`}><Phone size={18} />{contactInfo.phone}</a>
-              <a href={`mailto:${contactInfo.email}`}><Mail size={18} />{contactInfo.email}</a>
+              <a href={`tel:${CONTACT.phone}`}><Phone size={18} />{CONTACT.phone}</a>
+              <a href={`mailto:${CONTACT.email}`}><Mail size={18} />{CONTACT.email}</a>
             </div>
           </div>
 

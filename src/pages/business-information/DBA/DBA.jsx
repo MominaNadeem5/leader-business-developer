@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, ArrowDown, Star, Phone, Mail, ShieldCheck, Search, Newspaper,
+  Check, ArrowRight, ArrowDown, /* Star, */ ShieldCheck, Search, Newspaper,
   RefreshCw, Lock, Scale, ListChecks, Store, FileCheck, Megaphone, BadgeCheck, Landmark,
-  Quote, CheckCircle2, MessageSquare, Clock,
+  CheckCircle2, 
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, FaqList, Testimonials, ContactCards, CtaBand, ServiceFooter } from "../../../components/service";
 import "./DBA.css"; // shared, fully scoped styles (.llc-page)
 
 /* ---- EDIT THESE: prices, links, hours ---- */
 const PRICE = { standard: "$79", premium: "$129" }; // placeholder prices, set your own
 const LINKS = { register: "/get-started?service=dba", samples: "/sample-documents", attorney: "/contact" };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 const packages = [
   {
@@ -89,11 +88,6 @@ const testimonials = [
   { quote: "Leader Business Developer was an incredible partner. The process was smooth, and the support team was always available when I needed help.", name: "Shannon Greevy", role: "Customer, California" },
 ];
 
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`dba-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
 const EXAMPLES = [
   { legal: "Jordan Smith", dba: "Sunny Side Bakery" },
   { legal: "Northwind Holdings LLC", dba: "Northwind Coffee Co." },
@@ -125,20 +119,11 @@ function DBACard() {
   );
 }
 
-function CtaBand({ title = "Ready to register your DBA?" }) {
-  return (
-    <Reveal className="dba-band">
-      <h2>{title}</h2>
-      <Button to={LINKS.register}>Register my DBA <ArrowRight size={18} /></Button>
-    </Reveal>
-  );
-}
-
 export default function StartDBA() {
   const [heroRef, heroInView] = useInView();
 
   return (
-    <div className="llc-page dba-page">
+    <div className="svc llc-page dba-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <div className="container">
@@ -156,10 +141,12 @@ export default function StartDBA() {
                 <Button to={LINKS.register}>Register my DBA <ArrowRight size={18} /></Button>
               </div>
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />)}</span>
                 <strong>Excellent</strong>
                 <span className="llc-hero__badge">Trustpilot</span>
                 <span className="llc-hero__sep" />
+                */}
                 <a href="#dba-guarantee" className="dba-guarantee-link"><ShieldCheck size={16} /> Learn about our guarantee</a>
               </div>
             </div>
@@ -304,7 +291,7 @@ export default function StartDBA() {
         </div>
       </section>
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Ready to register your DBA?" label="Register my DBA" to={LINKS.register} />
 
       {/* DBA VS SOLE PROP */}
       <section className="dba-section">
@@ -319,73 +306,21 @@ export default function StartDBA() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">Frequently asked questions</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item">
-                <summary><span>{q}</span><ChevronDown size={20} /></summary>
-                <p>{a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} />
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Ready to register your DBA?" label="Register my DBA" to={LINKS.register} />
 
-      {/* TESTIMONIALS */}
-      <section className="dba-section">
-        <div className="container">
-          <h2 className="llc-section__title">What our customers are saying</h2>
-          <Reveal className="dba-testimonials dba-mt">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="dba-testimonial">
-                <Quote size={28} />
-                <blockquote>{t.quote}</blockquote>
-                <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
-              </figure>
-            ))}
-          </Reveal>
-        </div>
-      </section>
+      <Testimonials items={testimonials} title="What our customers are saying" />
 
-      {/* QUESTIONS */}
-      <section className="dba-section dba-section--gray">
-        <div className="container">
-          <h2 className="llc-section__title">Questions?</h2>
-          <Reveal className="dba-grid dba-grid-2 dba-ask dba-mt">
-            <div className="dba-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={LINKS.attorney} className="llc-cta__btn llc-cta__btn--gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="dba-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="dba-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="dba-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={LINKS.attorney} />
 
-      {/* FOOTNOTES */}
-      <section className="llc-cta">
-        <div className="container">
-          <p className="dba-footnote">*If required in your county or state.</p>
-          <p className="dba-footnote">†Attorney consultation access and any ongoing plan terms are shown at checkout.</p>
-          <p className="llc-cta__disclaimer">
-            Leader Business Developer provides business formation and administrative filing support. State filing fees, requirements, processing times and available documents vary by jurisdiction. Government acceptance and processing are controlled by the applicable state authority. Nothing on this page constitutes legal or tax advice.
-          </p>
-          <div className="llc-center">
-            <button type="button" className="llc-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        footnotes={[
+          <>*If required in your county or state.</>,
+          <>†Attorney consultation access and any ongoing plan terms are shown at checkout.</>,
+        ]}
+        disclaimer={<>Leader Business Developer provides business formation and administrative filing support. State filing fees, requirements, processing times and available documents vary by jurisdiction. Government acceptance and processing are controlled by the applicable state authority. Nothing on this page constitutes legal or tax advice.</>}
+      />
     </div>
   );
 }

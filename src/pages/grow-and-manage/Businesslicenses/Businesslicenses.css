@@ -487,8 +487,8 @@
 /* DBA page extras. Everything is scoped under .bl-page (shared base styles live in StartLLC.css) */
 
 /* reveal on scroll */
-.bl-page .dba-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.bl-page .dba-reveal.is-in { opacity: 1; transform: none; }
+.bl-page .svc-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.bl-page .svc-reveal.is-in { opacity: 1; transform: none; }
 
 /* layout helpers */
 .bl-page .dba-section { padding: 60px 0; }
@@ -592,7 +592,7 @@
   .bl-page .dba-section { padding: 44px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .bl-page .dba-reveal { opacity: 1; transform: none; transition: none; }
+  .bl-page .svc-reveal { opacity: 1; transform: none; transition: none; }
   .bl-page .dba-card *, .bl-page .dba-card__inner { animation: none !important; opacity: 1 !important; transform: none; clip-path: none !important; }
   .bl-page .dba-card__stamp { transform: rotate(-8deg) !important; }
 }
@@ -731,7 +731,7 @@
 .bl-page .bl-wallet__bar b { display: block; width: 0; height: 100%; border-radius: 8px; background: var(--llc-green); transition: width 1.4s ease .3s; }
 .bl-page .bl-wallet__bar.is-warm b { background: #f59e0b; }
 .bl-page .bl-wallet__bar.is-hot b { background: #ef4444; }
-.bl-page .dba-reveal.is-in .bl-wallet__bar b { width: var(--w); }
+.bl-page .svc-reveal.is-in .bl-wallet__bar b { width: var(--w); }
 
 /* info cards */
 .bl-page .corp-info { max-width: 1000px; }

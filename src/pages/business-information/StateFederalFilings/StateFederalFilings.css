@@ -487,8 +487,8 @@
 /* DBA page extras. Everything is scoped under .sf-page (shared base styles live in StartLLC.css) */
 
 /* reveal on scroll */
-.sf-page .dba-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.sf-page .dba-reveal.is-in { opacity: 1; transform: none; }
+.sf-page .svc-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.sf-page .svc-reveal.is-in { opacity: 1; transform: none; }
 
 /* layout helpers */
 .sf-page .dba-section { padding: 60px 0; }
@@ -592,7 +592,7 @@
   .sf-page .dba-section { padding: 44px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sf-page .dba-reveal { opacity: 1; transform: none; transition: none; }
+  .sf-page .svc-reveal { opacity: 1; transform: none; transition: none; }
   .sf-page .dba-card *, .sf-page .dba-card__inner { animation: none !important; opacity: 1 !important; transform: none; clip-path: none !important; }
   .sf-page .dba-card__stamp { transform: rotate(-8deg) !important; }
 }
@@ -714,7 +714,7 @@
 /* federal list */
 .sf-page .sf-fed { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .sf-page .sf-fed li { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: #fff; border: 1px solid #bbf7d0; border-radius: 14px; font-size: .92rem; font-weight: 600; color: var(--llc-ink); opacity: 0; }
-.sf-page .dba-reveal.is-in .sf-fed li { animation: sf-slide .5s ease calc(var(--i) * .12s + .1s) both; }
+.sf-page .svc-reveal.is-in .sf-fed li { animation: sf-slide .5s ease calc(var(--i) * .12s + .1s) both; }
 .sf-page .sf-fed li span { flex: 0 0 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--llc-green); }
 
 /* change finder */

@@ -487,8 +487,8 @@
 /* DBA page extras. Everything is scoped under .va-page (shared base styles live in StartLLC.css) */
 
 /* reveal on scroll */
-.va-page .dba-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.va-page .dba-reveal.is-in { opacity: 1; transform: none; }
+.va-page .svc-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.va-page .svc-reveal.is-in { opacity: 1; transform: none; }
 
 /* layout helpers */
 .va-page .dba-section { padding: 60px 0; }
@@ -592,7 +592,7 @@
   .va-page .dba-section { padding: 44px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .va-page .dba-reveal { opacity: 1; transform: none; transition: none; }
+  .va-page .svc-reveal { opacity: 1; transform: none; transition: none; }
   .va-page .dba-card *, .va-page .dba-card__inner { animation: none !important; opacity: 1 !important; transform: none; clip-path: none !important; }
   .va-page .dba-card__stamp { transform: rotate(-8deg) !important; }
 }

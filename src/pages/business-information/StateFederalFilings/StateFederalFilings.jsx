@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare, FileText,
+  Check, ArrowRight, /* Star, */ ShieldCheck, Phone, MessageSquare, FileText,
   CalendarClock, PencilLine, Globe, RotateCcw, LogOut, Landmark, Search, FileCheck, CalendarCheck,
   MapPin, Users, Tag, Wrench, Headset, Layers, ClipboardCheck, Building2, Sparkles,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, FaqList, ServiceFooter, CtaBand, ContactCards } from "../../../components/service";
+import { CONTACT } from "../../../data/site";
 import "./StateFederalFilings.css";
 
 /* ---- EDIT THESE ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const LINKS = { request: "/get-started?service=state-federal-filings", contact: "/contact" };
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
 
 const heroChips = ["State filing assistance", "Federal filing support", "Amendments & business updates", "Annual & periodic report support"];
 const strip = ["Annual reports", "Amendments", "Address changes", "Registered agent changes", "Foreign qualification", "Reinstatement", "Dissolution & withdrawal", "Federal forms"];
@@ -114,11 +114,6 @@ const faqs = [
   ["Can filing approval or processing time be guaranteed?", "No. Acceptance, processing times and final decisions are controlled by the applicable government authority. Our role is independent preparation and administrative support."],
 ];
 
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`dba-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
 function FilingCard() {
   const [tick, setTick] = useState(2);
   useEffect(() => {
@@ -207,21 +202,12 @@ function Readiness() {
   );
 }
 
-function CtaBand() {
-  return (
-    <Reveal className="dba-band">
-      <h2>Need help with a state or federal filing?</h2>
-      <Button to={LINKS.request}>Request filing assistance <ArrowRight size={18} /></Button>
-    </Reveal>
-  );
-}
-
 export default function StateFederalFilings() {
   const [heroRef, heroInView] = useInView();
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="sf-page">
+    <div className="svc sf-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="sf-blob sf-blob--a" aria-hidden="true" />
@@ -239,13 +225,15 @@ export default function StateFederalFilings() {
               <div className="sf-chips" style={{ "--d": 2 }}>{heroChips.map((t) => <span key={t}><Check size={14} />{t}</span>)}</div>
               <div className="sf-cta-row" style={{ "--d": 3 }}>
                 <Button to={LINKS.request}>Request filing assistance <ArrowRight size={18} /></Button>
-                <a href={`tel:${contactInfo.phone}`} className="sf-ghost"><Phone size={16} /> Speak with our team</a>
+                <a href={`tel:${CONTACT.phone}`} className="sf-ghost"><Phone size={16} /> Speak with our team</a>
               </div>
+              {/* Trustpilot rating hidden for now
               <div className="llc-hero__trust" style={{ "--d": 4 }}>
                 <strong>{TRUST_LABEL}</strong>
                 <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
               </div>
+              */}
             </div>
             <div className={`llc-hero__visual ${heroInView ? "is-in" : ""}`}><FilingCard /></div>
           </div>
@@ -377,51 +365,21 @@ export default function StateFederalFilings() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">State &amp; federal filing FAQs</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} title="State &amp; federal filing FAQs" />
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Need help with a state or federal filing?" label="Request filing assistance" to={LINKS.request} />
 
-      {/* QUESTIONS */}
-      <section className="dba-section dba-section--gray">
-        <div className="container">
-          <h2 className="llc-section__title">Questions?</h2>
-          <Reveal className="dba-grid dba-grid-2 dba-ask dba-mt">
-            <div className="dba-ask__card">
-              <MessageSquare size={30} />
-              <h3>Tell us what you need to file</h3>
-              <p>Share what you need to file, update or correct, and we'll help identify the next steps.</p>
-              <Link to={LINKS.request} className="llc-cta__btn llc-cta__btn--gold">Request filing assistance <ArrowRight size={16} /></Link>
-            </div>
-            <div className="dba-ask__card">
-              <Phone size={30} />
-              <h3>Call our team at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="dba-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="dba-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards
+        helpTitle="Tell us what you need to file"
+        helpText="Share what you need to file, update or correct, and we'll help identify the next steps."
+        helpLabel="Request filing assistance"
+        helpTo={LINKS.request}
+        phoneLabel="Call our team at"
+      />
 
-      <section className="llc-cta">
-        <div className="container">
-          <p className="llc-cta__disclaimer">
-            Leader Business Developer is an independent business-services provider offering administrative, document-preparation and filing-support assistance. We are not a government agency. Filing requirements, government fees, deadlines, eligibility, acceptance and processing times vary by jurisdiction and applicable authority. Nothing on this page constitutes legal or tax advice.
-          </p>
-          <div className="llc-center">
-            <button type="button" className="llc-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        disclaimer={<>Leader Business Developer is an independent business-services provider offering administrative, document-preparation and filing-support assistance. We are not a government agency. Filing requirements, government fees, deadlines, eligibility, acceptance and processing times vary by jurisdiction and applicable authority. Nothing on this page constitutes legal or tax advice.</>}
+      />
     </div>
   );
 }

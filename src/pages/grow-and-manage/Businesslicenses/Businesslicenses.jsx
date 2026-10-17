@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, Minus, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare, FileText,
+  Check, Minus, ChevronDown, ArrowRight, /* Star, */ ShieldCheck, Phone, Clock, MessageSquare, FileText,
   Landmark, Building2, MapPin, FileCheck, BadgeCheck, Trophy, Zap, Target, PiggyBank, Smile,
-  Coffee, ShoppingBag, Home, Hammer, Briefcase, Store, Bell, FolderOpen, Quote, Sparkles,
+  Coffee, ShoppingBag, Home, Hammer, Briefcase, Store, Bell, FolderOpen, Sparkles,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, FaqList, Testimonials, ContactCards, ServiceFooter, CtaBand } from "../../../components/service";
+import { CONTACT } from "../../../data/site";
 import "./Businesslicenses.css";
 
 /* ---- EDIT THESE ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const PRICES = { report: "$99", compliance: "$299", manager: "$999" }; // placeholder prices, set your own
 const LINKS = { start: "/get-started?service=business-license", attorney: "/contact" };
 const BILLING_NOTE = "Billed yearly. Terms shown at checkout.";
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 const EXAMPLES = [
   { biz: "Café", place: "Austin, TX", items: [["General business license", "Local"], ["Food service permit", "State"], ["Health department permit", "Local"], ["Seller's permit", "State"]] },
@@ -100,11 +100,6 @@ const testimonials = [
   { quote: "Leader Business Developer was an incredible partner. The process was smooth, and the support team was always available when I needed help.", name: "Shannon Greevy", role: "Customer, California" },
 ];
 
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`dba-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
 function ReportCard() {
   const [tick, setTick] = useState(3);
   useEffect(() => {
@@ -158,7 +153,7 @@ function Plans() {
           <small className="bl-billing">{BILLING_NOTE}</small>
           <p className="llc-package-card__tagline">{p.tagline}</p>
           {p.call ? (
-            <a href={`tel:${contactInfo.phone}`} className="llc-cta__btn llc-cta__btn--gold bl-call"><Phone size={16} /> {contactInfo.phone}</a>
+            <a href={`tel:${CONTACT.phone}`} className="llc-cta__btn llc-cta__btn--gold bl-call"><Phone size={16} /> {CONTACT.phone}</a>
           ) : null}
           <Button variant={p.id === "compliance" ? "primary" : "outline"} to={`${LINKS.start}&plan=${p.id}`} className="llc-package-card__btn">{p.cta}</Button>
           <button type="button" className={`bl-toggle ${open[p.id] ? "is-open" : ""}`} onClick={() => setOpen((o) => ({ ...o, [p.id]: !o[p.id] }))} aria-expanded={!!open[p.id]}>
@@ -215,21 +210,12 @@ function Finder() {
   );
 }
 
-function CtaBand() {
-  return (
-    <Reveal className="dba-band">
-      <h2>Ready to get your licenses sorted?</h2>
-      <a href="#pricing" className="llc-cta__btn llc-cta__btn--gold">Select my plan <ChevronDown size={16} /></a>
-    </Reveal>
-  );
-}
-
 export default function BusinessLicenses() {
   const [heroRef, heroInView] = useInView();
   const [showCompare, setShowCompare] = useState(false);
 
   return (
-    <div className="bl-page">
+    <div className="svc bl-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="bl-blob bl-blob--a" aria-hidden="true" />
@@ -246,13 +232,15 @@ export default function BusinessLicenses() {
               </p>
               <div className="bl-cta-row" style={{ "--d": 2 }}>
                 <a href="#pricing" className="corp-submit">Select my plan <ArrowRight size={18} /></a>
-                <a href={`tel:${contactInfo.phone}`} className="bl-ghost"><Phone size={16} /> Talk to a specialist</a>
+                <a href={`tel:${CONTACT.phone}`} className="bl-ghost"><Phone size={16} /> Talk to a specialist</a>
               </div>
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
                 <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
                 <span className="llc-hero__sep" />
+                */}
                 <a href="#bl-guarantee" className="dba-guarantee-link"><ShieldCheck size={16} /> Learn about our guarantee</a>
               </div>
             </div>
@@ -415,71 +403,22 @@ export default function BusinessLicenses() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">Frequently asked questions</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} />
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Ready to get your licenses sorted?" label="Select my plan" href="#pricing" />
 
-      {/* TESTIMONIALS */}
-      <section className="dba-section">
-        <div className="container">
-          <h2 className="llc-section__title">What our customers are saying</h2>
-          <Reveal className="dba-testimonials dba-mt">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="dba-testimonial">
-                <Quote size={28} />
-                <blockquote>{t.quote}</blockquote>
-                <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
-              </figure>
-            ))}
-          </Reveal>
-        </div>
-      </section>
+      <Testimonials items={testimonials} title="What our customers are saying" />
 
-      {/* QUESTIONS */}
-      <section className="dba-section dba-section--gray">
-        <div className="container">
-          <h2 className="llc-section__title">Questions?</h2>
-          <Reveal className="dba-grid dba-grid-2 dba-ask dba-mt">
-            <div className="dba-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={LINKS.attorney} className="llc-cta__btn llc-cta__btn--gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="dba-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="dba-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="dba-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={LINKS.attorney} />
 
-      {/* FOOTNOTES */}
-      <section className="llc-cta">
-        <div className="container">
-          <p className="dba-footnote">*You are responsible for any government filing and license fees.</p>
-          <p className="dba-footnote">†Where applicable in your state.</p>
-          <p className="dba-footnote">‡If a filing we prepare is rejected or incorrect due to our error, we'll correct it with the government agency at no additional cost to you.</p>
-          <p className="llc-cta__disclaimer">
-            Leader Business Developer is an independent business-services provider offering administrative, document-preparation and filing-support assistance. We are not a law firm or a government agency. Requirements, fees, deadlines and processing times vary by jurisdiction, and example licenses shown here are illustrative. Nothing on this page constitutes legal or tax advice.
-          </p>
-          <div className="llc-center">
-            <button type="button" className="llc-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        footnotes={[
+          <>*You are responsible for any government filing and license fees.</>,
+          <>†Where applicable in your state.</>,
+          <>‡If a filing we prepare is rejected or incorrect due to our error, we'll correct it with the government agency at no additional cost to you.</>,
+        ]}
+        disclaimer={<>Leader Business Developer is an independent business-services provider offering administrative, document-preparation and filing-support assistance. We are not a law firm or a government agency. Requirements, fees, deadlines and processing times vary by jurisdiction, and example licenses shown here are illustrative. Nothing on this page constitutes legal or tax advice.</>}
+      />
     </div>
   );
 }

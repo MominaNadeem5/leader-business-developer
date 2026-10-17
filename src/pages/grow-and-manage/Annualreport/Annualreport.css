@@ -27,8 +27,8 @@
 .ar-page .ar-grid { display: grid; gap: 22px; }
 .ar-page .ar-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; margin: 0 auto; align-items: start; }
 .ar-page .ar-grid-3 { grid-template-columns: repeat(3, 1fr); }
-.ar-page .ar-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-.ar-page .ar-reveal.is-in { opacity: 1; transform: none; }
+.ar-page .svc-reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.ar-page .svc-reveal.is-in { opacity: 1; transform: none; }
 .ar-page .ar-link-btn { background: none; border: none; color: var(--g-dark); font-weight: 700; font-size: .92rem; cursor: pointer; text-decoration: underline; }
 .ar-page .ar-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 2px solid var(--g); border-radius: 10px; color: var(--g-dark); font-weight: 700; font-size: .92rem; text-decoration: none; background: rgba(255,255,255,.6); transition: background .2s ease, transform .2s ease; }
 .ar-page .ar-ghost:hover { background: var(--soft); transform: translateY(-1px); }
@@ -193,8 +193,8 @@
 .ar-page .ar-ladder li:nth-child(n+3) .ar-ladder__ico { color: #b91c1c; }
 .ar-page .ar-ladder strong { display: block; font-size: .9rem; color: var(--ink); }
 .ar-page .ar-ladder small { display: block; font-size: .78rem; color: var(--muted); line-height: 1.4; }
-.ar-page .ar-reveal .ar-ladder li { opacity: 0; transform: translateX(-12px); }
-.ar-page .ar-reveal.is-in .ar-ladder li { animation: ar-slidein .5s ease calc(var(--i) * .2s + .2s) forwards; }
+.ar-page .svc-reveal .ar-ladder li { opacity: 0; transform: translateX(-12px); }
+.ar-page .svc-reveal.is-in .ar-ladder li { animation: ar-slidein .5s ease calc(var(--i) * .2s + .2s) forwards; }
 @keyframes ar-slidein { to { opacity: 1; transform: translateX(0); } }
 
 /* ---------- states ---------- */
@@ -305,7 +305,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ar-page *, .ar-page *::before, .ar-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .ar-page .ar-hero__content > *, .ar-page .ar-hero__visual, .ar-page .ar-reveal, .ar-page .ar-report__row,
-  .ar-page .ar-who__panel li, .ar-page .ar-states__card li, .ar-page .ar-how__step, .ar-page .ar-reveal .ar-ladder li { opacity: 1 !important; transform: none !important; }
+  .ar-page .ar-hero__content > *, .ar-page .ar-hero__visual, .ar-page .svc-reveal, .ar-page .ar-report__row,
+  .ar-page .ar-who__panel li, .ar-page .ar-states__card li, .ar-page .ar-how__step, .ar-page .svc-reveal .ar-ladder li { opacity: 1 !important; transform: none !important; }
   .ar-page .ar-report__stamp { opacity: 1 !important; transform: rotate(-8deg) !important; }
 }

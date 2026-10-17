@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare,
+  Check, ChevronDown, ArrowRight, /* Star, */ ShieldCheck, Phone, Clock, 
   FileText, BadgeCheck, Bell, Landmark, MapPin, Building2, Flag, RefreshCw, Mic,
   ClipboardList, CalendarCheck, Home, Utensils, ShoppingBag, LayoutGrid,
   AlertTriangle, Eye, RotateCcw, Sparkles, Layers,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, FaqList, ContactCards, ServiceFooter, CtaBand } from "../../../components/service";
+import { CONTACT } from "../../../data/site";
 import "./Compliance.css";
 
 /* ---- EDIT THESE ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const ROUTES = {
   plans: "#cp-plans",
   start: "/get-started?service=compliance",
@@ -20,8 +22,6 @@ const ROUTES = {
   licenses: "/business-licenses",
   attorney: "/contact",
 };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 /* Prices are placeholders: replace with your real pricing (or set price to null to hide) */
 const PLANS = [
@@ -141,11 +141,6 @@ const faqs = [
   ["What is the difference between the plans?", "Filings Only covers your state filing duties: reports, amendments, alerts and meeting minutes. Filings + Licenses adds a custom license report with application help and renewal tracking. The Compliance Manager plan gives you a dedicated person who runs everything for you."],
 ];
 
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`cp-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
 /* Hero card: items tick off one by one while the gauge fills up */
 const RADAR = [
   { icon: <FileText size={16} />, label: "Annual report", note: "Filed" },
@@ -204,7 +199,7 @@ function Plans() {
           {p.price !== null ? (
             <Button to={ROUTES.start}>{p.cta} <ArrowRight size={16} /></Button>
           ) : (
-            <a className="cp-plan__phone" href={`tel:${contactInfo.phone}`}><Phone size={16} /> {contactInfo.phone}</a>
+            <a className="cp-plan__phone" href={`tel:${CONTACT.phone}`}><Phone size={16} /> {CONTACT.phone}</a>
           )}
           <button type="button" className={`cp-plan__toggle ${open[i] ? "is-open" : ""}`} onClick={() => toggle(i)} aria-expanded={open[i]}>
             {open[i] ? "Hide features" : "View features"} <ChevronDown size={16} />
@@ -344,7 +339,7 @@ export default function Compliance() {
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="cp-page">
+    <div className="svc cp-page">
       {/* HERO */}
       <section className="cp-hero" ref={heroRef}>
         <span className="cp-blob cp-blob--a" aria-hidden="true" />
@@ -361,13 +356,15 @@ export default function Compliance() {
               </p>
               <div className="cp-cta-row" style={{ "--d": 2 }}>
                 <Button to={ROUTES.plans}>Choose my plan <ArrowRight size={18} /></Button>
-                <a href={`tel:${contactInfo.phone}`} className="cp-ghost"><Phone size={15} /> Talk to a manager</a>
+                <a href={`tel:${CONTACT.phone}`} className="cp-ghost"><Phone size={15} /> Talk to a manager</a>
               </div>
               <div className="cp-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
                 <span className="cp-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="cp-hero__badge" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
                 <span className="cp-hero__sep" />
+                */}
                 <span className="cp-hero__trust-item"><ShieldCheck size={16} /> Accuracy-first filing support</span>
               </div>
             </div>
@@ -501,59 +498,15 @@ export default function Compliance() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="cp-faq">
-        <div className="container cp-faq__inner">
-          <h2 className="cp-title">Frequently asked questions</h2>
-          <div className="cp-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="cp-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} tone="white" />
 
-      {/* CTA BAND */}
-      <section className="cp-section cp-section--soft">
-        <div className="container">
-          <Reveal className="cp-band">
-            <h2>Ready to get compliant?</h2>
-            <Button to={ROUTES.plans}>Select my plan <ArrowRight size={18} /></Button>
-          </Reveal>
-        </div>
-      </section>
+      <CtaBand title="Ready to get compliant?" label="Select my plan" to={ROUTES.plans} />
 
-      {/* QUESTIONS */}
-      <section className="cp-section cp-section--gray">
-        <div className="container">
-          <h2 className="cp-title">Questions?</h2>
-          <Reveal className="cp-grid cp-grid-2 cp-ask cp-mt">
-            <div className="cp-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={ROUTES.attorney} className="cp-btn-gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="cp-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="cp-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="cp-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={ROUTES.attorney} />
 
-      <section className="cp-foot">
-        <div className="container">
-          <p>
-            Leader Business Developer provides business formation and administrative filing support. Requirements, fees and processing times vary by jurisdiction, and government filing fees are paid separately. This page is for general information and is not legal or tax advice.
-          </p>
-          <div className="cp-center">
-            <button type="button" className="cp-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        disclaimer={<>Leader Business Developer provides business formation and administrative filing support. Requirements, fees and processing times vary by jurisdiction, and government filing fees are paid separately. This page is for general information and is not legal or tax advice.</>}
+      />
     </div>
   );
 }

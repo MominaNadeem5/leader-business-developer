@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare, FileText,
+  Check, ArrowRight, /* Star, */ ShieldCheck, MessageSquare, FileText,
   FileCheck, Users, Building2, Landmark, Briefcase, UserRound, Handshake, Globe, Lock, CreditCard,
-  BadgeCheck, Quote, Send, Fingerprint, Hash, Sparkles,
+  BadgeCheck, Send, Fingerprint, Hash, Sparkles,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, CountUp, FaqList, Testimonials, ContactCards, CtaBand, ServiceFooter } from "../../../components/service";
 import "./EinItin.css";
 
 /* ---- EDIT THESE ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const PRICES = { ein: "$79", itin: "Custom quote" }; // placeholder prices, set your own
 const LINKS = { ein: "/get-started?service=ein", itin: "/get-started?service=itin", attorney: "/contact" };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 const STAGES = [
   ["Business details", "A few quick questions"],
@@ -121,29 +120,6 @@ const testimonials = [
   { quote: "Leader Business Developer was an incredible partner. The process was smooth, and the support team was always available when I needed help.", name: "Shannon Greevy", role: "Customer, California" },
 ];
 
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`dba-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
-function Count({ to, suffix = "" }) {
-  const [ref, inView] = useInView();
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!inView) return undefined;
-    let raf;
-    const t0 = performance.now();
-    const tick = (t) => {
-      const p = Math.min((t - t0) / 1200, 1);
-      setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, to]);
-  return <span ref={ref}>{n}{suffix}</span>;
-}
-
 function EinCard() {
   const [tick, setTick] = useState(2);
   useEffect(() => {
@@ -233,20 +209,11 @@ function Checklist() {
   );
 }
 
-function CtaBand({ title = "Ready to start your EIN?" }) {
-  return (
-    <Reveal className="dba-band">
-      <h2>{title}</h2>
-      <Button to={LINKS.ein}>Start my EIN <ArrowRight size={18} /></Button>
-    </Reveal>
-  );
-}
-
 export default function EinItin() {
   const [heroRef, heroInView] = useInView();
 
   return (
-    <div className="ein-page">
+    <div className="svc ein-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="ein-blob ein-blob--a" aria-hidden="true" />
@@ -266,10 +233,12 @@ export default function EinItin() {
                 <a href="#itin" className="ein-ghost"><Fingerprint size={16} /> I need an ITIN</a>
               </div>
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
                 <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
                 <span className="llc-hero__sep" />
+                */}
                 <a href="#ein-guarantee" className="dba-guarantee-link"><ShieldCheck size={16} /> Learn about our guarantee</a>
               </div>
             </div>
@@ -375,7 +344,7 @@ export default function EinItin() {
             <div className="ein-stats">
               {stats.map((s) => (
                 <div key={s.label} className="ein-stat">
-                  <strong><Count to={s.to} /></strong>
+                  <strong><CountUp to={s.to} /></strong>
                   <span>{s.label}</span>
                   <small>{s.text}</small>
                 </div>
@@ -457,70 +426,21 @@ export default function EinItin() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">Frequently asked questions</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} />
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Ready to start your EIN?" label="Start my EIN" to={LINKS.ein} />
 
-      {/* TESTIMONIALS */}
-      <section className="dba-section">
-        <div className="container">
-          <h2 className="llc-section__title">How we've helped our customers</h2>
-          <Reveal className="dba-testimonials dba-mt">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="dba-testimonial">
-                <Quote size={28} />
-                <blockquote>{t.quote}</blockquote>
-                <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
-              </figure>
-            ))}
-          </Reveal>
-        </div>
-      </section>
+      <Testimonials items={testimonials} />
 
-      {/* QUESTIONS */}
-      <section className="dba-section dba-section--gray">
-        <div className="container">
-          <h2 className="llc-section__title">Questions?</h2>
-          <Reveal className="dba-grid dba-grid-2 dba-ask dba-mt">
-            <div className="dba-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={LINKS.attorney} className="llc-cta__btn llc-cta__btn--gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="dba-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="dba-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="dba-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={LINKS.attorney} />
 
-      {/* FOOTNOTES */}
-      <section className="llc-cta">
-        <div className="container">
-          <p className="dba-footnote">*If the IRS online system isn't available, we prepare the SS-4 form and send it to you with simple instructions to submit.</p>
-          <p className="dba-footnote">‡If a filing we prepare is rejected or incorrect due to our error, we'll correct it with the government agency at no additional cost to you.</p>
-          <p className="llc-cta__disclaimer">
-            Leader Business Developer is an independent business-services provider offering administrative, document-preparation and filing-support assistance. We are not a law firm, a tax advisor or a government agency. EINs and ITINs are issued by the IRS, and you can apply to the IRS directly at no charge. Requirements, deadlines and processing times are set by the IRS and may change. Nothing on this page constitutes legal or tax advice.
-          </p>
-          <div className="llc-center">
-            <button type="button" className="llc-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        footnotes={[
+          <>*If the IRS online system isn't available, we prepare the SS-4 form and send it to you with simple instructions to submit.</>,
+          <>‡If a filing we prepare is rejected or incorrect due to our error, we'll correct it with the government agency at no additional cost to you.</>,
+        ]}
+        disclaimer={<>Leader Business Developer is an independent business-services provider offering administrative, document-preparation and filing-support assistance. We are not a law firm, a tax advisor or a government agency. EINs and ITINs are issued by the IRS, and you can apply to the IRS directly at no charge. Requirements, deadlines and processing times are set by the IRS and may change. Nothing on this page constitutes legal or tax advice.</>}
+      />
     </div>
   );
 }

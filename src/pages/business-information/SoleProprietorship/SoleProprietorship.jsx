@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare, Scale,
+  Check, ArrowRight, /* Star, */ ShieldCheck, Scale,
   UserRound, FileSignature, BadgeCheck, Landmark, Shield, TrendingDown, Receipt, Handshake,
   Rocket, Tag, Briefcase, RotateCcw, Sparkles,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, CountUp, FaqList, ContactCards, CtaBand, ServiceFooter } from "../../../components/service";
 import "./SoleProprietorship.css";
 
 /* ---- EDIT THESE ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const ROUTES = { dba: "/get-started?service=dba", dbaInfo: "/business/dba", llc: "/business/llc", corp: "/business/corporation", licenses: "/business-licenses", attorney: "/contact" };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 const NODES = [
   { icon: <FileSignature size={20} />, title: "Register a DBA", text: "Trade under a business name instead of your own." },
@@ -84,29 +83,6 @@ const faqs = [
   ["Do I need an EIN if I file a DBA?", "That depends on your structure, not on whether you have a DBA. Sole proprietors without employees usually use their Social Security number. You need an EIN to hire employees, and many banks and entities require one."],
   ["Do sole proprietors pay self-employment tax?", "Generally yes. Net business earnings are subject to self-employment tax in addition to income tax. Speak with a qualified tax professional about your situation."],
 ];
-
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`dba-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
-function Count({ to, suffix = "" }) {
-  const [ref, inView] = useInView();
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!inView) return undefined;
-    let raf;
-    const t0 = performance.now();
-    const tick = (t) => {
-      const p = Math.min((t - t0) / 1300, 1);
-      setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, to]);
-  return <span ref={ref}>{n}{suffix}</span>;
-}
 
 function OrbitCard() {
   const [active, setActive] = useState(0);
@@ -201,21 +177,12 @@ function Quiz() {
   );
 }
 
-function CtaBand({ title = "Ready to put your business name on the record?" }) {
-  return (
-    <Reveal className="dba-band">
-      <h2>{title}</h2>
-      <Button to={ROUTES.dba}>Register my DBA <ArrowRight size={18} /></Button>
-    </Reveal>
-  );
-}
-
 export default function SoleProprietorship() {
   const [heroRef, heroInView] = useInView();
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="sp-page">
+    <div className="svc sp-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="sp-blob sp-blob--a" aria-hidden="true" />
@@ -235,10 +202,12 @@ export default function SoleProprietorship() {
                 <a href="#sp-compare" className="sp-ghost">Compare structures</a>
               </div>
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
                 <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
                 <span className="llc-hero__sep" />
+                */}
                 <span className="llc-hero__trust-item"><ShieldCheck size={16} /> Filing support from real people</span>
               </div>
             </div>
@@ -264,7 +233,7 @@ export default function SoleProprietorship() {
             <div className="sp-stats">
               {stats.map((s) => (
                 <div key={s.label} className="sp-stat">
-                  <strong><Count to={s.to} suffix={s.suffix} /></strong>
+                  <strong><CountUp to={s.to} suffix={s.suffix} /></strong>
                   <span>{s.label}</span>
                   <small>{s.text}</small>
                 </div>
@@ -367,51 +336,15 @@ export default function SoleProprietorship() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">Frequently asked questions</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} />
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Ready to put your business name on the record?" label="Register my DBA" to={ROUTES.dba} />
 
-      {/* QUESTIONS */}
-      <section className="dba-section dba-section--gray">
-        <div className="container">
-          <h2 className="llc-section__title">Questions?</h2>
-          <Reveal className="dba-grid dba-grid-2 dba-ask dba-mt">
-            <div className="dba-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={ROUTES.attorney} className="llc-cta__btn llc-cta__btn--gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="dba-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="dba-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="dba-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={ROUTES.attorney} />
 
-      <section className="llc-cta">
-        <div className="container">
-          <p className="llc-cta__disclaimer">
-            Leader Business Developer provides business formation and administrative filing support. Requirements, fees and processing times vary by jurisdiction. This page is for general information and is not legal or tax advice.
-          </p>
-          <div className="llc-center">
-            <button type="button" className="llc-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        disclaimer={<>Leader Business Developer provides business formation and administrative filing support. Requirements, fees and processing times vary by jurisdiction. This page is for general information and is not legal or tax advice.</>}
+      />
     </div>
   );
 }

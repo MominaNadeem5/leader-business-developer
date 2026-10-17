@@ -1,21 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare, Quote, MapPin,
+  Check, ArrowRight, /* Star, */ ShieldCheck, MapPin,
   Package, FileText, Landmark, Search, Lock, Smartphone, Globe, Home, Laptop, Rocket, Briefcase, Filter,
   Plug, Banknote, Send, Building2, Inbox, Users, Scale, BadgeCheck, Sparkles,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, FaqList, Testimonials, ContactCards, ServiceFooter, CtaBand } from "../../../components/service";
 import "./VirtualAddress.css";
 
 /* ---- EDIT THESE: this is the section to make match your real service ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const LINKS = { start: "/get-started?service=virtual-address", attorney: "/contact" };
 const ROUTES = { agent: "/business/registered-agent", llc: "/business/llc", ein: "/business/ein" };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 // PLACEHOLDER plans and limits. Replace with your real prices and what each plan includes.
 const PLANS = [
@@ -111,11 +110,6 @@ const faqs = [
 const testimonials = [
   { quote: "Leader Business Developer was an incredible partner. The process was smooth, and the support team was always available when I needed help.", name: "Shannon Greevy", role: "Customer, California" },
 ];
-
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`dba-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
 
 function AddressCard() {
   const [tick, setTick] = useState(3);
@@ -226,21 +220,12 @@ function UseTabs() {
   );
 }
 
-function CtaBand({ title = "Ready to get your virtual address?" }) {
-  return (
-    <Reveal className="dba-band">
-      <h2>{title}</h2>
-      <a href="#pricing" className="llc-cta__btn llc-cta__btn--gold">See plans <ChevronDown size={16} /></a>
-    </Reveal>
-  );
-}
-
 export default function VirtualAddress() {
   const [heroRef, heroInView] = useInView();
   const track = [...marquee, ...marquee];
 
   return (
-    <div className="va-page">
+    <div className="svc va-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="va-blob va-blob--a" aria-hidden="true" />
@@ -260,10 +245,12 @@ export default function VirtualAddress() {
                 <a href="#addresses" className="va-ghost"><MapPin size={16} /> Choose an address</a>
               </div>
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
                 <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
                 <span className="llc-hero__sep" />
+                */}
                 <span className="llc-hero__trust-item"><ShieldCheck size={16} /> Secure mail handling</span>
               </div>
             </div>
@@ -387,69 +374,20 @@ export default function VirtualAddress() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="llc-faq">
-        <div className="container llc-faq__inner">
-          <h2 className="llc-section__title">Frequently asked questions</h2>
-          <div className="llc-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="llc-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} />
 
-      <section className="dba-section dba-section--soft"><div className="container"><CtaBand /></div></section>
+      <CtaBand title="Ready to get your virtual address?" label="See plans" href="#pricing" />
 
-      {/* TESTIMONIALS */}
-      <section className="dba-section">
-        <div className="container">
-          <h2 className="llc-section__title">How we've helped our customers</h2>
-          <Reveal className="dba-testimonials dba-mt">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="dba-testimonial">
-                <Quote size={28} />
-                <blockquote>{t.quote}</blockquote>
-                <figcaption><strong>{t.name}</strong><span>{t.role}</span></figcaption>
-              </figure>
-            ))}
-          </Reveal>
-        </div>
-      </section>
+      <Testimonials items={testimonials} />
 
-      {/* QUESTIONS */}
-      <section className="dba-section dba-section--gray">
-        <div className="container">
-          <h2 className="llc-section__title">Questions?</h2>
-          <Reveal className="dba-grid dba-grid-2 dba-ask dba-mt">
-            <div className="dba-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={LINKS.attorney} className="llc-cta__btn llc-cta__btn--gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="dba-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="dba-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="dba-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={LINKS.attorney} />
 
-      {/* FOOTNOTES */}
-      <section className="llc-cta">
-        <div className="container">
-          <p className="dba-footnote">*Rules about acceptable business addresses vary by state. A virtual address does not replace a registered agent.</p>
-          <p className="llc-cta__disclaimer">
-            Leader Business Developer is an independent business-services provider. We are not a law firm or a government agency and do not provide legal advice. Mail-handling services are subject to USPS rules, including identity verification. Locations, plans, prices and features shown are subject to change and may differ at checkout.
-          </p>
-          <div className="llc-center">
-            <button type="button" className="llc-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        footnotes={[
+          <>*Rules about acceptable business addresses vary by state. A virtual address does not replace a registered agent.</>,
+        ]}
+        disclaimer={<>Leader Business Developer is an independent business-services provider. We are not a law firm or a government agency and do not provide legal advice. Mail-handling services are subject to USPS rules, including identity verification. Locations, plans, prices and features shown are subject to change and may differ at checkout.</>}
+      />
     </div>
   );
 }

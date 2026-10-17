@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Check, ChevronDown, ArrowRight, Star, ShieldCheck, Phone, Mail, Clock, MessageSquare,
+  Check, ChevronDown, ArrowRight, /* Star, */ ShieldCheck, Phone, Mail, Clock, 
   FileText, FileCheck, Send, Eye, Users, Briefcase, Bell,
   Calendar, CalendarCheck, Hourglass, AlertTriangle, BadgeCheck, Handshake, Shield, Ban,
   Sparkles, Search, Layers,
 } from "lucide-react";
 import Button from "../../../components/common/Button";
 import useInView from "../../../hooks/useInView";
+import { Reveal, FaqList, ContactCards, ServiceFooter, CtaBand } from "../../../components/service";
+import { CONTACT } from "../../../data/site";
 import "./Annualreport.css";
 
 /* ---- EDIT THESE ---- */
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
-const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
+// const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
+// const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
 const ROUTES = {
   plans: "#ar-plans",
   start: "/get-started?service=annual-report",
@@ -20,8 +22,6 @@ const ROUTES = {
   licenses: "/business-licenses",
   attorney: "/contact",
 };
-const HOURS = ["Mon–Fri: 9 a.m.–6 p.m.", "Weekends: closed"]; // placeholder hours
-const contactInfo = { phone: "(855) 787-1221", email: "support@leaderbusiness.com" };
 
 /* Prices are placeholders: replace with your real pricing (price: null shows "Custom") */
 const PLANS = [
@@ -177,11 +177,6 @@ const faqs = [
   ["Which plan should I choose?", "Pick a Single Report for a one-time filing, the Filings Plan if you want every year handled, Filings + Licenses to cover permits as well, or the Compliance Manager for full hands-on service."],
 ];
 
-function Reveal({ children, className = "" }) {
-  const [ref, inView] = useInView();
-  return <div ref={ref} className={`ar-reveal ${inView ? "is-in" : ""} ${className}`}>{children}</div>;
-}
-
 /* Hero: a filing tracker that moves through four stages on a loop */
 const STAGES = [
   { icon: <FileText size={16} />, label: "Prepared", msg: "Report drafted from your details" },
@@ -243,7 +238,7 @@ function Plans() {
           {p.price !== null ? (
             <Button to={ROUTES.start}>{p.cta} <ArrowRight size={16} /></Button>
           ) : (
-            <a className="ar-plan__phone" href={`tel:${contactInfo.phone}`}><Phone size={16} /> {contactInfo.phone}</a>
+            <a className="ar-plan__phone" href={`tel:${CONTACT.phone}`}><Phone size={16} /> {CONTACT.phone}</a>
           )}
           <button type="button" className={`ar-plan__toggle ${open[i] ? "is-open" : ""}`} onClick={() => toggle(i)} aria-expanded={open[i]}>
             {open[i] ? "Hide features" : "View features"} <ChevronDown size={16} />
@@ -376,7 +371,7 @@ export default function AnnualReport() {
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="ar-page">
+    <div className="svc ar-page">
       {/* HERO */}
       <section className="ar-hero" ref={heroRef}>
         <span className="ar-blob ar-blob--a" aria-hidden="true" />
@@ -396,10 +391,12 @@ export default function AnnualReport() {
                 <a href="#ar-deadlines" className="ar-ghost">Check deadlines</a>
               </div>
               <div className="ar-hero__trust" style={{ "--d": 3 }}>
+                {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
                 <span className="ar-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
                 <a className="ar-hero__badge" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
                 <span className="ar-hero__sep" />
+                */}
                 <span className="ar-hero__trust-item"><ShieldCheck size={16} /> Accuracy-first filing support</span>
               </div>
             </div>
@@ -528,59 +525,15 @@ export default function AnnualReport() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="ar-faq">
-        <div className="container ar-faq__inner">
-          <h2 className="ar-title">Frequently asked questions</h2>
-          <div className="ar-faq__list">
-            {faqs.map(([q, a]) => (
-              <details key={q} className="ar-faq-item"><summary><span>{q}</span><ChevronDown size={20} /></summary><p>{a}</p></details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqList faqs={faqs} tone="white" />
 
-      {/* CTA BAND */}
-      <section className="ar-section ar-section--soft">
-        <div className="container">
-          <Reveal className="ar-band">
-            <h2>Ready to file your annual report?</h2>
-            <Button to={ROUTES.plans}>Select my plan <ArrowRight size={18} /></Button>
-          </Reveal>
-        </div>
-      </section>
+      <CtaBand title="Ready to file your annual report?" label="Select my plan" to={ROUTES.plans} />
 
-      {/* QUESTIONS */}
-      <section className="ar-section ar-section--gray">
-        <div className="container">
-          <h2 className="ar-title">Questions?</h2>
-          <Reveal className="ar-grid ar-grid-2 ar-ask ar-mt">
-            <div className="ar-ask__card">
-              <MessageSquare size={30} />
-              <h3>Ask an attorney</h3>
-              <p>Get the right guidance with an attorney by your side.</p>
-              <Link to={ROUTES.attorney} className="ar-btn-gold">Get legal help <ArrowRight size={16} /></Link>
-            </div>
-            <div className="ar-ask__card">
-              <Phone size={30} />
-              <h3>Call an agent at <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a></h3>
-              <p className="ar-hours"><Clock size={14} /> {HOURS[0]}<br />{HOURS[1]}</p>
-              <a href={`mailto:${contactInfo.email}`} className="ar-ask__mail"><Mail size={16} /> {contactInfo.email}</a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <ContactCards helpTo={ROUTES.attorney} />
 
-      <section className="ar-foot">
-        <div className="container">
-          <p>
-            Leader Business Developer provides business formation and administrative filing support. Requirements, fees and processing times vary by jurisdiction, and government filing fees are paid separately. This page is for general information and is not legal or tax advice.
-          </p>
-          <div className="ar-center">
-            <button type="button" className="ar-link-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>Back to top ↑</button>
-          </div>
-        </div>
-      </section>
+      <ServiceFooter
+        disclaimer={<>Leader Business Developer provides business formation and administrative filing support. Requirements, fees and processing times vary by jurisdiction, and government filing fees are paid separately. This page is for general information and is not legal or tax advice.</>}
+      />
     </div>
   );
 }
