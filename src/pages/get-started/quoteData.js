@@ -3,7 +3,7 @@
 
 export const BASE = "/get-started";
 export const stepPath = (n) => `${BASE}/step-${n}`;
-export const DONE_PATH = `${BASE}/submitted`;
+export const THANK_YOU_PATH = "/thank-you";
 
 export const STEPS = [
   { key: "business", label: "Business", title: "Tell us about your business", sub: "A few basics so we can tailor the right solution." },

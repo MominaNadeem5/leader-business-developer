@@ -40,7 +40,7 @@ export default function ServicesGrid() {
   const [ref, inView] = useInView();
 
   return (
-    <section className="section svc">
+    <section className="section">
       <div className="container svc__layout" ref={ref}>
         {/* ---------- LEFT ---------- */}
         <div className={`svc__intro ${inView ? "is-in" : ""}`}>

@@ -1,17 +1,17 @@
 import { startTransition, useEffect, useRef, useState } from "react";
-import { Link, Navigate, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, Building2, MapPin, LayoutGrid, FileText, Wallet, UserRound, ClipboardCheck, Mail, Phone, Globe,
   Briefcase, Tag, Check, Pencil, ShieldAlert, Clock, MessageSquare, Sparkles, ChevronDown, AlertCircle, Info, Loader2,
-  Search, CalendarCheck, Rocket, LogIn,
+  LogIn, Sprout, IdCard, ShieldCheck, Landmark, CreditCard, Laptop, Code, PenTool, TrendingUp, Plus, Banknote, Coins, Layers, Gem, Lightbulb,
 } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Field, Checkbox, Alert } from "../auth/AuthBits";
 import { CONTACT } from "../../data/site";
-import { StepScene, SuccessScene } from "./StepVisuals";
+import { StepScene } from "./StepVisuals";
 import {
   STEPS, TOTAL, STAGES, ENTITIES, INDUSTRIES, COUNTRIES, US_STATES, PK_REGIONS, SERVICES, TIMELINES, BUDGETS, CONTACT_METHODS,
-  EMPTY, VALIDATORS, REQ_MAX, stepPath, DONE_PATH, firstIncomplete, loadDraft, saveDraft, clearDraft, prefillFromParams,
+  EMPTY, VALIDATORS, REQ_MAX, BASE, THANK_YOU_PATH, firstIncomplete, loadDraft, saveDraft, clearDraft, prefillFromParams,
   serviceName, budgetName, makeRef,
 } from "./quoteData";
 import { submitQuote } from "./quoteApi";
@@ -28,18 +28,15 @@ const CAPTIONS = [
   "A real person from our team will reach out.",
   "One last look before it goes to our team.",
 ];
-const TEL = `tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`;
+/* Icon tile shown on each option card (replaces the checkbox / radio mark). */
+const OPT_ICONS = {
+  new: Sprout, existing: Building2,
+  formation: Building2, ein: IdCard, tax: ShieldCheck, filings: Landmark, banking: Landmark, merchant: CreditCard,
+  website: Laptop, automation: Code, branding: PenTool, marketing: TrendingUp, documents: FileText, custom: Plus,
+  "under-500": Banknote, "500-1500": Coins, "1500-5000": Layers, "5000-plus": Gem, recommend: Lightbulb,
+};
 
-/* ===== /get-started : apply ?service= / ?entity= / ?state= from the button that was clicked, then open step 1 ===== */
-export function GetStartedEntry() {
-  const [params] = useSearchParams();
-  const [prefill] = useState(() => {
-    const next = prefillFromParams(params, loadDraft());
-    saveDraft(next);
-    return next;
-  });
-  return <Navigate to={stepPath(1)} replace state={{ prefill }} />;
-}
+const TEL = `tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`;
 
 /* ===== small form pieces (same look as the auth pages' fields) ===== */
 const Opt = () => <span className="gs-opt-tag">Optional</span>;
@@ -81,10 +78,11 @@ function Choices({ type = "radio", name, legend, options, isOn, onToggle, error,
       <div className="gs-choice__grid">
         {options.map(([val, title, desc], i) => {
           const on = isOn(val);
+          const OptIcon = OPT_ICONS[val] || FileText;
           return (
             <label key={val} className={`gs-opt gs-opt--${type}${on ? " is-on" : ""}`} style={{ "--i": i }}>
               <input type={type} name={name} value={val} checked={on} onChange={() => onToggle(val)} aria-invalid={error ? true : undefined} />
-              <span className="gs-opt__mark" aria-hidden="true"><Check size={12} strokeWidth={3.5} /></span>
+              <span className="gs-opt__icon" aria-hidden="true"><OptIcon size={20} /></span>
               <span className="gs-opt__text"><b>{title}</b>{desc && <small>{desc}</small>}</span>
             </label>
           );
@@ -96,7 +94,7 @@ function Choices({ type = "radio", name, legend, options, isOn, onToggle, error,
 }
 
 /* ===== progress: "Step n of 7" + bar + clickable step list ===== */
-function Progress({ n, reach }) {
+function Progress({ n, reach, onStep }) {
   return (
     <nav className="gs-progress" aria-label="Quote request progress">
       <div className="gs-progress__top">
@@ -118,7 +116,7 @@ function Progress({ n, reach }) {
           return (
             <li key={s.key} className={`is-${state}`}>
               {k !== n && k <= reach ? (
-                <Link to={stepPath(k)} state={{ dir: k < n ? "back" : "fwd" }}>{inner}</Link>
+                <button type="button" onClick={() => onStep(k, k < n ? "back" : "fwd")}>{inner}</button>
               ) : (
                 <span aria-current={state === "current" ? "step" : undefined}>{inner}</span>
               )}
@@ -165,52 +163,20 @@ function Sidebar({ n, data }) {
         <a href={TEL}><Phone size={16} aria-hidden="true" />{CONTACT.phone}</a>
         <a href={`mailto:${CONTACT.email}`}><Mail size={16} aria-hidden="true" />{CONTACT.email}</a>
         <p className="gs-muted">
-          Already a client? <Link to="/login" state={{ from: stepPath(n) }} className="au-link">Sign in</Link> · New here? <Link to="/register" className="au-link">Create an account</Link>
+          Already a client? <Link to="/login" state={{ from: BASE }} className="au-link">Sign in</Link> · New here? <Link to="/register" className="au-link">Create an account</Link>
         </p>
       </div>
     </aside>
   );
 }
 
-/* ===== confirmation ===== */
-function Success({ info }) {
-  const headingRef = useRef(null);
-  useEffect(() => { headingRef.current?.focus({ preventScroll: true }); }, []);
-  if (!info?.ref) return <Navigate to={stepPath(1)} replace />;
-  const method = { Email: " by email", "Phone Call": " by phone", WhatsApp: " on WhatsApp", "Video Meeting": " to set up a video meeting" }[info.method] || "";
-  return (
-    <div className="svc au gs">
-      <Seo title="Request Received | Get Started | Leader Business Developer" description="Your quote request has been received by Leader Business Developer." path={DONE_PATH} robots="noindex, nofollow" />
-      <div className="gs__wrap">
-        <div className="gs-card gs-done">
-          <SuccessScene />
-          <h1 ref={headingRef} tabIndex={-1}>Thanks{info.firstName ? `, ${info.firstName}` : ""}! Your request is in.</h1>
-          <p className="au-sub">
-            A specialist will review your requirements and reply to <b className="au-email">{info.email}</b> within one business day{method}.
-          </p>
-          <p className="gs-done__ref">Reference number <b>{info.ref}</b></p>
-          <ol className="gs-done__next">
-            {[[Search, "We review", "Our team reads your brief and checks state or provider requirements."], [CalendarCheck, "You get a custom scope", "A clear plan with services, timeline and your final service amount."], [Rocket, "We get to work", "Approve the scope and we start, with updates at every step."]].map(([Icon, t, d], i) => (
-              <li key={t} style={{ "--i": i }}><span><Icon size={18} aria-hidden="true" /></span><b>{t}</b><small>{d}</small></li>
-            ))}
-          </ol>
-          <div className="gs-done__actions">
-            <Link to="/register" className="au-btn">Create an account to track it <ArrowRight size={18} className="au-btn__arrow" aria-hidden="true" /></Link>
-            <Link to="/" className="au-btn au-btn--ghost">Back to home</Link>
-          </div>
-          <p className="gs-muted gs-done__signin">Already have an account? <Link to="/login" className="au-link">Sign in</Link></p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ===== the flow: /get-started/step-1 … step-7 and /get-started/submitted ===== */
+/* ===== the flow: all 7 steps render on /get-started (the step lives in state, never in the URL); submitting goes to /thank-you ===== */
 export default function GetStarted() {
-  const { step: param } = useParams();
-  const location = useLocation();
+  const [params, setParams] = useSearchParams();
+  const [data, setData] = useState(() => prefillFromParams(params, loadDraft()));
+  const [step, setStep] = useState(1);
+  const [dir, setDir] = useState();
   const navigate = useNavigate();
-  const [data, setData] = useState(() => location.state?.prefill || loadDraft());
   const [touched, setTouched] = useState({});
   const [tried, setTried] = useState({});
   const [status, setStatus] = useState("idle");
@@ -218,29 +184,27 @@ export default function GetStarted() {
   const headingRef = useRef(null);
   const formRef = useRef(null);
 
-  const match = /^step-([1-7])$/.exec(param || "");
-  const n = match ? Number(match[1]) : 0;
+  // Never show a step whose earlier steps are incomplete.
+  const n = Math.min(step, firstIncomplete(data, step - 1));
   const prevN = useRef(n);
 
   useEffect(() => { saveDraft(data); }, [data]);
+
+  // Buttons like /get-started?service=ein pre-fill the answers above; drop the query so the URL stays /get-started.
+  useEffect(() => { if ([...params.keys()].length) setParams({}, { replace: true }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Announce each new step to screen readers by moving focus to its heading (not on first load).
   useEffect(() => {
     if (prevN.current === n) return;
     prevN.current = n;
+    window.scrollTo(0, 0);
     headingRef.current?.focus({ preventScroll: true });
   }, [n]);
-
-  if (param === "submitted") return <Success info={location.state} />;
-  if (!n) return <Navigate to={stepPath(1)} replace />;
-  const gate = firstIncomplete(data, n - 1);
-  if (gate < n) return <Navigate to={stepPath(gate)} replace />;
 
   const S = STEPS[n - 1];
   const Icon = STEP_ICONS[n - 1];
   const errors = VALIDATORS[n - 1](data);
   const valid = Object.keys(errors).length === 0;
-  const dir = location.state?.dir;
   const loading = status === "loading";
 
   const set = (name, value) => setData((d) => ({ ...d, [name]: value }));
@@ -248,7 +212,7 @@ export default function GetStarted() {
   const err = (name) => (touched[name] || tried[n] ? errors[name] : undefined);
   const bind = (name) => ({ name, value: data[name], onChange: (e) => set(name, e.target.value), onBlur: () => touch(name) });
   const bindSelect = (name) => ({ name, value: data[name], onChange: (e) => { set(name, e.target.value); touch(name); } });
-  const go = (k, d) => navigate(stepPath(k), { state: { dir: d } });
+  const go = (k, d) => { setDir(d); setStep(k); };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -266,10 +230,10 @@ export default function GetStarted() {
       const ref = makeRef();
       await submitQuote({ ...data, ref: undefined, source: data.ref || undefined, reference: ref, submittedAt: new Date().toISOString() });
       clearDraft();
-      // One transition, so the cleared answers and the new URL render together (otherwise the step guard
+      // One transition, so the cleared answers and the new page render together (otherwise the step guard
       // would see empty answers on step 7 and bounce back to step 1).
       startTransition(() => {
-        navigate(DONE_PATH, { state: { ref, firstName: data.firstName.trim(), email: data.email.trim(), method: data.contactMethod } });
+        navigate(THANK_YOU_PATH, { replace: true });
         setData({ ...EMPTY });
         setTouched({});
         setTried({});
@@ -299,7 +263,7 @@ export default function GetStarted() {
         description={n === 1
           ? "Get started with Leader Business Developer. Tell us about your business and request a custom quote for formation, compliance, banking, website and marketing services."
           : `Step ${n} of ${TOTAL} of your quote request: ${S.title}`}
-        path={stepPath(n)}
+        path={BASE}
         robots={n === 1 ? undefined : "noindex, nofollow"}
       />
 
@@ -312,7 +276,7 @@ export default function GetStarted() {
           </p>
         </header>
 
-        <Progress n={n} reach={firstIncomplete(data)} />
+        <Progress n={n} reach={firstIncomplete(data)} onStep={go} />
 
         <div className="gs__grid">
           <section className="gs-card">
@@ -437,7 +401,7 @@ export default function GetStarted() {
                       />
                     </div>
                     <Select id="gs-method" label={<>Preferred Contact Method <Opt /></>} icon={<MessageSquare size={18} />} placeholder="Select contact method" options={CONTACT_METHODS} {...bindSelect("contactMethod")} />
-                    <p className="gs-xlink"><LogIn size={16} aria-hidden="true" /><span>Have an account? <Link to="/login" state={{ from: stepPath(6) }} className="au-link">Sign in</Link> to track this request, or <Link to="/register" className="au-link">create one</Link> after you submit.</span></p>
+                    <p className="gs-xlink"><LogIn size={16} aria-hidden="true" /><span>Have an account? <Link to="/login" state={{ from: BASE }} className="au-link">Sign in</Link> to track this request, or <Link to="/register" className="au-link">create one</Link> after you submit.</span></p>
                   </>
                 )}
 
@@ -447,7 +411,7 @@ export default function GetStarted() {
                       <section key={k} className="gs-rev" aria-labelledby={`gs-rev-${k}`}>
                         <header>
                           <h3 id={`gs-rev-${k}`}>{title}</h3>
-                          <Link to={stepPath(k)} state={{ dir: "back" }} className="gs-rev__edit" aria-label={`Edit ${title}`}><Pencil size={14} aria-hidden="true" /> Edit</Link>
+                          <button type="button" onClick={() => go(k, "back")} className="gs-rev__edit" aria-label={`Edit ${title}`}><Pencil size={14} aria-hidden="true" /> Edit</button>
                         </header>
                         <dl>
                           {items.map(([dt, dd]) => <div key={dt}><dt>{dt}</dt><dd>{dd}</dd></div>)}
@@ -477,7 +441,7 @@ export default function GetStarted() {
                   {loading ? (
                     <><Loader2 size={18} className="au-spin" aria-hidden="true" />Sending request…</>
                   ) : n < TOTAL ? (
-                    <>Next<span className="gs-next__to">: {STEPS[n].label}</span><ArrowRight size={18} className="au-btn__arrow" aria-hidden="true" /></>
+                    <>Next</>
                   ) : (
                     <>Submit quote request<ArrowRight size={18} className="au-btn__arrow" aria-hidden="true" /></>
                   )}

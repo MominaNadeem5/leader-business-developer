@@ -148,3 +148,5 @@
   .how * { animation: none !important; }
   .how__step, .how__chev { opacity: 1 !important; }
 }
+/* Even vertical rhythm between the landing-page sections */
+.home > .section { padding-top: 36px; padding-bottom: 36px; }

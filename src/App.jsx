@@ -99,7 +99,8 @@ import Contact from "./pages/resources/Contact";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ResetPassword from "./pages/auth/ResetPassword";
-import GetStarted, { GetStartedEntry } from "./pages/get-started/GetStarted";
+import GetStarted from "./pages/get-started/GetStarted";
+import ThankYou from "./pages/get-started/ThankYou";
 
 export const SITE_URL = import.meta.env.VITE_SITE_URL;
 
@@ -243,9 +244,9 @@ export default function App() {
           <Route path="/resources/support/faqs" element={<Faqs />} />
           <Route path="/consultation" element={<Consultation />} />
 
-          {/* Get Started quote flow: every "Get Started" button opens /get-started, which pre-fills and goes to step 1 */}
-          <Route path="/get-started" element={<GetStartedEntry />} />
-          <Route path="/get-started/:step" element={<GetStarted />} />
+          {/* Get Started quote flow: all 7 steps render on this one URL; submitting goes to /thank-you */}
+          <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/contact" element={<Contact />} />
 
           {/* Account */}

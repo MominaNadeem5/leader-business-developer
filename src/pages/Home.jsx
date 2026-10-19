@@ -9,7 +9,7 @@ import Reviews from "../components/features/Reviews";
 
 export default function Home() {
   return (
-    <>
+    <div className="home">
       <Hero />
       <TrustBar />
       <ServicesGrid />
@@ -18,6 +18,6 @@ export default function Home() {
       <LegalHelp />
       <MoreServices />
       <Reviews />
-    </>
+    </div>
   );
 }
