@@ -3,9 +3,9 @@
   padding: 48px; border-radius: 24px; border: 1px solid var(--color-border);
   background: linear-gradient(110deg, var(--color-surface) 35%, var(--color-hero-to) 100%); }
 .pay__text, .pay__visual { position: relative; z-index: 1; }
-.pay h2 { font-size: clamp(30px, 3.6vw, 44px); line-height: 1.08; letter-spacing: -1px; margin: 0 0 14px; }
+.pay h2 { font-size: clamp(var(--fs-5xl), 3.6vw, var(--fs-7xl)); line-height: var(--lh-tight); letter-spacing: -1px; margin: 0 0 14px; }
 .pay h2 .g { display: block; color: var(--color-primary); }
-.pay__text > p { font-size: 17px; color: var(--color-text); max-width: 420px; margin: 0 0 24px; }
+.pay__text > p { font-size: var(--fs-xl); color: var(--color-text); max-width: 420px; margin: 0 0 24px; }
 
 /* Peeche ke patte */
 .pay__leaf { position: absolute; color: var(--color-primary-soft); opacity: 0.7; pointer-events: none;
@@ -18,8 +18,8 @@
   background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px;
   box-shadow: 0 8px 24px var(--color-shadow-soft); transition: transform 0.2s, box-shadow 0.2s; }
 .pay__note:hover { transform: translateY(-2px); box-shadow: 0 14px 30px var(--color-shadow); }
-.pay__note b { display: block; font-size: 15px; }
-.pay__note small { display: block; font-size: 13px; color: var(--color-text-muted); }
+.pay__note b { display: block; font-size: var(--fs-base); }
+.pay__note small { display: block; font-size: var(--fs-sm); color: var(--color-text-muted); }
 .pay__note .icon { flex: none; width: 46px; height: 46px; }
 .pay__note-chev { margin-left: auto; flex: none; color: var(--color-text-muted); transition: transform 0.2s; }
 .pay__note:hover .pay__note-chev { transform: translateX(4px); }
@@ -28,31 +28,31 @@
 .pay__visual { display: grid; grid-template-columns: 1fr 1fr; align-items: center; min-height: 360px; }
 .biz { position: relative; z-index: 1; background: var(--color-surface); border-radius: 18px; padding: 18px;
   box-shadow: 0 18px 40px var(--color-shadow); }
-.biz__title { font-weight: 700; font-size: 15px; margin-bottom: 12px; }
+.biz__title { font-weight: var(--fw-bold); font-size: var(--fs-base); margin-bottom: 12px; }
 .biz__row { display: grid; grid-template-columns: 46px 1fr auto; align-items: center; gap: 12px; padding: 9px;
   border: 1px solid var(--color-border); border-radius: 12px; margin-bottom: 10px; transition: transform 0.2s, background 0.2s; }
 .biz__row:last-child { margin-bottom: 0; }
 .biz__row:hover { transform: translateX(4px); background: var(--color-bg); }
 .biz__row img { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; }
-.biz__name { font-weight: 700; font-size: 14px; }
-.biz__ok { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--color-primary); }
-.biz__ok svg { font-size: 14px; }
+.biz__name { font-weight: var(--fw-bold); font-size: var(--fs-md); }
+.biz__ok { display: flex; align-items: center; gap: 4px; font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--color-primary); }
+.biz__ok svg { font-size: var(--fs-md); }
 .biz__chev { color: var(--color-text-muted); }
 
 .checkout { position: relative; z-index: 2; margin-left: -28px; background: var(--color-surface); border-radius: 18px;
   border-top: 3px solid var(--color-primary); padding: 18px; box-shadow: 0 22px 46px var(--color-shadow); }
-.checkout__head { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
-.checkout__head svg { color: var(--color-primary); font-size: 18px; }
+.checkout__head { display: flex; align-items: center; gap: 8px; font-weight: var(--fw-bold); font-size: var(--fs-md); margin-bottom: 12px; }
+.checkout__head svg { color: var(--color-primary); font-size: var(--fs-2xl); }
 .checkout__prod { display: grid; grid-template-columns: 84px 1fr; gap: 12px; margin-bottom: 12px; }
 .checkout__prod img { width: 84px; height: 84px; border-radius: 10px; object-fit: cover; }
 .sk { height: 8px; border-radius: 6px; background: var(--color-border); margin: 10px 0; }
-.field { border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 13px; color: var(--color-text-muted); margin-top: 10px; }
+.field { border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: var(--fs-sm); color: var(--color-text-muted); margin-top: 10px; }
 .fields2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .checkout__btn { position: relative; overflow: hidden; width: 100%; margin-top: 14px; padding: 12px; border: 0; cursor: pointer;
-  border-radius: var(--radius-btn-nav); background: var(--color-primary); color: var(--color-text-on-primary); font: 700 14px var(--font); }
+  border-radius: var(--radius-btn-nav); background: var(--color-primary); color: var(--color-text-on-primary); font: var(--fw-bold) var(--fs-md) var(--font-body); }
 .checkout__btn::after { content: ""; position: absolute; inset: 0; animation: shimmer 2.6s ease-in-out 2s infinite;
   background: linear-gradient(90deg, transparent, var(--color-shimmer), transparent); }
-.checkout__note { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-size: 12px; color: var(--color-text-muted); }
+.checkout__note { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; font-size: var(--fs-xs); color: var(--color-text-muted); }
 .checkout__note svg { flex: none; margin-top: 2px; }
 
 /* More services strip */
@@ -60,7 +60,7 @@
   background: var(--color-surface-soft); border: 1px solid var(--color-border); border-radius: 16px; transition: transform 0.2s; }
 .soon:hover { transform: translateY(-2px); }
 .soon .icon { flex: none; width: 46px; height: 46px; }
-.soon__cap { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--color-primary); }
+.soon__cap { display: block; font-size: var(--fs-2xs); font-weight: var(--fw-bold); letter-spacing: 0.8px; text-transform: uppercase; color: var(--color-primary); }
 .soon__txt { display: block; color: var(--color-text); }
 .soon__chev { margin-left: auto; flex: none; color: var(--color-text-muted); transition: transform 0.2s; }
 .soon:hover .soon__chev { transform: translateX(4px); }

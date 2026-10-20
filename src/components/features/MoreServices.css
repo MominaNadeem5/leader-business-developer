@@ -50,8 +50,8 @@
 }
 .more-services__cap {
   display: block;
-  font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--color-primary);
@@ -61,7 +61,7 @@
 .more-services__txt {
   display: block;
   color: var(--color-text);
-  font-size: var(--font-size-base);
+  font-size: var(--fs-base);
   white-space: nowrap;
 }
 
@@ -74,4 +74,25 @@
 
 .more-services:hover .more-services__chev {
   transform: translateX(4px);
+}
+
+/* ---------- Responsive ---------- */
+.more-services > span:nth-of-type(2) {
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .more-services {
+    padding: var(--space-md) var(--space-lg);
+    gap: var(--space-md);
+  }
+  .more-services .icon {
+    width: 44px;
+    height: 44px;
+  }
+  .more-services__txt {
+    white-space: normal;
+    font-size: var(--fs-md);
+    line-height: var(--lh-snug);
+  }
 }

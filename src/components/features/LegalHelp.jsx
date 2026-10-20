@@ -16,7 +16,7 @@ export default function LegalHelp() {
 
   return (
     <section className="section">
-      <div className="container" style={{ padding: "0px 50px" }}>
+      <div className="container legal-container">
         <div ref={ref} className={`legal-wrapper ${inView ? "is-in" : ""}`}>
           <div className="legal__grid">
             <div className="legal__content">

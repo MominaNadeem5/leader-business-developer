@@ -87,17 +87,17 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-size: 13.5px;
-  line-height: 1.35;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
 }
 
 .trust__text b {
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   color: #153a47;
 }
 
 .trust__text span {
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   color: #5d727c;
 }
 

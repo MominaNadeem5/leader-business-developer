@@ -30,8 +30,8 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 14px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--pay-green);
@@ -47,9 +47,9 @@
 
 .pay h2 {
   margin: 0 0 16px;
-  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
-  line-height: 1.08;
-  font-weight: 800;
+  font-size: clamp(var(--fs-6xl), 3.4vw, var(--fs-8xl));
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-heavy);
   letter-spacing: -0.03em;
   color: var(--pay-ink);
 }
@@ -62,8 +62,8 @@
 .pay__text > p {
   max-width: 420px;
   margin: 0 0 26px;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-relaxed);
   color: #25406a;
 }
 
@@ -102,15 +102,15 @@
 
 .pay__note-txt b {
   display: block;
-  font-size: 0.98rem;
+  font-size: var(--fs-lg);
   color: var(--pay-ink);
 }
 
 .pay__note-txt small {
   display: block;
   margin-top: 2px;
-  font-size: 0.84rem;
-  line-height: 1.45;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-compact);
   color: #3d5a82;
 }
 
@@ -165,8 +165,8 @@
 
 .biz__title {
   margin-bottom: 16px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
   color: var(--pay-ink);
 }
 
@@ -205,8 +205,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
   color: var(--pay-ink);
 }
 
@@ -216,14 +216,14 @@
   gap: 5px;
   margin-top: 4px;
   white-space: nowrap;
-  font-size: 0.72rem;
-  font-weight: 500;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
   color: #2a5a8c;
 }
 
 .biz__ok svg {
   flex: none;
-  font-size: 1rem;
+  font-size: var(--fs-lg);
   color: #2fa24f;
 }
 
@@ -249,13 +249,13 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 18px;
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
   color: var(--pay-ink);
 }
 
 .checkout__head svg {
-  font-size: 1.35rem;
+  font-size: var(--fs-3xl);
   color: #1f8a3d;
 }
 
@@ -296,7 +296,7 @@
   background: #fff;
   border: 1px solid #dfe5ec;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: #8693a3;
 }
 
@@ -314,7 +314,7 @@
   border-radius: 8px;
   background: linear-gradient(180deg, #1f8a3d, #17702f);
   color: #fff;
-  font: 700 0.9rem/1 inherit;
+  font: var(--fw-bold) var(--fs-md)/1 inherit;
   font-family: inherit;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -330,8 +330,8 @@
   align-items: center;
   gap: 12px;
   margin-top: 16px;
-  font-size: 0.74rem;
-  line-height: 1.4;
+  font-size: var(--fs-xs);
+  line-height: var(--lh-compact);
   color: #3d5a82;
 }
 
@@ -396,15 +396,20 @@
 
 /* ---------- Responsive ---------- */
 
-@media (max-width: 1000px) {
+@media (max-width: 1180px) {
   .pay {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pay__text,
+  .pay__visual {
+    min-width: 0;
   }
   .pay__text {
     padding: 36px 32px 8px;
   }
   .pay__visual {
-    padding-left: clamp(40px, 14%, 110px);
+    justify-content: center;
+    padding: 36px 32px;
   }
   .pay__bg {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%);
@@ -429,6 +434,71 @@
   }
   .biz__row {
     margin: 0 0 12px;
+  }
+  .pay__text > p {
+    max-width: none;
+  }
+  .pay h2 {
+    font-size: clamp(var(--fs-4xl), 7vw, var(--fs-6xl));
+  }
+}
+
+/* phone layout for the platform note + "Your Businesses" card */
+@media (max-width: 680px) {
+  .pay__note {
+    gap: 12px;
+    padding: 14px;
+  }
+  .pay__note .icon {
+    width: 44px;
+    height: 44px;
+  }
+  .pay__note-txt b {
+    font-size: var(--fs-base);
+    line-height: var(--lh-snug);
+  }
+  .pay__note-txt small {
+    font-size: var(--fs-xs);
+  }
+
+  .biz {
+    padding: 16px 12px 18px;
+  }
+  .biz__row {
+    grid-template-columns: 48px minmax(0, 1fr) 16px;
+    gap: 10px;
+    padding: 8px 10px 8px 8px;
+  }
+  .biz__row img {
+    width: 48px;
+    height: 48px;
+  }
+  .biz__name {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    line-height: var(--lh-snug);
+  }
+  .biz__ok {
+    white-space: normal;
+    align-items: flex-start;
+    line-height: var(--lh-snug);
+  }
+  .biz__ok svg {
+    margin-top: 1px;
+    font-size: var(--fs-md);
+  }
+}
+
+@media (max-width: 420px) {
+  .pay__text {
+    padding: 24px 18px 4px;
+  }
+  .pay__visual {
+    padding: 24px 14px;
+  }
+  .pay__note {
+    max-width: none;
   }
 }
 

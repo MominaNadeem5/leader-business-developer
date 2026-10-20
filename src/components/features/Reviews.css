@@ -54,8 +54,8 @@
 
 .review-card__text {
   color: var(--color-text);
-  font-size: var(--font-size-base);
-  line-height: 1.6;
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
   margin: 0 0 var(--space-xl);
 }
 
@@ -65,14 +65,14 @@
 }
 
 .review-card__name {
-  font-weight: 700;
-  font-size: var(--font-size-lg);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-xl);
   color: var(--color-text);
   margin-bottom: 4px;
 }
 
 .review-card__role {
-  font-size: var(--font-size-sm);
+  font-size: var(--fs-sm);
   color: var(--color-text-muted);
 }
 

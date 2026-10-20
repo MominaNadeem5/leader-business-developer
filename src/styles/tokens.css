@@ -33,16 +33,7 @@
   --color-hero-from: #f0fdf4;
 
   /* ===== Typography ===== */
-  --font: "Figtree", system-ui, sans-serif;
-  --font-size-xs: 11px;
-  --font-size-sm: 13px;
-  --font-size-base: 15px;
-  --font-size-lg: 17px;
-  --font-size-xl: 19px;
-  --font-size-2xl: 22px;
-  --font-size-3xl: 30px;
-  --font-size-4xl: 38px;
-  --font-size-5xl: 64px;
+  /* Fonts, sizes, weights and line-heights live in typography.css */
 
   /* ===== Spacing ===== */
   --space-xs: 4px;

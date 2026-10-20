@@ -62,17 +62,17 @@
 
 .case__no {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
   margin-bottom: 3px;
 }
 
 .case__top h3 {
   margin: 0;
   color: #fff;
-  font-size: 23px;
-  line-height: 1.2;
-  font-weight: 700;
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-bold);
   letter-spacing: -0.02em;
 }
 
@@ -88,8 +88,8 @@
   border-radius: 999px;
   background: rgba(61, 211, 132, 0.14);
   color: #58df91;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
   opacity: 0;
 }
 
@@ -124,8 +124,8 @@
   border-radius: 13px;
   background: rgba(3, 38, 47, 0.65);
   color: rgba(255, 255, 255, 0.9);
-  font-size: 14.5px;
-  font-weight: 600;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
   opacity: 0;
   transform: translateX(-25px) scale(0.97);
 }
@@ -165,7 +165,7 @@
 
 .case__status {
   color: rgba(255, 255, 255, 0.52);
-  font-size: 12.5px;
+  font-size: var(--fs-xs);
   opacity: 0;
 }
 
@@ -184,7 +184,7 @@
   justify-content: space-between;
   margin-bottom: 8px;
   color: rgba(255, 255, 255, 0.55);
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-variant-numeric: tabular-nums;
 }
 
@@ -226,8 +226,8 @@
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.97);
   color: #173740;
-  font-size: 13px;
-  font-weight: 650;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
   box-shadow:
     0 16px 32px rgba(0, 30, 40, 0.22),
     0 2px 8px rgba(0, 0, 0, 0.08);
@@ -416,7 +416,7 @@
 
 @media (max-width: 600px) {
   .case-box {
-    width: 94vw;
+    width: 100%;
     padding: 30px 12px;
   }
 
@@ -426,12 +426,12 @@
 
   .case__row {
     height: 46px;
-    font-size: 13px;
+    font-size: var(--fs-sm);
     padding-right: 14px;
   }
 
   .chip {
-    font-size: 11px;
+    font-size: var(--fs-2xs);
     padding: 8px 10px 8px 8px;
   }
 

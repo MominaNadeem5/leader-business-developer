@@ -7,7 +7,7 @@
   gap: var(--space-sm);
   padding: var(--space-md) var(--space-xl);
   border-radius: var(--radius-full);
-  font: 700 var(--font-size-base) var(--font);
+  font: var(--fw-bold) var(--fs-base) var(--font-body);
   border: 1.5px solid var(--color-primary);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -48,17 +48,17 @@
 /* Button Sizes */
 .btn--sm {
   padding: var(--space-sm) var(--space-lg);
-  font-size: var(--font-size-sm);
+  font-size: var(--fs-sm);
 }
 
 .btn--md {
   padding: var(--space-md) var(--space-xl);
-  font-size: var(--font-size-base);
+  font-size: var(--fs-base);
 }
 
 .btn--lg {
   padding: var(--space-lg) var(--space-2xl);
-  font-size: var(--font-size-lg);
+  font-size: var(--fs-xl);
 }
 
 /* Button in Navbar/Footer */

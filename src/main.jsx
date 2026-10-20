@@ -10,6 +10,7 @@ import "./theme/animations.css";
 // Base styles
 import "./styles/base.css";
 import "./styles/tokens.css";
+import "./styles/typography.css";
 import "./styles/utils.css";
 
 // Layout styles

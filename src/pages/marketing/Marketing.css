@@ -10,7 +10,7 @@
 .mk-dash .ws-health__stats b { font-variant-numeric: tabular-nums; }
 .mk-bars { display: grid; gap: 8px; }
 .mk-bars div { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 8px; }
-.mk-bars small { font-size: .72rem; font-weight: 700; color: var(--svc-muted); }
+.mk-bars small { font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--svc-muted); }
 .mk-bars span { height: 10px; border-radius: 6px; background: #eef4f0; overflow: hidden; }
 .mk-bars i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--svc-green), #6fcf8a); transition: width .6s cubic-bezier(.2, .9, .3, 1); }
 
@@ -18,13 +18,13 @@
 .mk-search { position: relative; }
 .mk-ad { position: relative; padding: 12px; border-radius: 12px; border: 1.5px solid var(--svc-line); opacity: .15; transition: all .4s ease; }
 .mk-ad.is-on { opacity: 1; border-color: var(--svc-green); background: var(--svc-soft); animation: mk-in .4s ease both; }
-.mk-ad small { display: block; font-size: .68rem; color: var(--svc-muted); }
+.mk-ad small { display: block; font-size: var(--fs-2xs); color: var(--svc-muted); }
 .mk-ad small b { color: var(--svc-ink); }
-.mk-ad strong { display: block; margin: 3px 0; font-size: .86rem; line-height: 1.3; color: #1a4fd6; }
+.mk-ad strong { display: block; margin: 3px 0; font-size: var(--fs-md); line-height: var(--lh-snug); color: #1a4fd6; }
 .mk-ad.is-clicked strong { text-decoration: underline; }
-.mk-ad p { margin: 0 0 8px; font-size: .72rem; line-height: 1.45; color: var(--svc-text); }
+.mk-ad p { margin: 0 0 8px; font-size: var(--fs-xs); line-height: var(--lh-compact); color: var(--svc-text); }
 .mk-ad__links { display: flex; flex-wrap: wrap; gap: 5px; }
-.mk-ad__links span { padding: 3px 8px; border-radius: 999px; background: #fff; border: 1px solid var(--svc-line); font-size: .66rem; font-weight: 700; color: var(--svc-green-dark); }
+.mk-ad__links span { padding: 3px 8px; border-radius: 999px; background: #fff; border: 1px solid var(--svc-line); font-size: var(--fs-2xs); font-weight: var(--fw-bold); color: var(--svc-green-dark); }
 .mk-cursor { position: absolute; right: 26px; top: 30px; color: var(--svc-ink); fill: #fff; animation: mk-tap .5s ease both; }
 .mk-organic { display: grid; gap: 6px; margin-top: 10px; }
 .mk-organic i { height: 7px; border-radius: 4px; background: #eef2f0; }
@@ -35,21 +35,21 @@
 /* social posts */
 .mk-post__head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .mk-post__head div { flex: 1; display: grid; }
-.mk-post__head b { font-size: .86rem; color: var(--svc-ink); }
-.mk-post__head small { font-size: .7rem; color: var(--svc-muted); }
+.mk-post__head b { font-size: var(--fs-md); color: var(--svc-ink); }
+.mk-post__head small { font-size: var(--fs-2xs); color: var(--svc-muted); }
 .mk-avatar { border-radius: 50%; }
-.mk-post p { margin: 0 0 10px; font-size: .8rem; line-height: 1.5; color: var(--svc-text); }
+.mk-post p { margin: 0 0 10px; font-size: var(--fs-sm); line-height: var(--lh-normal); color: var(--svc-text); }
 .mk-post__media { display: grid; place-items: center; height: 92px; margin-bottom: 10px; border-radius: 12px; background: linear-gradient(135deg, #fef3c7, #fde68a); color: var(--mc-amber-ink); }
-.mk-post__stats { display: flex; justify-content: space-between; gap: 6px; font-size: .72rem; font-weight: 700; color: var(--svc-muted); font-variant-numeric: tabular-nums; }
+.mk-post__stats { display: flex; justify-content: space-between; gap: 6px; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--svc-muted); font-variant-numeric: tabular-nums; }
 .mk-post__stats span { display: flex; align-items: center; gap: 4px; }
 .mk-post__stats span:nth-child(3) svg { color: #e0457b; }
-.mk-promoted { display: block; margin-top: 8px; font-size: .68rem; font-weight: 700; color: var(--svc-muted); }
+.mk-promoted { display: block; margin-top: 8px; font-size: var(--fs-2xs); font-weight: var(--fw-bold); color: var(--svc-muted); }
 
 /* feed ad */
 .mk-feed__media { position: relative; height: 128px; margin-bottom: 8px; border-radius: 12px; overflow: hidden; }
 .mk-feed__media span {
   position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 6px; opacity: 0; transform: translateX(30px);
-  font-size: .82rem; font-weight: 800; color: var(--svc-ink); transition: all .5s ease;
+  font-size: var(--fs-sm); font-weight: var(--fw-heavy); color: var(--svc-ink); transition: all .5s ease;
   background: linear-gradient(135deg, #dcfce7, #bbf7d0);
 }
 .mk-feed__media span:nth-child(2) { background: linear-gradient(135deg, #fef3c7, #fde68a); }
@@ -58,14 +58,14 @@
 .mk-feed__dots { display: flex; justify-content: center; gap: 5px; margin-bottom: 8px; }
 .mk-feed__dots i { width: 6px; height: 6px; border-radius: 50%; background: #cfd8d3; transition: all .3s ease; }
 .mk-feed__dots i.is-on { width: 16px; border-radius: 4px; background: var(--svc-green); }
-.mk-feed__cta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; padding: 8px 10px; border-radius: 10px; background: #f8faf9; font-size: .74rem; color: var(--svc-ink); }
-.mk-feed__cta b { padding: 5px 10px; border-radius: 8px; background: var(--svc-green); color: #fff; font-size: .7rem; white-space: nowrap; }
+.mk-feed__cta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; padding: 8px 10px; border-radius: 10px; background: #f8faf9; font-size: var(--fs-xs); color: var(--svc-ink); }
+.mk-feed__cta b { padding: 5px 10px; border-radius: 8px; background: var(--svc-green); color: #fff; font-size: var(--fs-2xs); white-space: nowrap; }
 
 /* budget estimator */
 .mk-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
 .mk-kpis span { padding: 12px; border-radius: 12px; background: #fff; border: 1px solid #bbf7d0; text-align: center; }
-.mk-kpis b { display: block; font-size: 1.35rem; color: var(--svc-ink); font-variant-numeric: tabular-nums; }
-.mk-kpis small { font-size: .74rem; font-weight: 700; color: var(--svc-muted); }
+.mk-kpis b { display: block; font-size: var(--fs-3xl); color: var(--svc-ink); font-variant-numeric: tabular-nums; }
+.mk-kpis small { font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--svc-muted); }
 
 @media (prefers-reduced-motion: reduce) {
   .mk-ad.is-on, .mk-cursor { animation: none; }

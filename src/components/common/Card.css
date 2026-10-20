@@ -19,20 +19,20 @@
 
 .card h4 {
   margin: var(--space-md) 0 var(--space-sm);
-  font-size: var(--font-size-lg);
+  font-size: var(--fs-xl);
 }
 
 .card p {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
+  font-size: var(--fs-sm);
 }
 
 /* Card with icon */
 .card .icon {
   width: 58px;
   height: 58px;
-  font-size: 26px;
+  font-size: var(--fs-4xl);
 }
 
 /* Card arrow indicator */

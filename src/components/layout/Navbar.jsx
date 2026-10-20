@@ -21,6 +21,8 @@ import {
   BookOpen,
   Zap,
   HelpCircle,
+  UserRound,
+  MapPin,
 } from "lucide-react";
 
 import Button from "../common/Button";
@@ -454,6 +456,16 @@ export default function Navbar() {
     setOpenMenu(null);
   };
 
+  // Lock page scroll behind the full-height mobile menu.
+  useEffect(() => {
+    if (!open) return undefined;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
   // Close dropdown on outside click or Escape.
   useEffect(() => {
     const onClick = (event) => {
@@ -656,6 +668,35 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+
+          {/* Mobile only: contact details */}
+          <li className="nav__mobile-contact">
+            <a href="tel:+18155668220">
+              <Phone size={18} />
+              <span>+1 (815) 566-8220</span>
+            </a>
+            <a href="mailto:support@leaderbusinessdeveloper.com">
+              <Mail size={18} />
+              <span>support@leaderbusinessdeveloper.com</span>
+            </a>
+            <p>
+              <MapPin size={18} />
+              <span>1500 N Grant St #4438, Denver, CO 80203</span>
+            </p>
+          </li>
+
+          {/* Mobile only: the header buttons are hidden below 900px, so they live in the opened menu */}
+          <li className="nav__mobile-actions">
+            <Button variant="outline" to="/login" onClick={closeAll}>
+              <UserRound size={18} />
+              Sign In
+            </Button>
+
+            <Button to="/get-started" onClick={closeAll}>
+              Get Started
+              <ArrowRight size={18} />
+            </Button>
+          </li>
         </ul>
 
         <div className="nav__actions">
@@ -668,6 +709,15 @@ export default function Navbar() {
             <ArrowRight size={18} />
           </Button>
         </div>
+
+        <Link
+          to="/login"
+          className="nav__user"
+          aria-label="Sign in"
+          onClick={closeAll}
+        >
+          <UserRound size={18} />
+        </Link>
 
         <button
           type="button"

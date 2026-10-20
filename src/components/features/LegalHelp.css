@@ -88,14 +88,14 @@
 }
 
 .legal__play-icon {
-  font-size: 28px;
+  font-size: var(--fs-5xl);
   color: var(--color-primary);
   margin-left: 4px;
 }
 
 .legal__video p {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
   margin: 0;
 }
 
@@ -139,8 +139,8 @@
 }
 
 .legal__service span {
-  font-weight: 600;
-  font-size: var(--font-size-sm);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
 }
 
 /* Responsive */
@@ -152,10 +152,27 @@
   .legal__visual {
     order: -1;
   }
+
+  /* the desktop slide-in offsets would push the stacked blocks off-screen */
+  .legal__content,
+  .legal__visual {
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {
   .legal__services {
     grid-template-columns: 1fr;
   }
+}
+
+/* side gutters: wide on desktop, narrower as the screen shrinks (was an inline 50px) */
+.container.legal-container { padding-left: 50px; padding-right: 50px; }
+
+@media (max-width: 900px) {
+  .container.legal-container { padding-left: 24px; padding-right: 24px; }
+}
+
+@media (max-width: 480px) {
+  .home .container.legal-container { padding-left: 16px; padding-right: 16px; }
 }
