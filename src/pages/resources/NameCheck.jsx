@@ -49,7 +49,7 @@ export default function NameCheck() {
     : ["warn", "Keep checking", "Finish the remaining checks to get a confident answer."];
 
   return (
-    <div className="svc mc-page lf-page rs-page rs-check">
+    <div className="svc mc-page lf-page rs-page rs-namecheck">
       <Seo {...RES_SEO[PATH]} path={PATH} faqs={FAQS} />
 
       <ResHero
