@@ -16,6 +16,9 @@ import "./styles/utils.css";
 // Layout styles
 import "./styles/layout.css";
 
+// Shared phone rules for dropdowns / accordions (must load last)
+import "./styles/responsive.css";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

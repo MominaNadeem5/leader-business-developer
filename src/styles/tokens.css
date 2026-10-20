@@ -3,6 +3,7 @@
   --color-primary: #2fa24f;
   --color-primary-light: #3ebf5f;
   --color-primary-dark: #1f7a3a;
+  --svc-green-dark: var(--color-primary-dark); /* also usable outside .svc pages (e.g. the footer) */
   --color-primary-soft: rgba(47, 162, 79, 0.1);
   --color-primary-tint: rgba(47, 162, 79, 0.15);
 

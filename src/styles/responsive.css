@@ -1,0 +1,241 @@
+/* =====================================================================
+   Shared mobile rules for dropdowns / accordions and the cards around them.
+   Loaded last (see main.jsx). Selectors use `.svc.svc` so they win over the
+   per-page copies of these components (.llc-faq-item, .svc-faq__item, .lf-faq…)
+   without !important. Phones only; tablet and desktop are untouched.
+   ===================================================================== */
+
+/* grids that forced a 300px minimum column (overflowed phones narrower than that) */
+.lf-faq__grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+
+@media (max-width: 680px) {
+  /* ---------- section rhythm ---------- */
+  .svc.svc .svc-section,
+  .svc.svc .dba-section,
+  .svc.svc .svc-faq { padding-top: 40px; padding-bottom: 40px; }
+  .svc.svc .svc-section--soft,
+  .svc.svc .dba-section--soft { padding-top: 28px; padding-bottom: 28px; }
+  .svc.svc .svc-faq__list { margin-top: 20px; }
+  .svc.svc .dba-mt,
+  .svc.svc .svc-mt { margin-top: 20px; }
+
+  /* ---------- accordion rows (all FAQ variants) ---------- */
+  .svc.svc .svc-faq__item,
+  .svc.svc .llc-faq-item { margin-bottom: 10px; border-radius: 12px; }
+
+  .svc.svc .svc-faq__item summary,
+  .svc.svc .llc-faq-item summary,
+  .svc.svc .lf-faq__list summary {
+    gap: 10px;
+    padding: 14px 16px;
+    font-size: var(--fs-base);
+    line-height: var(--lh-snug);
+  }
+
+  .svc.svc .svc-faq__item p,
+  .svc.svc .llc-faq-item p {
+    padding: 12px 16px 16px;
+    font-size: var(--fs-md);
+    line-height: var(--lh-relaxed);
+  }
+
+  .svc.svc .lf-faq__list p {
+    padding: 0 16px 16px;
+    font-size: var(--fs-md);
+  }
+
+  .svc.svc .lf-faq__list summary em { font-size: var(--fs-xl); }
+  .svc.svc .lf-faq__grid article { padding: 16px; }
+  .svc.svc .lf-faq--cards .lf-faq__grid article { padding-top: 42px; }
+
+  /* ---------- cards and the grids that hold them ---------- */
+  .svc.svc .dba-grid,
+  .svc.svc .svc-grid,
+  .svc.svc .llc-reasons__grid,
+  .svc.svc .llc-steps__grid,
+  .svc.svc .llc-vs__grid { gap: 14px; }
+
+  .svc.svc .llc-reason,
+  .svc.svc .llc-step { padding: 18px 16px; }
+
+  .svc.svc .llc-reason__icon,
+  .svc.svc .llc-step__icon { margin-bottom: 12px; }
+
+  /* ---------- state dropdown + button in the LLC hero ---------- */
+  .svc.svc .llc-hero__form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .svc.svc .llc-hero__select { width: 100%; min-width: 0; }
+  .svc.svc .llc-hero__form .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .svc.svc .container { padding-left: 16px; padding-right: 16px; }
+}
+
+/* single-column grids must be allowed to shrink below their content's min width
+   (long emails / URLs in the contact cards pushed the page wider than the phone) */
+@media (max-width: 760px) {
+  .svc.svc .svc-grid-2,
+  .svc.svc .svc-grid-3,
+  .svc.svc .svc-grid-4,
+  .svc.svc .svc-path,
+  .svc.svc .svc-timeline { grid-template-columns: minmax(0, 1fr); }
+
+  .svc.svc .svc-ask__card { min-width: 0; overflow-wrap: anywhere; }
+}
+
+@media (max-width: 680px) {
+  .svc.svc .dba-grid-2,
+  .svc.svc .dba-grid-3,
+  .svc.svc .dba-grid-4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- page-specific two-column layouts that never collapsed on phones/tablets ---------- */
+@media (max-width: 900px) {
+  .svc.svc .lf-c-intro,
+  .svc.svc .lf-c-clauses,
+  .svc.svc .lf-c-tpl,
+  .svc.svc .lf-p-intro,
+  .svc.svc .lf-p-calc,
+  .svc.svc .lf-n-facts .container,
+  .svc.svc .rs-scorer { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+
+  .svc.svc .dba-split { grid-template-columns: minmax(0, 1fr); }
+  .svc.svc .lf-c-clauses__panel { padding: 22px 18px; }
+}
+
+@media (max-width: 560px) {
+  .svc.svc .lf-p-steps,
+  .svc.svc .lf-c-check ul { grid-template-columns: minmax(0, 1fr); }
+
+  /* roadmap phase tabs wrap instead of forcing a 450px-wide row */
+  .svc.svc .rs-road { padding: 18px 14px; }
+  .svc.svc .rs-road__phases { width: 100%; flex-wrap: wrap; }
+  .svc.svc .rs-road__phases button { flex: 1 1 auto; justify-content: center; padding: 8px 10px; }
+  .svc.svc .rs-road__prog { min-width: 0; max-width: none; width: 100%; }
+  .svc.svc .rs-scorer__in { padding: 18px 14px; }
+  .svc.svc .rs-scorer__field input { font-size: var(--fs-xl); }
+}
+
+@media (max-width: 420px) {
+  .svc.svc .ra-page .ra-flow,
+  .ra-page .ra-flow { padding: 24px 8px; }
+  .ra-page .ra-flow__node { flex-basis: 70px; }
+  .ra-page .ra-flow__link { min-width: 14px; }
+}
+
+@media (max-width: 560px) {
+  /* the right-most duration label is centred on the end of the bar, so give the bar side room */
+  .svc.svc .lf-n-dur__scale { margin-left: 20px; margin-right: 20px; }
+}
+
+/* FAQ page: the topic filter becomes one swipeable row of chips instead of a tall stacked list */
+@media (max-width: 760px) {
+  .svc.svc .rs-faqs__layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .svc.svc .rs-faqs__side { position: static; gap: 10px; }
+  .svc.svc .rs-faqs__side nav {
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .svc.svc .rs-faqs__side nav::-webkit-scrollbar { display: none; }
+  .svc.svc .rs-faqs__side nav button { flex: 0 0 auto; padding: 8px 12px; white-space: nowrap; }
+  .svc.svc .rs-faqs__side nav button.is-on { box-shadow: inset 0 0 0 1.5px var(--svc-green); }
+  .svc.svc .rs-faqs__group { margin-bottom: 16px; }
+}
+
+/* very small phones (320px): remaining tracks that could not shrink below their content */
+@media (max-width: 1024px) {
+  .svc.svc .svc-split { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .svc.svc .lf-s-tpl { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .svc.svc .lf-s-tpl__doc { padding: 24px 18px; }
+  .svc.svc .rs-cc__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .svc.svc .rs-cc__steps li { min-width: 0; overflow-wrap: anywhere; }
+}
+
+/* =====================================================================
+   Phone polish: headings, buttons on one line, contact cards
+   ===================================================================== */
+@media (max-width: 680px) {
+  /* section and hero titles: smaller and tighter so they wrap onto fewer lines */
+  .svc.svc h1 { font-size: clamp(var(--fs-4xl), 7vw, var(--fs-6xl)); line-height: var(--lh-tight); }
+  .svc.svc h2 {
+    font-size: clamp(var(--fs-3xl), 5.8vw, var(--fs-4xl));
+    line-height: var(--lh-heading);
+  }
+  .svc.svc .llc-section__title::after { margin-top: 8px; }
+
+  /* buttons stay on a single line */
+  .svc.svc .btn,
+  .svc.svc .lf-btn,
+  .svc.svc .svc-gold-btn,
+  .svc.svc .llc-cta__btn,
+  .svc.svc .llc-features-toggle,
+  .svc.svc .llc-package-card__btn {
+    white-space: nowrap;
+    max-width: 100%;
+    padding: 11px 18px;
+    font-size: var(--fs-md);
+  }
+
+  .svc.svc .llc-features-toggle { padding: 10px 18px; gap: 6px; }
+  .svc.svc .llc-features-toggle-wrap { margin-top: 20px; }
+
+  /* "Questions?" contact cards */
+  .svc.svc .svc-ask__card,
+  .svc.svc .dba-ask__card { padding: 22px 16px; gap: 8px; }
+
+  .svc.svc .svc-ask__card h3,
+  .svc.svc .dba-ask__card h3 { font-size: var(--fs-xl); line-height: var(--lh-snug); }
+
+  .svc.svc .svc-ask__card h3 a,
+  .svc.svc .dba-ask__card h3 a { display: inline-block; white-space: nowrap; }
+
+  .svc.svc .svc-link,
+  .svc.svc .dba-ask__mail {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    max-width: 100%;
+    font-size: var(--fs-sm);
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  .svc.svc .svc-link svg,
+  .svc.svc .dba-ask__mail svg { flex: none; }
+
+  /* LLC-style contact box: stacked, full-width pills that never exceed the card */
+  .svc.svc .llc-contact { padding: 20px 16px; }
+  .svc.svc .llc-contact__links { flex-direction: column; align-items: stretch; gap: 10px; }
+  .svc.svc .llc-contact__links a {
+    justify-content: center;
+    min-width: 0;
+    padding: 10px 12px;
+    font-size: var(--fs-sm);
+    overflow-wrap: anywhere;
+  }
+}
+
+/* landing page: long primary buttons ("Explore Payment Solutions") stay on one line */
+@media (max-width: 680px) {
+  .home .btn { white-space: nowrap; max-width: 100%; }
+  .home .btn--lg { padding: 12px 20px; font-size: var(--fs-base); }
+}

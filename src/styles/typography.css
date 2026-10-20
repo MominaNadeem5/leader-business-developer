@@ -71,3 +71,14 @@ body { font-family: var(--font-body); font-size: var(--fs-lg); line-height: var(
 :where(h1, h2, h3, h4, h5, h6) { font-family: var(--font-heading); }
 :where(button, input, select, textarea, optgroup) { font-family: inherit; }
 :where(code, kbd, samp, pre) { font-family: var(--font-mono); }
+
+/* ---------- Phones: slightly smaller text everywhere ----------
+   All sizes are rem-based, so lowering the root size scales the whole type scale together
+   (16px -> 15px, and 14.5px on very small phones) while keeping the hierarchy intact. */
+@media (max-width: 680px) {
+  html { font-size: 93.75%; }
+}
+
+@media (max-width: 380px) {
+  html { font-size: 90.625%; }
+}

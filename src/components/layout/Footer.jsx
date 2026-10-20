@@ -7,7 +7,8 @@ import amex from "../../assets/american-express.svg";
 import discover from "../../assets/discover.svg";
 import paypal from "../../assets/paypal.svg";
 import gpay from "../../assets/g-pay.svg";
-import { MapPin, Phone, Mail, Lock, Check } from "lucide-react";
+import { MapPin, Phone, Mail, Lock, Check, CreditCard, Landmark, ArrowUp } from "lucide-react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import "./Footer.css";
 
 export default function Footer() {
@@ -47,10 +48,10 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: "f", to: "#", label: "Facebook" },
-    { icon: "in", to: "#", label: "Instagram" },
-    { icon: "X", to: "#", label: "Twitter" },
-    { icon: "li", to: "#", label: "LinkedIn" },
+    { Icon: FaFacebookF, to: "#", label: "Facebook" },
+    { Icon: FaInstagram, to: "#", label: "Instagram" },
+    { Icon: FaXTwitter, to: "#", label: "X (Twitter)" },
+    { Icon: FaLinkedinIn, to: "#", label: "LinkedIn" },
   ];
 
   const paymentMethods = [
@@ -60,6 +61,8 @@ export default function Footer() {
     { name: "Discover", icon: discover },
     { name: "PayPal", icon: paypal },
     { name: "Google Pay", icon: gpay },
+    { name: "Credit & debit cards", Icon: CreditCard },
+    { name: "Bank payments", Icon: Landmark },
   ];
 
   return (
@@ -68,7 +71,9 @@ export default function Footer() {
       <div className="container footer__main">
         {/* Left Column - Logo & Description */}
         <div className="footer__col footer__col--brand">
-          <img src={logo} alt="Leader Business Developer" className="footer__logo" />
+          <div className="footer__logo-card">
+            <img src={logo} alt="Leader Business Developer" className="footer__logo" />
+          </div>
           <p className="footer__description">
             Leader Business Developer provides professional business-support, administrative, digital and technology services for entrepreneurs and growing businesses. We help clients organize important business requirements and build the systems needed to operate professionally.
           </p>
@@ -85,7 +90,7 @@ export default function Footer() {
             <div className="footer__social-links">
               {socialLinks.map((social, index) => (
                 <a key={index} href={social.to} className="footer__social-link" aria-label={social.label}>
-                  {social.icon}
+                  <social.Icon size={16} aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -132,21 +137,21 @@ export default function Footer() {
         <div className="footer__col footer__col--contact">
           <h4 className="footer__heading">Contact Us</h4>
           <div className="footer__contact-item">
-            <MapPin size={18} />
+            <span className="footer__contact-icon"><MapPin size={18} /></span>
             <div>
               <strong>Business Address</strong>
               <span>1500 N Grant St #4438, Denver, CO 80203</span>
             </div>
           </div>
           <div className="footer__contact-item">
-            <Phone size={18} />
+            <span className="footer__contact-icon"><Phone size={18} /></span>
             <div>
               <strong>Phone</strong>
               <a href="tel:+18155668220">+1 (815) 566-8220</a>
             </div>
           </div>
           <div className="footer__contact-item">
-            <Mail size={18} />
+            <span className="footer__contact-icon"><Mail size={18} /></span>
             <div>
               <strong>Email</strong>
               <a href="mailto:support@leaderbusinessdeveloper.com">support@leaderbusinessdeveloper.com</a>
@@ -173,7 +178,7 @@ export default function Footer() {
           <div className="footer__payment-methods">
             {paymentMethods.map((method, index) => (
               <div key={index} className="footer__payment-icon" title={method.name}>
-                <img src={method.icon} alt={method.name} />
+                {method.icon ? <img src={method.icon} alt={method.name} /> : <method.Icon size={26} aria-label={method.name} />}
               </div>
             ))}
           </div>
@@ -191,6 +196,14 @@ export default function Footer() {
             <Link to="/security">Security</Link>
             <Link to="/contact">Contact</Link>
           </div>
+          <button
+            type="button"
+            className="footer__top"
+            aria-label="Back to top"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <ArrowUp size={18} />
+          </button>
         </div>
       </div>
     </footer>
