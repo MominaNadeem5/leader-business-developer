@@ -2,18 +2,21 @@ import { startTransition, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, Building2, MapPin, LayoutGrid, FileText, Wallet, UserRound, ClipboardCheck, Mail, Phone, Globe,
-  Briefcase, Tag, Check, Pencil, ShieldAlert, Clock, MessageSquare, Sparkles, ChevronDown, AlertCircle, Info, Loader2,
+  Briefcase, Tag, Pencil, ShieldAlert, Clock, MessageSquare, Sparkles, Info, Loader2,
   LogIn, Sprout, IdCard, ShieldCheck, Landmark, CreditCard, Laptop, Code, PenTool, TrendingUp, Plus, Banknote, Coins, Layers, Gem, Lightbulb,
 } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Field, Checkbox, Alert } from "../auth/AuthBits";
 import { CONTACT } from "../../data/site";
+import { Opt, Req, Msg, Select, Choices, Progress } from "./FormBits";
 import { StepScene } from "./StepVisuals";
 import {
   STEPS, TOTAL, STAGES, ENTITIES, INDUSTRIES, COUNTRIES, US_STATES, PK_REGIONS, SERVICES, TIMELINES, BUDGETS, CONTACT_METHODS,
   EMPTY, VALIDATORS, REQ_MAX, BASE, THANK_YOU_PATH, firstIncomplete, loadDraft, saveDraft, clearDraft, prefillFromParams,
   serviceName, budgetName, makeRef,
 } from "./quoteData";
+import { LLC_PATH } from "./llc/llcData";
+import { DBA_PATH } from "./dba/dbaData";
 import { submitQuote } from "./quoteApi";
 import "../auth/Auth.css";
 import "./GetStarted.css";
@@ -37,96 +40,6 @@ const OPT_ICONS = {
 };
 
 const TEL = `tel:${CONTACT.phone.replace(/[^\d+]/g, "")}`;
-
-/* ===== small form pieces (same look as the auth pages' fields) ===== */
-const Opt = () => <span className="gs-opt-tag">Optional</span>;
-const Req = () => <span className="gs-req" aria-hidden="true">*</span>;
-
-function Msg({ id, error, hint }) {
-  if (error) return <p className="au-msg au-msg--err" id={id}><AlertCircle size={14} aria-hidden="true" />{error}</p>;
-  if (hint) return <p className="au-msg" id={id}>{hint}</p>;
-  return null;
-}
-
-function Select({ id, label, icon, placeholder, options, error, hint, value, ...rest }) {
-  const msgId = error || hint ? `${id}-msg` : undefined;
-  return (
-    <div className={`au-field${error ? " is-err" : ""}`}>
-      <div className="au-field__top"><label htmlFor={id}>{label}</label></div>
-      <div className="au-input gs-select">
-        <span className="au-input__icon" aria-hidden="true">{icon}</span>
-        <select id={id} value={value} className={value ? "" : "is-empty"} aria-invalid={error ? true : undefined} aria-describedby={msgId} {...rest}>
-          <option value="" disabled>{placeholder}</option>
-          {options.map((o) => <option key={o} value={o}>{o}</option>)}
-        </select>
-        <ChevronDown size={18} className="gs-select__chev" aria-hidden="true" />
-      </div>
-      <Msg id={msgId} error={error} hint={hint} />
-    </div>
-  );
-}
-
-/* Card-style radio or checkbox group with a real fieldset/legend and native inputs (keyboard works as usual). */
-function Choices({ type = "radio", name, legend, options, isOn, onToggle, error, cols = 2, aside }) {
-  const errId = `gs-${name}-msg`;
-  return (
-    <fieldset className={`gs-choice gs-choice--${cols}${error ? " is-err" : ""}`} aria-describedby={error ? errId : undefined}>
-      <legend>
-        <span>{legend}<Req /></span>
-        {aside}
-      </legend>
-      <div className="gs-choice__grid">
-        {options.map(([val, title, desc], i) => {
-          const on = isOn(val);
-          const OptIcon = OPT_ICONS[val] || FileText;
-          return (
-            <label key={val} className={`gs-opt gs-opt--${type}${on ? " is-on" : ""}`} style={{ "--i": i }}>
-              <input type={type} name={name} value={val} checked={on} onChange={() => onToggle(val)} aria-invalid={error ? true : undefined} />
-              <span className="gs-opt__icon" aria-hidden="true"><OptIcon size={20} /></span>
-              <span className="gs-opt__text"><b>{title}</b>{desc && <small>{desc}</small>}</span>
-            </label>
-          );
-        })}
-      </div>
-      <Msg id={errId} error={error} />
-    </fieldset>
-  );
-}
-
-/* ===== progress: "Step n of 7" + bar + clickable step list ===== */
-function Progress({ n, reach, onStep }) {
-  return (
-    <nav className="gs-progress" aria-label="Quote request progress">
-      <div className="gs-progress__top">
-        <p><b>Step {n} of {TOTAL}</b> · {STEPS[n - 1].label}</p>
-        <span>{Math.round(((n - 1) / TOTAL) * 100)}% complete</span>
-      </div>
-      <div className="gs-progress__bar" aria-hidden="true"><span style={{ transform: `scaleX(${(n - 1) / TOTAL})` }} /></div>
-      <ol className="gs-steps">
-        {STEPS.map((s, i) => {
-          const k = i + 1;
-          const state = k < n ? "done" : k === n ? "current" : "todo";
-          const inner = (
-            <>
-              <span className="gs-steps__dot">{state === "done" ? <Check size={14} strokeWidth={3} aria-hidden="true" /> : k}</span>
-              <span className="gs-steps__label">{s.label}</span>
-              {state === "done" && <span className="sr-only"> (completed)</span>}
-            </>
-          );
-          return (
-            <li key={s.key} className={`is-${state}`}>
-              {k !== n && k <= reach ? (
-                <button type="button" onClick={() => onStep(k, k < n ? "back" : "fwd")}>{inner}</button>
-              ) : (
-                <span aria-current={state === "current" ? "step" : undefined}>{inner}</span>
-              )}
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
-  );
-}
 
 /* ===== sidebar: animated scene, live summary, help ===== */
 function Sidebar({ n, data }) {
@@ -191,7 +104,13 @@ export default function GetStarted() {
   useEffect(() => { saveDraft(data); }, [data]);
 
   // Buttons like /get-started?service=ein pre-fill the answers above; drop the query so the URL stays /get-started.
-  useEffect(() => { if ([...params.keys()].length) setParams({}, { replace: true }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // LLC links (?service=llc / ?entity=llc) go to the dedicated LLC application instead.
+  useEffect(() => {
+    const kind = (params.get("service") || params.get("entity") || "").toLowerCase();
+    if (kind === "llc") { navigate(LLC_PATH + (params.get("state") ? "?state=" + encodeURIComponent(params.get("state")) : ""), { replace: true }); return; }
+    if (kind === "dba") { navigate(DBA_PATH, { replace: true }); return; }
+    if ([...params.keys()].length) setParams({}, { replace: true });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Announce each new step to screen readers by moving focus to its heading (not on first load).
   useEffect(() => {
@@ -276,7 +195,7 @@ export default function GetStarted() {
           </p>
         </header>
 
-        <Progress n={n} reach={firstIncomplete(data)} onStep={go} />
+        <Progress label="Quote request progress" steps={STEPS} n={n} reach={firstIncomplete(data)} onStep={go} />
 
         <div className="gs__grid">
           <section className="gs-card">
@@ -298,7 +217,7 @@ export default function GetStarted() {
                       autoComplete="organization" placeholder="e.g. Northwind Studio LLC" maxLength={120}
                       hint="You can leave this blank if you haven't chosen a name yet." {...bind("businessName")}
                     />
-                    <Choices
+                    <Choices icons={OPT_ICONS}
                       name="stage" legend="Business Stage" options={STAGES} isOn={(v) => data.stage === v}
                       onToggle={(v) => { set("stage", v); touch("stage"); }} error={err("stage")}
                     />
@@ -306,6 +225,9 @@ export default function GetStarted() {
                       <Select id="gs-entity" label={<>Current / Intended Entity <Opt /></>} icon={<Building2 size={18} />} placeholder="Select entity type" options={ENTITIES} {...bindSelect("entity")} />
                       <Field id="gs-industry" label={<>Business Industry <Opt /></>} icon={<Tag size={18} />} list="gs-industries" placeholder="e.g. Ecommerce & retail" maxLength={80} autoComplete="off" {...bind("industry")} />
                     </div>
+                    {data.entity === "LLC" && (
+                      <p className="gs-note"><Building2 size={16} aria-hidden="true" /><span>Forming an LLC? Use our <Link to={LLC_PATH} className="au-link">dedicated LLC application</Link> for a guided, step-by-step setup.</span></p>
+                    )}
                     <datalist id="gs-industries">{INDUSTRIES.map((x) => <option key={x} value={x} />)}</datalist>
                   </>
                 )}
@@ -338,7 +260,7 @@ export default function GetStarted() {
                 )}
 
                 {n === 3 && (
-                  <Choices
+                  <Choices icons={OPT_ICONS}
                     type="checkbox" name="services" legend="Services" options={SERVICES} cols={3}
                     isOn={(v) => data.services.includes(v)}
                     onToggle={(v) => { setData((d) => ({ ...d, services: d.services.includes(v) ? d.services.filter((x) => x !== v) : [...d.services, v] })); touch("services"); }}
@@ -376,7 +298,7 @@ export default function GetStarted() {
 
                 {n === 5 && (
                   <>
-                    <Choices
+                    <Choices icons={OPT_ICONS}
                       name="budget" legend="Estimated budget" options={BUDGETS} cols={1}
                       isOn={(v) => data.budget === v} onToggle={(v) => { set("budget", v); touch("budget"); }} error={err("budget")}
                     />

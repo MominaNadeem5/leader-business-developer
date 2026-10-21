@@ -12,7 +12,7 @@ import "./DBA.css"; // shared, fully scoped styles (.llc-page)
 
 /* ---- EDIT THESE: prices, links, hours ---- */
 const PRICE = { standard: "$79", premium: "$129" }; // placeholder prices, set your own
-const LINKS = { register: "/get-started?service=dba", samples: "/sample-documents", attorney: "/contact" };
+const LINKS = { register: "/get-started/dba", samples: "/sample-documents", attorney: "/contact" };
 
 const packages = [
   {

@@ -239,3 +239,70 @@
   .home .btn { white-space: nowrap; max-width: 100%; }
   .home .btn--lg { padding: 12px 20px; font-size: var(--fs-base); }
 }
+
+/* =====================================================================
+   Compact phone layout: smaller buttons, tighter sections and cards
+   ===================================================================== */
+@media (max-width: 680px) {
+  /* ---------- buttons: compact, one line ---------- */
+  .btn.btn--sm,
+  .btn.btn--md,
+  .btn.btn--lg {
+    gap: 6px;
+    padding: 9px 16px;
+    font-size: var(--fs-md);
+    line-height: var(--lh-snug);
+    white-space: nowrap;
+  }
+
+  .btn svg { width: 16px; height: 16px; }
+
+  .svc.svc .btn,
+  .svc.svc .lf-btn,
+  .svc.svc .svc-gold-btn,
+  .svc.svc .llc-cta__btn,
+  .svc.svc .llc-package-card__btn { padding: 9px 16px; }
+
+  /* auth + Get Started buttons (Back / Next, Create account, social) */
+  .au-btn,
+  .gs-nav .au-btn { height: 42px; padding: 0 16px; gap: 6px; font-size: var(--fs-md); }
+  .au-social__btn { height: 42px; }
+
+  .gs-nav { gap: 10px; margin-top: 18px; padding-top: 16px; }
+  .gs-hint { margin-top: 8px; font-size: var(--fs-xs); }
+
+  /* ---------- section rhythm ---------- */
+  .section { padding-top: 24px; padding-bottom: 24px; }
+  .home > .section { padding-top: 24px; padding-bottom: 24px; }
+
+  .svc.svc .svc-section,
+  .svc.svc .dba-section,
+  .svc.svc .svc-faq { padding-top: 32px; padding-bottom: 32px; }
+  .svc.svc .svc-section--soft,
+  .svc.svc .dba-section--soft { padding-top: 24px; padding-bottom: 24px; }
+
+  .svc.svc .svc-center,
+  .svc.svc .svc-mt,
+  .svc.svc .dba-mt { margin-top: 16px; }
+  .svc.svc .svc-subtitle { margin-bottom: 20px; font-size: var(--fs-base); }
+  .svc.svc .svc-ask,
+  .svc.svc .svc-testimonials { margin-top: 20px; gap: 14px; }
+  .svc.svc .svc-faq__list { margin-top: 16px; }
+
+  /* cards */
+  .svc.svc .svc-card,
+  .svc.svc .svc-testimonial,
+  .svc.svc .svc-check__side { padding: 18px 16px; }
+
+  /* hero blocks */
+  .svc.svc .svc-hero { padding-top: 20px; padding-bottom: 24px; }
+  .svc.svc .svc-hero__grid,
+  .svc.svc .llc-hero__grid { gap: 18px; }
+
+  /* ---------- footer ---------- */
+  .footer .footer__main { padding-top: 28px; padding-bottom: 20px; gap: 24px; }
+  .footer .footer__payment-content { padding-top: 24px; padding-bottom: 24px; gap: 16px; }
+  .footer .footer__copyright-content { padding-top: 16px; padding-bottom: 16px; }
+  .footer__col--links { gap: 22px; }
+  .footer__links-group { gap: 10px; }
+}

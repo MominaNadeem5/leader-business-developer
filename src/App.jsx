@@ -1,5 +1,7 @@
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import Loader from "./components/common/Loader";
+import usePageReady from "./hooks/usePageReady";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ScrollToHash from "./components/layout/ScrollToHash";
@@ -101,6 +103,10 @@ import Register from "./pages/auth/Register";
 import ResetPassword from "./pages/auth/ResetPassword";
 import GetStarted from "./pages/get-started/GetStarted";
 import ThankYou from "./pages/get-started/ThankYou";
+import LlcForm from "./pages/get-started/llc/LlcForm";
+import DbaApplication from "./pages/get-started/dba/DbaForm";
+import DbaThankYou from "./pages/get-started/dba/DbaThankYou";
+import Services from "./pages/services/Services";
 
 export const SITE_URL = import.meta.env.VITE_SITE_URL;
 
@@ -117,14 +123,18 @@ function NotFound() {
 }
 
 export default function App() {
+  const { visible, leaving } = usePageReady();
+
   return (
     <>
+      {visible && <Loader leaving={leaving} />}
       <ScrollToHash />
       <Navbar />
 
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
           <Route path="/business/llc" element={<StartLLC />} />
           <Route path="/business/corporation" element={<Corporation />} />
           <Route path="/business/dba" element={<StartDBA />} />
@@ -246,6 +256,9 @@ export default function App() {
 
           {/* Get Started quote flow: all 7 steps render on this one URL; submitting goes to /thank-you */}
           <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/get-started/llc" element={<LlcForm />} />
+          <Route path="/get-started/dba" element={<DbaApplication />} />
+          <Route path="/get-started/dba/thank-you" element={<DbaThankYou />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/contact" element={<Contact />} />
 

@@ -108,7 +108,7 @@ export default function StartLLC() {
   const [pricingRef, pricingInView] = useInView();
   const [reasonsRef, reasonsInView] = useInView();
 
-  const formLink = selectedState ? `/get-started?state=${encodeURIComponent(selectedState)}` : "#";
+  const formLink = selectedState ? `/get-started/llc?state=${encodeURIComponent(selectedState)}` : "#";
   const pickState = (s) => {
     setSelectedState(s);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -171,7 +171,7 @@ export default function StartLLC() {
                   <span className="llc-package-card__fees">+ state filing fees</span>
                 </div>
                 <p className="llc-package-card__tagline">{pkg.tagline}</p>
-                <Button variant={pkg.id === "pro" ? "primary" : "outline"} to="/get-started" className="llc-package-card__btn">Form my LLC</Button>
+                <Button variant={pkg.id === "pro" ? "primary" : "outline"} to="/get-started/llc" className="llc-package-card__btn">Form my LLC</Button>
                 {pkg.groups.map((g) => (
                   <div key={g.title} className="llc-package-card__group">
                     <h4>{g.title}</h4>
@@ -237,7 +237,7 @@ export default function StartLLC() {
               </div>
             ))}
           </div>
-          <div className="llc-center"><Button to="/get-started">Start my LLC <ArrowRight size={18} /></Button></div>
+          <div className="llc-center"><Button to="/get-started/llc">Start my LLC <ArrowRight size={18} /></Button></div>
         </div>
       </section>
 

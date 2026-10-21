@@ -16,7 +16,7 @@ import growthIcon from "../../assets/growth-icon.png";
 
 const checklist = [
   "LLC Formation",
-  "EIN & Tax ID",
+  "EIN & ITIN",
   "Banking & Payments",
   "Website Setup",
   "And More...",

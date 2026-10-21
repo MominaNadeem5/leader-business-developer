@@ -1,0 +1,48 @@
+/* ===== LLC application (/get-started/llc): extras on top of GetStarted.css / Auth.css ===== */
+
+.llc-sub { margin: 22px 0 10px; color: var(--svc-ink); font-size: var(--fs-base); font-weight: var(--fw-heavy); }
+.llc-sub small { color: var(--svc-muted); font-weight: var(--fw-regular); }
+.llc-sub-note { margin: -4px 0 12px; }
+.llc-3col { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 0 12px; }
+.llc-2col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 12px; }
+.llc-3col > *, .llc-2col > * { min-width: 0; }
+
+/* conditional blocks */
+.llc-cond { margin: 4px 0 8px; padding: 4px 18px 8px; border-left: 3px solid var(--svc-green); background: #f7fbf8; border-radius: 0 14px 14px 0; animation: au-fade .3s ease both; }
+.llc-cond .llc-sub:first-child { margin-top: 14px; }
+
+/* owners / managers */
+.llc-member { margin-bottom: 14px; padding: 16px 18px 4px; border: 1px solid var(--svc-line); border-radius: 16px; background: #fbfdfc; animation: au-rise .35s ease both; }
+.llc-member__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--svc-ink); font-size: var(--fs-base); }
+.llc-row { display: flex; align-items: flex-start; gap: 8px; }
+.llc-row > .au-field { flex: 1; min-width: 0; }
+.llc-row .llc-remove { margin-top: 30px; }
+.llc-remove { display: grid; place-items: center; flex: 0 0 auto; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: #b42318; cursor: pointer; transition: background-color .2s ease; }
+.llc-remove:hover { background: #fdecec; }
+.llc-member__head .llc-remove { width: 34px; height: 34px; }
+.llc-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px; }
+.llc-add { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border: 1.5px dashed var(--svc-green); border-radius: 999px; background: #fff; color: var(--svc-green-dark); font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-bold); cursor: pointer; transition: background-color .2s ease; }
+.llc-add:hover { background: var(--svc-soft); }
+.llc-add--ghost { border-style: solid; border-color: var(--au-field); color: var(--svc-ink); }
+.llc-fill { margin: -6px 0 14px; }
+.llc-total { margin-left: auto; padding: 6px 12px; border-radius: 999px; background: #fff8e6; border: 1px solid #f3dea0; color: #5f4300; font-size: var(--fs-sm); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+.llc-total.is-ok { background: var(--svc-soft); border-color: #ccebd5; color: var(--svc-green-dark); }
+.llc-tip h3 { display: flex; align-items: center; gap: 6px; }
+.llc-tip h3 svg { color: var(--svc-green); }
+.llc-tip p { margin: 0; }
+
+/* number input: hide spinners so the percent field matches the others */
+.llc input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.llc input[type="number"]::-webkit-outer-spin-button, .llc input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+@media (max-width: 880px) {
+  .llc-tip { display: none; }
+}
+@media (max-width: 600px) {
+  .llc-3col, .llc-2col { grid-template-columns: 1fr; }
+  .llc-cond { padding: 2px 12px 6px; }
+  .llc-member { padding: 14px 14px 2px; }
+  .llc-total { margin-left: 0; }
+  .llc-tools { gap: 8px; }
+  .llc-add { flex: 1 1 auto; justify-content: center; }
+}

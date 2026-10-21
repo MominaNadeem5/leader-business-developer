@@ -89,7 +89,7 @@ export default function AmazonSetup() {
         title: "What Amazon typically asks for",
         items: [
           "Government-issued photo ID",
-          "Business details and tax ID (EIN or SSN)",
+          "Business details and tax ID (EIN or ITIN)",
           "Bank account for payouts",
           "Credit card for seller fees",
           "Phone number for verification",

@@ -13,7 +13,7 @@ import "./SoleProprietorship.css";
 /* ---- EDIT THESE ---- */
 // const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // your real Trustpilot page
 // const TRUST_LABEL = "Excellent"; // keep only if it matches your real rating
-const ROUTES = { dba: "/get-started?service=dba", dbaInfo: "/business/dba", llc: "/business/llc", corp: "/business/corporation", licenses: "/business-licenses", attorney: "/contact" };
+const ROUTES = { dba: "/get-started/dba", dbaInfo: "/business/dba", llc: "/business/llc", corp: "/business/corporation", licenses: "/business-licenses", attorney: "/contact" };
 
 const NODES = [
   { icon: <FileSignature size={20} />, title: "Register a DBA", text: "Trade under a business name instead of your own." },

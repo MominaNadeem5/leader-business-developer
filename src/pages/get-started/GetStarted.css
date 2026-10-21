@@ -17,7 +17,7 @@
 .gs-progress__bar { height: 6px; border-radius: 6px; background: #e3ebe6; overflow: hidden; }
 .gs-progress__bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #3ebf5f, #1f7a3a); transform-origin: left; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
 .gs-steps button { width: 100%; background: none; border: 0; font: inherit; cursor: pointer; }
-.gs-steps { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
+.gs-steps { display: grid; grid-template-columns: repeat(var(--cols, 7), minmax(0, 1fr)); gap: 6px; margin: 16px 0 0; padding: 0; list-style: none; }
 .gs-steps li > a, .gs-steps li > button, .gs-steps li > span { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 4px 2px; border-radius: 10px; color: #7b8794; font-size: var(--fs-xs); font-weight: var(--fw-bold); text-align: center; }
 .gs-steps__dot { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #cdd6d0; background: #fff; font-size: var(--fs-xs); transition: transform .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease; }
 .gs-steps li.is-done .gs-steps__dot { background: var(--au-btn); border-color: var(--au-btn); color: #fff; }

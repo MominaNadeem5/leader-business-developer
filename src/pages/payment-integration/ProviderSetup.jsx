@@ -78,7 +78,7 @@ export default function ProviderSetup() {
         title: "What providers usually ask for",
         items: [
           "Legal business name and address",
-          "EIN or other tax ID",
+          "EIN or ITIN",
           "Owner's personal details for identity checks",
           "Business bank account for payouts",
           "Website or description of what you sell",

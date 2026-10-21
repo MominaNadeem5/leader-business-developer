@@ -253,7 +253,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
   color: var(--ft-gold);
 }
 
@@ -267,10 +266,6 @@
 
 .footer__payment-text {
   margin: 0 0 10px;
-  font-size: var(--fs-3xl);
-  font-weight: var(--fw-bold);
-  line-height: var(--lh-snug);
-  color: #fff;
 }
 
 .footer__payment-desc {
@@ -462,10 +457,7 @@
     padding: 32px 16px;
   }
 
-  .footer__payment-text {
-    font-size: var(--fs-2xl);
-  }
-
+ 
   .footer__payment-methods {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -572,6 +564,90 @@
   .footer__payment-methods {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 8px;
+  }
+
+  .footer__payment-icon {
+    height: 48px;
+  }
+}
+
+@media (max-width: 380px) {
+  .footer__payment-methods {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Follow Us (left) / Secure Payments (right) ---------- */
+.footer .footer__payment-content {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.footer__payment-info {
+  max-width: none;
+  margin-left: auto;
+}
+
+
+.footer__payment-text {
+  margin-bottom: 14px;
+}
+
+.footer__payment-methods {
+  display: flex;
+  flex-wrap: nowrap;
+  width: auto;
+  gap: 8px;
+}
+
+.footer__payment-icon {
+  width: 70px;
+  height: 48px;
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .footer__payment-icon {
+    width: 58px;
+    height: 44px;
+  }
+}
+
+/* tablet and phone: stack, both blocks start on the left edge */
+@media (max-width: 900px) {
+  .footer .footer__payment-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+  }
+
+  .footer__payment-info {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .footer__payment-header,
+  .footer__payment-methods {
+    justify-content: flex-start;
+  }
+
+  
+  .footer__payment-methods {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .footer__payment-icon {
+    width: auto;
+    height: 52px;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer__payment-methods {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .footer__payment-icon {

@@ -13,7 +13,7 @@ import "./Corporation.css";
 /* ---- EDIT THESE ---- */
 // const TRUSTPILOT_URL = "https://www.trustpilot.com/review/leaderbusiness.com"; // put your real Trustpilot page
 // const TRUST_LABEL = "Excellent"; // only keep if it matches your real rating
-const LINKS = { start: "/get-started?entity=corporation", samples: "/sample-documents", attorney: "/contact" };
+const LINKS = { start: "/get-started?entity=corporation", check: "/resources/tools/name-check", samples: "/sample-documents", attorney: "/contact" };
 
 const states = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -151,7 +151,7 @@ export default function Corporation() {
   const checkName = (e) => {
     e.preventDefault();
     if (!businessName.trim()) { setNameError("Enter the name you'd like to check."); return; }
-    navigate(`${LINKS.start}&name=${encodeURIComponent(businessName.trim())}`);
+    navigate(`${LINKS.check}?entity=corporation&name=${encodeURIComponent(businessName.trim())}${selectedState ? `&state=${encodeURIComponent(selectedState)}` : ""}`);
   };
 
   return (

@@ -14,25 +14,25 @@ const services = [
     title: "Company Formation",
     text: "Register your business and get up and running quickly.",
     Icon: PiBuildingsBold,
-    to: "/services/formation",
+    to: "/get-started/llc",
   },
   {
-    title: "EIN & Tax ID",
-    text: "Get your Employer Identification Number (EIN) and tax ID.",
+    title: "EIN & ITIN",
+    text: "Get your Employer Identification Number (EIN) and ITIN.",
     Icon: PiIdentificationBadgeBold,
-    to: "/services/ein",
+    to: "/get-started?service=ein",
   },
   {
     title: "Banking & Payments",
     text: "Set up merchant accounts, payment gateways and more.",
     Icon: PiBankBold,
-    to: "/services/payments",
+    to: "/get-started?service=merchant",
   },
   {
     title: "Website Setup",
     text: "Build your online presence with professional websites and tools.",
     Icon: PiMonitorBold,
-    to: "/services/website",
+    to: "/get-started?service=website",
   },
 ];
 

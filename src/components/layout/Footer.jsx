@@ -85,16 +85,6 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <div className="footer__social">
-            <h4 className="footer__social-title">FOLLOW US</h4>
-            <div className="footer__social-links">
-              {socialLinks.map((social, index) => (
-                <a key={index} href={social.to} className="footer__social-link" aria-label={social.label}>
-                  <social.Icon size={16} aria-hidden="true" />
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Middle Columns - Links */}
@@ -163,24 +153,31 @@ export default function Footer() {
       {/* Payment Methods Section */}
       <div className="footer__payment">
         <div className="container footer__payment-content">
+          <div className="footer__social">
+            <h4 className="footer__social-title">FOLLOW US</h4>
+            <div className="footer__social-links">
+              {socialLinks.map((social, index) => (
+                <a key={index} href={social.to} className="footer__social-link" aria-label={social.label}>
+                  <social.Icon size={16} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
           <div className="footer__payment-info">
             <div className="footer__payment-header">
               <Lock size={20} />
-              <h4>SECURE PAYMENTS</h4>
+              <h3>SECURE PAYMENTS</h3>
             </div>
-            <p className="footer__payment-text">
+            <p className="footer__payment-text" >
               We Accept Major Payment Methods
             </p>
-            <p className="footer__payment-desc">
-              Pay conveniently using supported credit cards, debit cards, digital wallets, bank-based payment options and approved online payment methods. Availability may vary depending on the payment channel and transaction.
-            </p>
-          </div>
-          <div className="footer__payment-methods">
-            {paymentMethods.map((method, index) => (
-              <div key={index} className="footer__payment-icon" title={method.name}>
-                {method.icon ? <img src={method.icon} alt={method.name} /> : <method.Icon size={26} aria-label={method.name} />}
-              </div>
-            ))}
+            <div className="footer__payment-methods">
+              {paymentMethods.map((method, index) => (
+                <div key={index} className="footer__payment-icon" title={method.name}>
+                  {method.icon ? <img src={method.icon} alt={method.name} /> : <method.Icon size={26} aria-label={method.name} />}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
