@@ -7,7 +7,7 @@ import amex from "../../assets/american-express.svg";
 import discover from "../../assets/discover.svg";
 import paypal from "../../assets/paypal.svg";
 import gpay from "../../assets/g-pay.svg";
-import { MapPin, Phone, Mail, Lock, Check, CreditCard, Landmark, ArrowUp } from "lucide-react";
+import { Phone, Mail, Lock, Check, CreditCard, Landmark, ArrowUp } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import "./Footer.css";
 
@@ -16,7 +16,8 @@ export default function Footer() {
     { label: "About Us", to: "/about" },
     { label: "Our Services", to: "/services" },
     { label: "Contact Us", to: "/contact" },
-    { label: "FAQs", to: "/faqs" },
+    { label: "FAQs", to: "/resources/support/faqs" },
+    { label: "Book a Consultation", to: "/consultation" },
     { label: "Request a Quote", to: "/get-started" },
   ];
 
@@ -32,8 +33,8 @@ export default function Footer() {
   ];
 
   const supportLinks = [
-    { label: "Customer Care", to: "/support" },
-    { label: "Help Center", to: "/help" },
+    { label: "Support Hub", to: "/resources/support" },
+    { label: "Help Center", to: "/resources/support/help" },
     { label: "Order Status", to: "/order-status" },
     { label: "Security", to: "/security" },
     { label: "Privacy Policy", to: "/privacy" },
@@ -65,86 +66,77 @@ export default function Footer() {
     { name: "Bank payments", Icon: Landmark },
   ];
 
+  const linkGroups = [
+    { title: "Company", links: companyLinks },
+    { title: "Popular Services", links: popularServices },
+    { title: "Support & Legal", links: supportLinks },
+  ];
+
   return (
     <footer className="footer">
       {/* Main Footer Section */}
       <div className="container footer__main">
-        {/* Left Column - Logo & Description */}
+        {/* Brand */}
         <div className="footer__col footer__col--brand">
           <div className="footer__logo-card">
             <img src={logo} alt="Leader Business Developer" className="footer__logo" />
           </div>
           <p className="footer__description">
-            Leader Business Developer provides professional business-support, administrative, digital and technology services for entrepreneurs and growing businesses. We help clients organize important business requirements and build the systems needed to operate professionally.
+            Leader Business Developer helps entrepreneurs start and run U.S. businesses with confidence. From LLC and corporation formation to EIN assistance, state and federal filings, and ongoing compliance support, we handle the paperwork so you can focus on growth.
           </p>
           <ul className="footer__points">
-            {footerPoints.map((point, index) => (
-              <li key={index}>
-                <Check size={16} />
+            {footerPoints.map((point) => (
+              <li key={point}>
+                <span className="footer__point-icon"><Check size={13} strokeWidth={3} /></span>
                 <span>{point}</span>
               </li>
             ))}
           </ul>
+          <div className="footer__social">
+            <h4 className="footer__social-title">Follow Us</h4>
+            <div className="footer__social-links">
+              {socialLinks.map((social) => (
+                <a key={social.label} href={social.to} className="footer__social-link" aria-label={social.label}>
+                  <social.Icon size={16} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Middle Columns - Links */}
+        {/* Links */}
         <div className="footer__col footer__col--links">
-          <div className="footer__links-group">
-            <h4 className="footer__heading">Company</h4>
-            <ul className="footer__link-list">
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer__links-group">
-            <h4 className="footer__heading">Popular Services</h4>
-            <ul className="footer__link-list">
-              {popularServices.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer__links-group">
-            <h4 className="footer__heading">Support & Legal</h4>
-            <ul className="footer__link-list">
-              {supportLinks.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {linkGroups.map((group) => (
+            <div className="footer__links-group" key={group.title}>
+              <h4 className="footer__heading">{group.title}</h4>
+              <ul className="footer__link-list">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <Link to={link.to}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Right Column - Contact */}
+        {/* Contact */}
         <div className="footer__col footer__col--contact">
           <h4 className="footer__heading">Contact Us</h4>
-          <div className="footer__contact-item">
-            <span className="footer__contact-icon"><MapPin size={18} /></span>
-            <div>
-              <strong>Business Address</strong>
-              <span>1500 N Grant St #4438, Denver, CO 80203</span>
+          <div className="footer__contact-card">
+            <div className="footer__contact-item">
+              <span className="footer__contact-icon"><Phone size={18} /></span>
+              <div>
+                <strong>Phone</strong>
+                <a href="tel:+18155668220">+1 (815) 566-8220</a>
+              </div>
             </div>
-          </div>
-          <div className="footer__contact-item">
-            <span className="footer__contact-icon"><Phone size={18} /></span>
-            <div>
-              <strong>Phone</strong>
-              <a href="tel:+18155668220">+1 (815) 566-8220</a>
-            </div>
-          </div>
-          <div className="footer__contact-item">
-            <span className="footer__contact-icon"><Mail size={18} /></span>
-            <div>
-              <strong>Email</strong>
-              <a href="mailto:support@leaderbusinessdeveloper.com">support@leaderbusinessdeveloper.com</a>
+            <div className="footer__contact-item">
+              <span className="footer__contact-icon"><Mail size={18} /></span>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:support@leaderbusinessdeveloper.com">support@leaderbusinessdeveloper.com</a>
+              </div>
             </div>
           </div>
         </div>
@@ -153,31 +145,21 @@ export default function Footer() {
       {/* Payment Methods Section */}
       <div className="footer__payment">
         <div className="container footer__payment-content">
-          <div className="footer__social">
-            <h4 className="footer__social-title">FOLLOW US</h4>
-            <div className="footer__social-links">
-              {socialLinks.map((social, index) => (
-                <a key={index} href={social.to} className="footer__social-link" aria-label={social.label}>
-                  <social.Icon size={16} aria-hidden="true" />
-                </a>
-              ))}
-            </div>
-          </div>
           <div className="footer__payment-info">
             <div className="footer__payment-header">
-              <Lock size={20} />
-              <h3>SECURE PAYMENTS</h3>
+              <span className="footer__payment-lock"><Lock size={16} /></span>
+              <div>
+                <h4>SECURE PAYMENTS</h4>
+                <p className="footer__payment-text">We Accept Major Payment Methods</p>
+              </div>
             </div>
-            <p className="footer__payment-text" >
-              We Accept Major Payment Methods
-            </p>
-            <div className="footer__payment-methods">
-              {paymentMethods.map((method, index) => (
-                <div key={index} className="footer__payment-icon" title={method.name}>
-                  {method.icon ? <img src={method.icon} alt={method.name} /> : <method.Icon size={26} aria-label={method.name} />}
-                </div>
-              ))}
-            </div>
+          </div>
+          <div className="footer__payment-methods">
+            {paymentMethods.map((method) => (
+              <div key={method.name} className="footer__payment-icon" title={method.name}>
+                {method.icon ? <img src={method.icon} alt={method.name} /> : <method.Icon size={24} aria-label={method.name} />}
+              </div>
+            ))}
           </div>
         </div>
       </div>

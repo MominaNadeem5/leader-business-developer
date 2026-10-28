@@ -110,8 +110,6 @@ export const RES_SEO = {
   },
 };
 
-export const RES_DISCLAIMER =
-  "The information on this page is general educational content and not legal, tax or financial advice. Laws, fees and deadlines vary by state and change over time. Tools give estimates and suggestions only. For decisions about your specific situation, consult a licensed attorney, CPA or other qualified professional.";
 
 /* Read and write per-viewer conveniences (favorites, checklist progress). Fails silently. */
 export const store = {

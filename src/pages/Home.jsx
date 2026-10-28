@@ -4,6 +4,8 @@ import ServicesGrid from "../components/features/ServicesGrid";
 import PaymentFeature from "../components/features/PaymentFeature";
 import HowItWorks from "../components/features/HowItWorks";
 import LegalHelp from "../components/features/LegalHelp";
+import WebsiteSection from "../components/features/WebsiteSection";
+import WhyChooseUs from "../components/features/WhyChooseUs";
 import MoreServices from "../components/features/MoreServices";
 import Reviews from "../components/features/Reviews";
 
@@ -16,6 +18,8 @@ export default function Home() {
       <PaymentFeature />
       <HowItWorks />
       <LegalHelp />
+      <WebsiteSection />
+      <WhyChooseUs />
       <MoreServices />
       <Reviews />
     </div>

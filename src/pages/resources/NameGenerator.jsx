@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, Segmented, FaqBlock, RelatedLinks, ResNote } from "./ResBits";
 import { SlotVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, FREE_TOOLS, HUBS, store } from "./resources";
+import { RES_SEO, FREE_TOOLS, HUBS, store } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -13,15 +13,41 @@ const PATH = "/resources/tools/name-generator";
 const FAV_KEY = "lbd-name-favs";
 
 const INDUSTRY = {
-  general: [], food: ["Kitchen", "Table", "Harvest", "Crumb", "Spoon"], tech: ["Labs", "Stack", "Logic", "Byte", "Cloud"],
-  beauty: ["Glow", "Bloom", "Studio", "Silk", "Aura"], home: ["Nest", "Haven", "Craft", "Hearth", "Works"],
-  finance: ["Capital", "Ledger", "Partners", "Trust", "Advisory"], fitness: ["Motion", "Strong", "Pulse", "Fit", "Peak"],
+  general: [],
+  food: ["Kitchen", "Table", "Harvest", "Crumb", "Spoon", "Pantry", "Bakehouse", "Bistro", "Oven", "Fork", "Feast", "Roast"],
+  tech: ["Labs", "Stack", "Logic", "Byte", "Cloud", "Pixel", "Code", "Grid", "Sync", "Node", "Forge", "Ware"],
+  beauty: ["Glow", "Bloom", "Studio", "Silk", "Aura", "Muse", "Velvet", "Radiance", "Petal", "Luxe", "Serene", "Spa"],
+  home: ["Nest", "Haven", "Craft", "Hearth", "Works", "Builders", "Abode", "Roofing", "Fixers", "Cornerstone", "Timber", "Homestead"],
+  finance: ["Capital", "Ledger", "Partners", "Trust", "Advisory", "Wealth", "Equity", "Fiduciary", "Assets", "Treasury", "Vantage", "Counsel"],
+  fitness: ["Motion", "Strong", "Pulse", "Fit", "Peak", "Iron", "Stride", "Flex", "Sprint", "Endure", "Vital", "Athletics"],
+  retail: ["Market", "Boutique", "Shop", "Emporium", "Goods", "Supply", "Trading", "Outlet", "Mercantile", "Bazaar", "Collective", "Finds"],
+  health: ["Care", "Health", "Wellness", "Clinic", "Remedy", "Vita", "Thrive", "Balance", "Healing", "Cura", "Mend", "Nourish"],
+  creative: ["Studio", "Design", "Canvas", "Story", "Pixel", "Frame", "Ink", "Palette", "Media", "Atelier", "Spark", "Craftwork"],
+  education: ["Academy", "Learn", "Scholar", "Mentor", "Campus", "Tutor", "Wisdom", "Bright", "Minds", "Lesson", "Path", "Classroom"],
+  travel: ["Voyage", "Journey", "Escape", "Trails", "Roam", "Wander", "Compass", "Getaway", "Atlas", "Horizon", "Excursion", "Nomad"],
+  realestate: ["Realty", "Properties", "Estates", "Homes", "Landmark", "Keystone", "Residences", "Holdings", "Acres", "Equity", "Dwell", "Metro"],
 };
 const STYLE = {
-  modern: { pre: ["Nova", "Zen", "Flux", "Neo", "Vibe", "Kin"], suf: ["ly", "ify", "io", "hub", "lab", "wise"], words: ["Spark", "Shift", "Loop", "Bolt"] },
-  classic: { pre: ["Heritage", "Crown", "Oak", "Liberty", "Sterling", "Union"], suf: [" & Co.", " Company", " Group", " House", " Guild", " Supply"], words: ["Bridge", "Stone", "Field", "Mill"] },
-  playful: { pre: ["Happy", "Little", "Sunny", "Jolly", "Bright", "Bubbly"], suf: ["oo", "y", "ster", "pop", "ville", "ish"], words: ["Pickle", "Puddle", "Doodle", "Sprout"] },
-  pro: { pre: ["Prime", "Summit", "Apex", "Core", "Keystone", "Meridian"], suf: [" Partners", " Advisors", " Solutions", " Consulting", " Associates", " Group"], words: ["North", "Clear", "True", "Point"] },
+  modern: {
+    pre: ["Nova", "Zen", "Flux", "Neo", "Vibe", "Kin", "Hyper", "Omni", "Uni", "Veri", "Luma", "Zeta", "Evo", "Apex", "Arc"],
+    suf: ["ly", "ify", "io", "hub", "lab", "wise", "ora", "ium", "ex", "ora", "able", "ster", "scape", "ify"],
+    words: ["Spark", "Shift", "Loop", "Bolt", "Wave", "Drift", "Pulse", "Link", "Beam", "Orbit", "Glide", "Rise"],
+  },
+  classic: {
+    pre: ["Heritage", "Crown", "Oak", "Liberty", "Sterling", "Union", "Royal", "Anchor", "Cedar", "Legacy", "Paramount", "Beacon", "Harbor", "Pioneer", "Eagle"],
+    suf: [" & Co.", " Company", " Group", " House", " Guild", " Supply", " & Sons", " Brothers", " Trading Co.", " Works", " Mercantile", " Society"],
+    words: ["Bridge", "Stone", "Field", "Mill", "Gate", "Grove", "Ridge", "Harbor", "Forge", "Lane", "Hill", "Brook"],
+  },
+  playful: {
+    pre: ["Happy", "Little", "Sunny", "Jolly", "Bright", "Bubbly", "Giddy", "Zippy", "Cheery", "Wiggle", "Peppy", "Funky", "Lucky", "Merry", "Snappy"],
+    suf: ["oo", "y", "ster", "pop", "ville", "ish", "ino", "ie", "zilla", "doodle", "ly", "bug"],
+    words: ["Pickle", "Puddle", "Doodle", "Sprout", "Button", "Bean", "Noodle", "Biscuit", "Bubble", "Pebble", "Pop", "Giggle"],
+  },
+  pro: {
+    pre: ["Prime", "Summit", "Apex", "Core", "Keystone", "Meridian", "Pinnacle", "Vertex", "Cornerstone", "Paragon", "Vanguard", "Strategic", "Premier", "Clarity", "Landmark"],
+    suf: [" Partners", " Advisors", " Solutions", " Consulting", " Associates", " Group", " Strategies", " Collective", " Services", " Holdings", " & Associates", " Advisory"],
+    words: ["North", "Clear", "True", "Point", "Bridge", "Axis", "Pillar", "Compass", "Stride", "Insight", "Anchor", "Vector"],
+  },
 };
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
@@ -36,9 +62,9 @@ function generate(keywords, industry, style, seed, maxLen) {
   const r = rng(hash(`${keywords}${industry}${style}`) + seed * 7919);
   const pick = (a) => a[Math.floor(r() * a.length)];
   const out = new Set();
-  for (let i = 0; i < 400 && out.size < 24; i++) {
+  for (let i = 0; i < 1500 && out.size < 60; i++) {
     const k = pick(base);
-    const t = Math.floor(r() * 7);
+    const t = Math.floor(r() * 11);
     let n;
     if (t === 0) n = `${k}${pick(S.suf)}`;
     else if (t === 1) n = `${pick(S.pre)}${k}`;
@@ -46,7 +72,11 @@ function generate(keywords, industry, style, seed, maxLen) {
     else if (t === 3) n = `${k.slice(0, Math.max(3, Math.ceil(k.length * .6)))}${pick(S.suf).trim().toLowerCase()}`;
     else if (t === 4) n = `${pick(S.words)}${k}`;
     else if (t === 5) n = extra.length ? `${pick(S.pre)} ${pick(extra)}` : `${k}${pick(S.words)}`;
-    else n = base.length > 1 ? `${base[0]}${base[1]}` : `${pick(S.pre)}${pick(S.words)}`;
+    else if (t === 6) n = base.length > 1 ? `${base[0]}${base[1]}` : `${pick(S.pre)}${pick(S.words)}`;
+    else if (t === 7) n = `${pick(S.pre)} ${k}${extra.length ? ` ${pick(extra)}` : ""}`;
+    else if (t === 8) { const o = pick(base.length > 1 ? base.filter((x) => x !== k) : S.words); n = `${k} & ${o}`; }
+    else if (t === 9) n = `The ${k} ${pick(extra.length ? extra : S.words)}`;
+    else n = `${k}${pick(extra.length ? extra : S.words)}`;
     n = n.replace(/\s+/g, " ").trim();
     n = n.charAt(0).toUpperCase() + n.slice(1);
     if (n.replace(/[^a-z]/gi, "").length <= maxLen) out.add(n);
@@ -96,7 +126,7 @@ export default function NameGenerator() {
             <label className="lf-field"><span>Keywords (comma separated)</span><input value={kw} maxLength={60} onChange={(e) => setKw(e.target.value)} placeholder="e.g. sunrise, bake, cozy" /></label>
             <label className="lf-field"><span>Industry</span>
               <select value={industry} onChange={(e) => setIndustry(e.target.value)}>
-                {[["general", "General / other"], ["food", "Food & drink"], ["tech", "Tech & software"], ["beauty", "Beauty & wellness"], ["home", "Home & trades"], ["finance", "Finance & consulting"], ["fitness", "Fitness & sports"]].map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+                {[["general", "General / other"], ["food", "Food & drink"], ["tech", "Tech & software"], ["beauty", "Beauty & wellness"], ["home", "Home & trades"], ["finance", "Finance & consulting"], ["fitness", "Fitness & sports"], ["retail", "Retail & ecommerce"], ["health", "Health & medical"], ["creative", "Creative & media"], ["education", "Education & coaching"], ["travel", "Travel & hospitality"], ["realestate", "Real estate"]].map(([v, l]) => <option key={v} value={v}>{l}</option>)}
               </select>
             </label>
             <Segmented label="Style" value={style} onChange={setStyle} options={[["modern", "Modern"], ["classic", "Classic"], ["playful", "Playful"], ["pro", "Professional"]]} />
@@ -157,7 +187,7 @@ export default function NameGenerator() {
         <RelatedLinks items={FREE_TOOLS} current={PATH} title="More free tools" hub={HUBS.tools} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

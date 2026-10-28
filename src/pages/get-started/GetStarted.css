@@ -55,6 +55,62 @@
 .gs-select select:hover:not(:disabled) { border-color: #c2cdc6; }
 .gs-select select:focus, .gs-select select:focus-visible { outline: none; border-color: var(--svc-green); box-shadow: 0 0 0 4px var(--au-ring); border-radius: 10px; }
 .gs-select select:disabled { background: #f6f8f7; cursor: not-allowed; }
+/* searchable dropdowns (country, state, city, industry): same field as .gs-select, white list panel with a search box */
+.gs-combo__btn {
+  width: 100%; height: 48px; padding: 0 40px 0 42px; border: 1.5px solid var(--au-field); border-radius: 10px; background: #fff;
+  font: inherit; font-size: var(--fs-input); font-weight: var(--fw-regular); color: var(--svc-ink); text-align: left; cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: border-color .2s ease, box-shadow .2s ease;
+}
+.gs-combo__btn.is-empty { color: #98a2ad; }
+.gs-combo__btn:hover:not(:disabled) { border-color: #c2cdc6; }
+.gs-combo__btn:focus-visible, .gs-combo.is-open .gs-combo__btn { outline: none; border-color: var(--svc-green); box-shadow: 0 0 0 4px var(--au-ring); }
+.gs-combo__btn:disabled { background: #f6f8f7; cursor: not-allowed; }
+.gs-select__chev { transition: transform .2s ease; }
+.gs-combo.is-open .gs-select__chev { transform: rotate(180deg); }
+.au-field.is-err .gs-combo__btn { border-color: var(--au-err); }
+.gs-combo__panel {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30; overflow: hidden;
+  background: #fff; border: 1px solid #d5dfd9; border-radius: 12px; box-shadow: 0 16px 36px rgba(20, 60, 40, .16);
+}
+.gs-combo__search {
+  display: flex; align-items: center; gap: 8px; margin: 10px 10px 4px; padding: 0 12px; height: 42px;
+  border: 1.5px solid #dfe7e2; border-radius: 10px; background: #f6f8f7; color: #8a96a3;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.gs-combo__search:focus-within { border-color: var(--svc-green); background: #fff; color: var(--svc-green-dark); }
+/* the search box is the field itself: no inner border or ring from the global input styles */
+.gs-combo .gs-combo__search input, .gs-combo .gs-combo__search input:hover, .gs-combo .gs-combo__search input:focus, .gs-combo .gs-combo__search input:focus-visible {
+  flex: 1; min-width: 0; width: auto; height: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; outline: none;
+  font: inherit; font-size: var(--fs-input); color: var(--svc-ink); cursor: text;
+}
+.gs-combo__search input::placeholder { color: #98a2ad; }
+.gs-combo__list { margin: 0; padding: 6px; list-style: none; max-height: 248px; overflow-y: auto; overscroll-behavior: contain; }
+.gs-combo__list li {
+  padding: 10px 12px; border-radius: 8px; color: var(--svc-ink); font-size: var(--fs-input); line-height: var(--lh-snug); cursor: pointer;
+}
+.gs-combo__list li.is-active { background: #eef6f1; }
+.gs-combo__list li.is-selected { color: var(--svc-green-dark); font-weight: var(--fw-semibold); }
+.gs-combo__list li.is-selected::after { content: "\2713"; float: right; margin-left: 10px; }
+.gs-combo__list li.is-custom { color: var(--svc-green-dark); font-weight: var(--fw-semibold); }
+.gs-combo__list .gs-combo__empty { color: #6b7280; cursor: default; text-align: center; }
+
+/* multi-select services dropdown (reuses the .gs-combo field + panel) */
+.gs-multi__list { max-height: 360px; }
+.gs-multi__row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; }
+.gs-combo__list li.gs-multi__row { padding: 10px 12px; }
+.gs-multi__icon { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: #eef3f0; color: var(--svc-green-dark); transition: background-color .2s ease, color .2s ease; }
+.gs-multi__row.is-on .gs-multi__icon { background: var(--svc-green); color: #fff; }
+.gs-multi__text { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.gs-multi__text b { color: var(--svc-ink); font-size: var(--fs-input); font-weight: var(--fw-semibold); line-height: var(--lh-snug); }
+.gs-multi__text small { color: var(--svc-muted); font-size: var(--fs-sm); line-height: var(--lh-snug); }
+.gs-multi__check { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid #c9d3cd; background: #fff; color: #fff; transition: background-color .2s ease, border-color .2s ease; }
+.gs-multi__row.is-on .gs-multi__check { background: var(--svc-green); border-color: var(--svc-green); }
+.gs-combo__list li.gs-multi__row.is-on::after { content: none; }
+.gs-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.gs-chips li { display: inline-flex; align-items: center; gap: 6px; padding: 5px 6px 5px 10px; border-radius: 999px; background: #eef6f1; border: 1px solid #d3e6da; color: var(--svc-green-dark); font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+.gs-chips button { display: grid; place-items: center; width: 20px; height: 20px; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; transition: background-color .2s ease; }
+.gs-chips button:hover { background: rgba(31, 122, 58, .15); }
+
 .gs-select__chev { position: absolute; right: 14px; color: #6b7280; pointer-events: none; }
 .au-field.is-err .gs-select select, .au-field.is-err .gs-textarea { border-color: var(--au-err); }
 .gs-textarea {
@@ -305,3 +361,7 @@
   .gs-ty__steps li { border-left: 0; }
   .gs-ty__actions .au-btn { width: 100%; }
 }
+
+/* an open dropdown stays above the Back / Next row and isn't clipped at the card's bottom edge */
+.gs-step { position: relative; z-index: 2; }
+.gs-card:has(.gs-combo.is-open) { overflow: visible; }

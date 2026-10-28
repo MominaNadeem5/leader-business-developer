@@ -8,7 +8,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, Field, Segmented, FaqBlock, RelatedLinks } from "./ResBits";
 import { BookingVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, SUPPORT_LINKS, HUBS } from "./resources";
+import { RES_SEO, SUPPORT_LINKS, HUBS } from "./resources";
 import { CONTACT } from "../../data/site";
 import "../forms/Forms.css";
 import "./Resources.css";
@@ -180,7 +180,7 @@ export default function Consultation() {
         <RelatedLinks items={SUPPORT_LINKS} current={PATH} title="Other ways to reach us" variant="list" hub={HUBS.support} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, FaqBlock, RelatedLinks } from "./ResBits";
 import { ToolboxVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, FREE_TOOLS, LEARN_GUIDES, HUBS } from "./resources";
+import { RES_SEO, FREE_TOOLS, LEARN_GUIDES, HUBS } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -106,7 +106,7 @@ export default function ToolsHub() {
         <RelatedLinks items={LEARN_GUIDES} title="Learn the why behind each tool" variant="list" hub={HUBS.learn} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 /* Data, validation and persistence for the 7-step "Get Started" quote flow (/get-started/step-1 … step-7).
    Steps, fields and options follow the Request a Quote form step for step. */
 
+import { matchCountry } from "./countries";
+
 export const BASE = "/get-started";
 export const stepPath = (n) => `${BASE}/step-${n}`;
 export const THANK_YOU_PATH = "/thank-you";
@@ -22,12 +24,29 @@ export const STAGES = [
 ];
 export const ENTITIES = ["Not Sure Yet", "LLC", "Corporation", "S Corporation", "Partnership", "Sole Proprietorship", "Other"];
 export const INDUSTRIES = [
-  "Consulting & professional services", "Ecommerce & retail", "Technology & software", "Food & hospitality", "Health & wellness",
-  "Construction & trades", "Real estate", "Transportation & logistics", "Beauty & personal care", "Education & coaching",
-  "Creative & media", "Finance & insurance", "Import & export", "Nonprofit",
+  "Accounting & bookkeeping", "Advertising & marketing", "Agriculture & farming", "Architecture & design", "Art & crafts",
+  "Automotive sales & repair", "Beauty & personal care", "Bookkeeping & tax preparation", "Car wash & detailing",
+  "Cleaning & janitorial", "Clothing & fashion", "Construction & trades", "Consulting & professional services",
+  "Content creation & influencer", "Cosmetics & skincare", "Courier & delivery", "Creative & media", "Cybersecurity",
+  "Daycare & childcare", "Dental & medical practice", "Digital marketing & SEO", "Dropshipping", "E-learning & online courses",
+  "Ecommerce & retail", "Education & coaching", "Electrical contracting", "Electronics & gadgets", "Employment & staffing",
+  "Energy & solar", "Engineering services", "Entertainment & events", "Event planning & weddings", "Finance & insurance",
+  "Fitness & personal training", "Food & hospitality", "Food truck & catering", "Freight & trucking", "Furniture & home goods",
+  "Gaming & esports", "Graphic design & branding", "Grocery & convenience store", "Handyman & home repair", "Health & wellness",
+  "Healthcare staffing", "Home care & senior care", "Hotel & lodging", "HVAC", "Import & export", "Interior design",
+  "Investment & wealth management", "IT services & support", "Jewelry & accessories", "Landscaping & lawn care",
+  "Legal services", "Logistics & warehousing", "Manufacturing", "Medical billing", "Mobile apps & software development",
+  "Mortgage & lending", "Moving & storage", "Music & audio production", "Nonprofit", "Online marketplace",
+  "Painting & renovation", "Pet services & supplies", "Photography & videography", "Plumbing", "Print on demand",
+  "Property management", "Public relations", "Publishing & writing", "Real estate", "Recruiting", "Renovation & remodeling",
+  "Restaurant & cafe", "Rideshare & taxi", "Roofing", "SaaS & subscriptions", "Salon & barbershop", "Security services",
+  "Social media management", "Spa & massage", "Sports & recreation", "Telecommunications", "Therapy & counseling",
+  "Tourism & travel agency", "Technology & software", "Training & workshops", "Translation & language services",
+  "Transportation & logistics", "Tutoring", "Video production", "Virtual assistant services", "Web design & development",
+  "Wholesale & distribution", "Yoga & wellness studio", "Other",
 ];
 
-export const COUNTRIES = ["United States", "Pakistan", "Other / International"];
+/* Countries come from ./countries.js (REST Countries API, with a bundled fallback list). */
 export const US_STATES = [
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida",
   "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts",
@@ -68,9 +87,9 @@ export const CONTACT_METHODS = ["Email", "Phone Call", "WhatsApp", "Video Meetin
 
 export const EMPTY = {
   businessName: "", stage: "", entity: "", industry: "",
-  country: "", region: "",
+  country: "", region: "", city: "", postalCode: "",
   services: [],
-  requirements: "", website: "", timeline: "",
+  requirements: "", website: "", referenceWebsite: "", timeline: "",
   budget: "",
   firstName: "", lastName: "", email: "", phone: "", contactMethod: "",
   consent: false,
@@ -83,12 +102,25 @@ const URL_RE = /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(\/\S*)?$/i;
 export const REQ_MIN = 20;
 export const REQ_MAX = 2000;
 
+/* ZIP / postal code is optional. When given: strict for the U.S., a loose international shape elsewhere
+   (letters, digits, spaces and hyphens) because formats differ by country. */
+export const POSTAL_HINTS = { "United States": "e.g. 80203", Canada: "e.g. K1A 0B1", "United Kingdom": "e.g. SW1A 1AA", Pakistan: "e.g. 44000" };
+export function postalError(country, value) {
+  const v = (value || "").trim();
+  if (!v) return "";
+  if (country === "United States") return /^\d{5}(-\d{4})?$/.test(v) ? "" : "Enter a 5-digit ZIP code, like 80203 or 80203-1234.";
+  return /^[A-Za-z0-9][A-Za-z0-9 -]{1,10}[A-Za-z0-9]$/.test(v) ? "" : "Enter a valid postal code (letters, numbers, spaces or hyphens).";
+}
+
 export const VALIDATORS = [
   (d) => (d.stage ? {} : { stage: "Choose whether you're starting new or already operating." }),
   (d) => {
     const e = {};
-    if (!d.country) e.country = "Select your country or region.";
-    if (!d.region.trim()) e.region = d.country === "Other / International" ? "Enter your country and state or region." : "Select your state, province or region.";
+    if (!d.country.trim()) e.country = "Select your country or region.";
+    else if (!matchCountry(d.country)) e.country = "Choose a country from the list.";
+    if (!d.region.trim()) e.region = "Select or enter your state, province or region.";
+    const zip = postalError(d.country, d.postalCode);
+    if (zip) e.postalCode = zip;
     return e;
   },
   (d) => (d.services.length ? {} : { services: "Select at least one service." }),
@@ -98,6 +130,7 @@ export const VALIDATORS = [
     if (!len) e.requirements = "Describe what you need so we can scope it.";
     else if (len < REQ_MIN) e.requirements = `Add a little more detail (at least ${REQ_MIN} characters).`;
     if (d.website.trim() && !URL_RE.test(d.website.trim())) e.website = "Enter a valid web address, like yourbusiness.com.";
+    if (d.referenceWebsite.trim() && !URL_RE.test(d.referenceWebsite.trim())) e.referenceWebsite = "Enter a valid web address, like example.com.";
     return e;
   },
   (d) => (d.budget ? {} : { budget: "Choose the budget range that fits best." }),

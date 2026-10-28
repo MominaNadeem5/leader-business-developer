@@ -1,0 +1,124 @@
+/* ===== Why Choose Us ===== */
+
+.why__head {
+  max-width: 720px;
+  margin: 0 auto clamp(28px, 4vw, 48px);
+  text-align: center;
+}
+
+.why__head > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.why__head.is-in > * {
+  animation: rise 0.5s ease both;
+  animation-delay: calc(var(--d, 0) * 0.12s);
+}
+
+.why__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary, #2a8a3e);
+}
+
+.why__eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.why__head h2 {
+  margin: 0 0 16px;
+  font-size: clamp(var(--fs-5xl), 2.6vw, var(--fs-7xl));
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-heavy);
+  letter-spacing: -0.02em;
+  color: #123a3a;
+}
+
+.why__head h2 em {
+  font-style: normal;
+  color: var(--color-primary, #2a8a3e);
+}
+
+.why__head p {
+  margin: 0;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-muted, #5d727c);
+}
+
+.why__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.why__card {
+  padding: 28px 24px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(20, 80, 60, 0.1);
+  box-shadow: 0 10px 28px rgba(20, 90, 60, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.why__grid.is-in .why__card {
+  animation: rise 0.5s ease both;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.why__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(46, 160, 90, 0.4);
+  box-shadow: 0 18px 38px rgba(20, 90, 60, 0.14);
+}
+
+.why__icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  font-size: var(--fs-4xl);
+  color: #17543a;
+  background: radial-gradient(circle at 30% 25%, #eaf8ef, #d3eedd);
+}
+
+.why__card h4 {
+  margin: 0 0 8px;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: #123a3a;
+}
+
+.why__card p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--color-text-muted, #5d727c);
+}
+
+@media (max-width: 960px) {
+  .why__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .why__grid {
+    grid-template-columns: 1fr;
+  }
+}

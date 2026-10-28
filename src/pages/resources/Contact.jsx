@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, Field, FaqBlock } from "./ResBits";
 import { PlaneVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, HUBS } from "./resources";
+import { RES_SEO, HUBS } from "./resources";
 import { CONTACT } from "../../data/site";
 import "../forms/Forms.css";
 import "./Resources.css";
@@ -108,7 +108,7 @@ export default function Contact() {
         </Reveal>
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Info } from "lucide-react";
 import ServiceHero from "../../components/service/ServiceHero";
-import { RES_DISCLAIMER } from "./resources";
 
 export { Field, Segmented, FaqBlock } from "../forms/FormBits";
 
@@ -31,7 +30,7 @@ export function ResHero({ hub, label, title, subtitle, primary, secondary, visua
 
 /* Short disclaimer note shown near tools and guides. */
 export function ResNote({ children }) {
-  return <p className="lf-note"><Info size={16} /><span>{children || RES_DISCLAIMER}</span></p>;
+  return <p className="lf-note"><Info size={16} /><span>{children}</span></p>;
 }
 
 /* Internal links to sibling pages. variant: "chips" | "list" | "tiles" (styles from Forms.css) */

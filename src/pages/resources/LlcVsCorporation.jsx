@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, FaqBlock, RelatedLinks } from "./ResBits";
 import { ScaleVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, LEARN_GUIDES, HUBS } from "./resources";
+import { RES_SEO, LEARN_GUIDES, HUBS } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -38,11 +38,15 @@ const ROWS = [
 ];
 
 const FAQS = [
-  ["Is an LLC or a corporation better for a small business?", "For most owner-operated small businesses, an LLC is simpler and more flexible, with pass-through taxation and fewer formalities. A corporation, usually a C corp, tends to be better if you plan to raise venture capital, offer stock options or take the company public."],
-  ["What's the difference between an S corp and an LLC?", "An LLC is a legal entity created under state law. An S corporation is a federal tax status. An LLC can elect to be taxed as an S corp, which can reduce self-employment taxes once profits are high enough to justify running payroll and paying yourself a reasonable salary."],
-  ["Why do investors prefer C corporations?", "C corps can issue different classes of stock, such as preferred shares, accept unlimited and foreign shareholders, and are familiar to investors and their lawyers. Many venture funds can't or won't invest in LLCs because of how pass-through income affects their own investors."],
-  ["Can I convert my LLC to a corporation later?", "Yes. Most states allow a statutory conversion, or you can merge the LLC into a new corporation. It's common to start as an LLC and convert before a priced funding round. Conversions can have tax consequences, so plan them with an accountant."],
-  ["Does a corporation really pay tax twice?", "A C corporation pays corporate income tax on its profits, currently a flat 21% federal rate, and shareholders pay tax again on dividends they receive. LLCs and S corps generally avoid this because profits pass through to the owners' personal returns."],
+  ["Is an LLC or a corporation better for a small business?", "For most owner-operated small businesses, an LLC is the better starting point. It is quick to set up, has few ongoing formalities and gives you flexible pass-through taxation, so profits are taxed once on your personal return. A corporation, usually a C corp, makes more sense if you plan to raise venture capital, issue stock options to employees or eventually go public."],
+  ["What's the difference between an S corp and an LLC?", "They are not the same kind of thing. An LLC is a legal entity created under state law, while an S corporation is a tax status granted by the IRS. An LLC can elect S corp taxation, which can lower self-employment tax once profits are high enough to justify running payroll and paying yourself a reasonable salary. The election has requirements, including no more than 100 shareholders and no nonresident alien owners."],
+  ["Why do investors prefer C corporations?", "C corporations can issue several classes of stock, such as preferred shares, and can have unlimited shareholders, including foreign investors and funds. Investors and their lawyers also know the structure well, and Delaware C corps in particular have standard, well-tested documents. Many venture funds cannot or will not invest in LLCs, because pass-through income creates tax filings for their own investors."],
+  ["Does an LLC or a corporation protect my personal assets?", "Yes, both give you limited liability, which generally keeps business debts and lawsuits separate from your home, savings and personal property. The protection has limits. It does not cover debts you personally guarantee or your own wrongful acts, and a court can set it aside if you mix personal and business money or ignore required formalities. Keep separate bank accounts, clear records and a signed operating agreement or bylaws."],
+  ["Does a corporation really pay tax twice?", "A C corporation does. It pays corporate income tax on its profits (a flat 21% federal rate), and shareholders pay tax again on any dividends they receive. LLCs and S corps generally avoid this double layer because profits pass through to the owners' personal tax returns. For a growing company that reinvests its profits instead of paying dividends, the second layer of tax may never come into play."],
+  ["Which costs less to form and maintain?", "An LLC usually costs less. Formation is a single state filing, and upkeep is typically an annual report and fee. A corporation adds bylaws, a board, shareholder meetings and minutes, plus payroll for officers who work in the business. State fees vary widely, and some states charge a minimum annual franchise tax to both LLCs and corporations, so check your state's costs before deciding."],
+  ["Can non-U.S. residents own an LLC or a corporation?", "Yes. People who live outside the United States can own and run an LLC or a C corporation, and neither requires U.S. citizenship or residency. An S corporation is the exception, since nonresident aliens cannot be shareholders. Foreign owners still need an EIN and have U.S. tax filing obligations, so it is worth getting guidance on the setup before you form."],
+  ["Can I convert my LLC to a corporation later?", "Yes. Most states allow a statutory conversion, or you can merge the LLC into a newly formed corporation. Many founders start as an LLC and convert just before a priced funding round or once outside investors are involved. A conversion can trigger tax and legal consequences, so plan the timing and structure with an accountant or attorney first."],
+  ["Which should I choose if I'm just starting out?", "Pick based on your next two to three years. If you are a solo owner or a small partnership running a service, retail or online business, start with an LLC and revisit an S corp election when profits grow. If you are building a startup that will raise outside capital or grant equity, form a C corporation from the start. When you are unsure, an LLC is easier to change later than most people expect."],
 ];
 
 export default function LlcVsCorporation() {
@@ -139,7 +143,7 @@ export default function LlcVsCorporation() {
         </Reveal>
       </Section>
 
-      <FaqBlock faqs={FAQS} title="LLC vs. corporation FAQs" variant="split" tone="gray" />
+      <FaqBlock faqs={FAQS} title="LLC vs. corporation articles" variant="articles" tone="gray" />
 
       <Section>
         <Reveal className="rs-band rs-band--split">
@@ -149,7 +153,7 @@ export default function LlcVsCorporation() {
         <RelatedLinks items={LEARN_GUIDES} current={PATH} title="More guides" variant="chips" hub={HUBS.learn} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

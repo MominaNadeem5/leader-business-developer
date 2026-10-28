@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, FaqBlock, RelatedLinks, ResNote } from "./ResBits";
 import { CoinsVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, FREE_TOOLS, HUBS, downloadText } from "./resources";
+import { RES_SEO, FREE_TOOLS, HUBS, downloadText } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -156,7 +156,7 @@ export default function CostCalculator() {
         <RelatedLinks items={FREE_TOOLS} current={PATH} title="More free tools" hub={HUBS.tools} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

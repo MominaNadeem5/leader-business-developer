@@ -20,7 +20,6 @@ import {
   Scale,
   BookOpen,
   Zap,
-  HelpCircle,
   UserRound,
   MapPin,
 } from "lucide-react";
@@ -401,29 +400,6 @@ const menus = [
           {
             label: "Startup Cost Calculator",
             to: "/resources/tools/cost-calculator",
-          },
-        ],
-      },
-      {
-        title: "Support",
-        icon: <HelpCircle />,
-        viewAll: "/resources/support",
-        items: [
-          {
-            label: "Help Center",
-            to: "/resources/support/help",
-          },
-          {
-            label: "FAQs",
-            to: "/resources/support/faqs",
-          },
-          {
-            label: "Book a Consultation",
-            to: "/consultation",
-          },
-          {
-            label: "Contact Us",
-            to: "/contact",
           },
         ],
       },

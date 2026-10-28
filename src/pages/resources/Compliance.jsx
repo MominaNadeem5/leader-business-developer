@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, FaqBlock, RelatedLinks } from "./ResBits";
 import { YearWheelVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, LEARN_GUIDES, HUBS } from "./resources";
+import { RES_SEO, LEARN_GUIDES, HUBS } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -136,7 +136,7 @@ export default function Compliance() {
         <RelatedLinks items={LEARN_GUIDES} current={PATH} title="More guides" hub={HUBS.learn} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

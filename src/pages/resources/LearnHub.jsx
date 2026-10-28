@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, FaqBlock, RelatedLinks } from "./ResBits";
 import { BooksVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, LEARN_GUIDES, FREE_TOOLS, HUBS } from "./resources";
+import { RES_SEO, LEARN_GUIDES, FREE_TOOLS, HUBS } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -114,7 +114,7 @@ export default function LearnHub() {
         <RelatedLinks items={FREE_TOOLS} title="Put it into practice with free tools" hub={HUBS.tools} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

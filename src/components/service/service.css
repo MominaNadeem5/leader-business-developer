@@ -282,10 +282,16 @@
 .svc-hours svg { vertical-align: -2px; }
 
 /* ---------- footer notes ---------- */
-.svc-foot { background: #f6f1e8; padding: 40px 0 32px; }
+.svc-foot { background: transparent; padding: 0 0 20px; }
+/* continue the colour of the section above so the footer strip never looks like a separate block */
+.svc-section--gray + .svc-foot,
+.svc-faq + .svc-foot { background: var(--svc-gray); }
+.svc-section--soft + .svc-foot { background: #ecfdf5; }
 .svc-footnote { max-width: 920px; margin: 0 auto 6px; font-size: var(--fs-xs); color: var(--svc-muted); }
 .svc-disclaimer { max-width: 920px; margin: 18px auto 0; text-align: center; font-size: var(--fs-xs); line-height: var(--lh-relaxed); color: var(--svc-muted); }
-.svc-top-btn { background: none; border: none; color: var(--svc-green-dark); font-weight: var(--fw-bold); font-size: var(--fs-base); cursor: pointer; text-decoration: underline; }
+.svc-top-wrap { display: flex; justify-content: flex-end; }
+.svc-top-btn { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(31, 122, 58, 0.25); border-radius: 12px; background: #fff; color: var(--svc-green-dark); cursor: pointer; box-shadow: 0 6px 16px rgba(20, 90, 60, 0.1); transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.svc-top-btn:hover { background: var(--svc-green-dark); color: #fff; transform: translateY(-2px); }
 
 /* ---------- explorer (tabs + animated panel) ---------- */
 @keyframes svc-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }

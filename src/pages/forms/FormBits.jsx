@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowRight, Scale } from "lucide-react";
+import { ChevronDown, ArrowRight, ArrowLeft, Scale } from "lucide-react";
 import Reveal from "../../components/service/Reveal";
 import ServiceHero from "../../components/service/ServiceHero";
 import { LEGAL_FORMS, DISCLAIMER, FORMS_HUB } from "./forms";
@@ -58,7 +58,30 @@ export function FaqBlock({ faqs, title = "Frequently asked questions", variant =
     <section className={`svc-section svc-section--${tone} lf-faq lf-faq--${variant}`}>
       <div className={`container ${variant === "accordion" || variant === "numbered" ? "svc-narrow" : ""}`}>
         <h2 className="svc-title">{title}</h2>
-        {variant === "split" ? (
+        {variant === "articles" ? (
+          <Reveal className="lf-art">
+            <nav className="lf-art__list" role="tablist" aria-label={title}>
+              {faqs.map(([q], i) => (
+                <button key={q} type="button" role="tab" aria-selected={open === i} className={open === i ? "is-on" : ""} onClick={() => setOpen(i)}>
+                  <em>{String(i + 1).padStart(2, "0")}</em><span>{q}</span>
+                </button>
+              ))}
+            </nav>
+            <article className="lf-art__body" key={open} role="tabpanel">
+              <p className="lf-art__eyebrow">
+                <b>Article {String(open + 1).padStart(2, "0")}</b>
+                <span>{Math.max(1, Math.ceil(faqs[open][1].split(/\s+/).length / 200))} min read</span>
+              </p>
+              <h3>{faqs[open][0]}</h3>
+              <p className="lf-art__text">{faqs[open][1]}</p>
+              <div className="lf-art__nav">
+                <button type="button" disabled={open === 0} onClick={() => setOpen(open - 1)}><ArrowLeft size={16} /> Previous</button>
+                <span aria-live="polite">{open + 1} of {faqs.length}</span>
+                <button type="button" disabled={open === faqs.length - 1} onClick={() => setOpen(open + 1)}>Next <ArrowRight size={16} /></button>
+              </div>
+            </article>
+          </Reveal>
+        ) : variant === "split" ? (
           <Reveal className="lf-faq__split">
             <div className="lf-faq__qs" role="tablist">
               {faqs.map(([q], i) => (

@@ -362,3 +362,13 @@
     font-size: var(--fs-base);
   }
 }
+
+@media (min-width: 561px) {
+  .hero__btns { flex-wrap: nowrap; gap: clamp(8px, 1vw, 12px); }
+  .hero__btns > * { white-space: nowrap; flex: 0 1 auto; min-width: 0; height: 46px; padding: 0 clamp(16px, 1.8vw, 24px); font-size: clamp(0.7rem, 0.85vw, 0.8rem); }
+  .hero__btns svg { flex: none; width: 16px; height: 16px; }
+
+  .hero__features { flex-wrap: nowrap; gap: 0; font-size: clamp(0.74rem, 0.9vw, 0.86rem); }
+  .hero__features li { white-space: nowrap; gap: 7px; padding-right: clamp(10px, 1.4vw, 22px); margin-right: clamp(6px, 0.8vw, 8px); }
+  .hero__features svg { flex: none; width: clamp(16px, 1.4vw, 20px); height: auto; }
+}

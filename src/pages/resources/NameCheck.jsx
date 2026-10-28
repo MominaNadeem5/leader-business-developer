@@ -9,7 +9,7 @@ import ServiceHero from "../../components/service/ServiceHero";
 import { Reveal, Section, IconCard, StepPath, ServiceFooter, CtaBand } from "../../components/service";
 import { FaqBlock, RelatedLinks } from "./ResBits";
 import { RadarVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, FREE_TOOLS, HUBS } from "./resources";
+import { RES_SEO, FREE_TOOLS, HUBS } from "./resources";
 import {
   US_STATES, ENTITIES, HAS_API, validateForm, checkAvailability, variations, slugOf, coreName, registryLink, hasDirectRegistryLink,
 } from "./availability";
@@ -422,7 +422,7 @@ export default function NameCheck() {
         <RelatedLinks items={FREE_TOOLS} current={PATH} title="More free tools" variant="chips" hub={HUBS.tools} />
       </Section>
 
-      <ServiceFooter disclaimer={`${RES_DISCLAIMER} Results show whether a name appears to meet naming rules and, where stated, whether a registry search found a conflict. Only your state can approve a name.`} />
+      <ServiceFooter disclaimer={`Results show whether a name appears to meet naming rules and, where stated, whether a registry search found a conflict. Only your state can approve a name.`} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, FaqBlock, RelatedLinks } from "./ResBits";
 import { HelpSearchVisual } from "./ResourcesVisual";
-import { RES_SEO, RES_DISCLAIMER, SUPPORT_LINKS, HUBS } from "./resources";
+import { RES_SEO, SUPPORT_LINKS, HUBS } from "./resources";
 import "../forms/Forms.css";
 import "./Resources.css";
 
@@ -123,7 +123,7 @@ export default function HelpCenter() {
         <RelatedLinks items={SUPPORT_LINKS} current={PATH} title="Other ways to get support" variant="chips" hub={HUBS.support} />
       </Section>
 
-      <ServiceFooter disclaimer={RES_DISCLAIMER} />
+      <ServiceFooter />
     </div>
   );
 }

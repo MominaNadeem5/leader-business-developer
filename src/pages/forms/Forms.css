@@ -90,6 +90,40 @@
 .lf-faq--grid .lf-faq__grid article { border-top: 4px solid var(--svc-green); }
 .lf-faq--cards .lf-faq__grid article { position: relative; padding-top: 44px; }
 .lf-faq--cards .lf-faq__grid article::before { content: "Q"; position: absolute; top: 14px; left: 22px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; background: var(--svc-ink); color: #fff; font-size: var(--fs-xs); font-weight: var(--fw-heavy); }
+/* articles layout: numbered article list + a readable article panel */
+.lf-art { display: grid; grid-template-columns: 340px 1fr; gap: 24px; max-width: 1040px; margin: 0 auto; align-items: start; }
+.lf-art__list { display: grid; gap: 8px; }
+.lf-art__list button {
+  display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1px solid var(--svc-line); border-left: 4px solid transparent;
+  border-radius: 12px; background: #fff; text-align: left; font: inherit; font-weight: var(--fw-semibold); font-size: var(--fs-base); line-height: var(--lh-snug);
+  color: var(--svc-text); cursor: pointer; transition: background-color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.lf-art__list button em { flex: none; font-style: normal; font-size: var(--fs-md); font-weight: var(--fw-heavy); color: #9bd6ad; font-variant-numeric: tabular-nums; padding-top: 1px; }
+.lf-art__list button:hover { border-color: #cfe4d6; border-left-color: #cfe4d6; transform: translateX(2px); }
+.lf-art__list button.is-on { background: #eef7f1; border-color: #cfe4d6; border-left-color: var(--svc-green); color: var(--svc-ink); box-shadow: 0 8px 20px rgba(10, 58, 42, .07); }
+.lf-art__list button.is-on em { color: var(--svc-green-dark); }
+.lf-art__body { position: relative; padding: 32px 34px 26px; border-radius: 20px; background: #fff; border: 1px solid var(--svc-line); box-shadow: 0 16px 40px rgba(10, 58, 42, .07); animation: lf-in .35s ease both; overflow: hidden; }
+.lf-art__body::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--svc-green), #9bd6ad); }
+.lf-art__eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--svc-muted); }
+.lf-art__eyebrow b { padding: 4px 10px; border-radius: 999px; background: #eef7f1; color: var(--svc-green-dark); font-weight: var(--fw-bold); }
+.lf-art__body h3 { margin: 0 0 14px; font-size: var(--fs-5xl); line-height: var(--lh-tight); letter-spacing: -.01em; color: var(--svc-ink); }
+.lf-art__text { margin: 0; font-size: var(--fs-lg); line-height: 1.8; color: var(--svc-text); }
+.lf-art__text::first-letter { font-weight: var(--fw-heavy); }
+.lf-art__nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--svc-line); }
+.lf-art__nav span { font-size: var(--fs-sm); color: var(--svc-muted); font-variant-numeric: tabular-nums; }
+.lf-art__nav button { display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border: 1px solid var(--svc-line); border-radius: 10px; background: #fff; font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-semibold); color: var(--svc-ink); cursor: pointer; transition: background-color .2s ease, border-color .2s ease, color .2s ease; }
+.lf-art__nav button:hover:not(:disabled) { background: var(--svc-green); border-color: var(--svc-green); color: #fff; }
+.lf-art__nav button:disabled { opacity: .45; cursor: not-allowed; }
+@media (max-width: 960px) {
+  .lf-art { grid-template-columns: 1fr; }
+  .lf-art__list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .lf-art__list { grid-template-columns: 1fr; }
+  .lf-art__body { padding: 24px 20px 20px; }
+  .lf-art__body h3 { font-size: var(--fs-4xl); }
+  .lf-art__text { font-size: var(--fs-base); line-height: 1.75; }
+}
 .lf-faq__split { display: grid; grid-template-columns: 340px 1fr; gap: 24px; max-width: 1040px; margin: 0 auto; }
 .lf-faq__qs { display: grid; gap: 6px; align-content: start; }
 .lf-faq__qs button { padding: 14px 16px; border: 1px solid var(--svc-line); border-radius: 12px; background: #fff; text-align: left; font-weight: var(--fw-semibold); font-size: var(--fs-base); color: var(--svc-text); transition: all .2s ease; }

@@ -2,19 +2,21 @@ import { startTransition, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, Building2, MapPin, LayoutGrid, FileText, Wallet, UserRound, ClipboardCheck, Mail, Phone, Globe,
-  Briefcase, Tag, Pencil, ShieldAlert, Clock, MessageSquare, Sparkles, Info, Loader2,
+  Briefcase, Tag, MapPinned, Link2, Pencil, ShieldAlert, Clock, MessageSquare, Sparkles, Info, Loader2,
   LogIn, Sprout, IdCard, ShieldCheck, Landmark, CreditCard, Laptop, Code, PenTool, TrendingUp, Plus, Banknote, Coins, Layers, Gem, Lightbulb,
 } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Field, Checkbox, Alert } from "../auth/AuthBits";
 import { CONTACT } from "../../data/site";
-import { Opt, Req, Msg, Select, Choices, Progress } from "./FormBits";
+import { Opt, Req, Msg, Select, SearchSelect, MultiSelect, Choices, Progress } from "./FormBits";
 import { StepScene } from "./StepVisuals";
 import {
-  STEPS, TOTAL, STAGES, ENTITIES, INDUSTRIES, COUNTRIES, US_STATES, PK_REGIONS, SERVICES, TIMELINES, BUDGETS, CONTACT_METHODS,
+  STEPS, TOTAL, STAGES, ENTITIES, INDUSTRIES, US_STATES, PK_REGIONS, SERVICES, TIMELINES, BUDGETS, CONTACT_METHODS,
   EMPTY, VALIDATORS, REQ_MAX, BASE, THANK_YOU_PATH, firstIncomplete, loadDraft, saveDraft, clearDraft, prefillFromParams,
-  serviceName, budgetName, makeRef,
+  serviceName, budgetName, makeRef, POSTAL_HINTS,
 } from "./quoteData";
+import { useCountries } from "./countries";
+import { useStates, useCities } from "./locations";
 import { LLC_PATH } from "./llc/llcData";
 import { DBA_PATH } from "./dba/dbaData";
 import { submitQuote } from "./quoteApi";
@@ -46,7 +48,7 @@ function Sidebar({ n, data }) {
   const stage = STAGES.find(([k]) => k === data.stage)?.[1];
   const rows = [
     [Building2, data.businessName || stage, 1],
-    [MapPin, [data.region, data.country].filter(Boolean).join(", "), 2],
+    [MapPin, [data.city, data.region, data.country].filter(Boolean).join(", "), 2],
     [LayoutGrid, data.services.length ? `${data.services.length} service${data.services.length > 1 ? "s" : ""}: ${data.services.map(serviceName).join(", ")}` : "", 3],
     [Clock, data.timeline, 4],
     [Wallet, budgetName(data.budget), 5],
@@ -94,6 +96,13 @@ export default function GetStarted() {
   const [tried, setTried] = useState({});
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+  const countries = useCountries();
+  // States: built-in lists for the U.S. and Pakistan, the API for everywhere else. Cities always come from the API.
+  const builtInStates = data.country === "United States" ? US_STATES : data.country === "Pakistan" ? PK_REGIONS : null;
+  const apiStates = useStates(builtInStates ? "" : data.country);
+  const states = builtInStates || apiStates.list;
+  const statesLoading = !builtInStates && apiStates.loading;
+  const apiCities = useCities(states.includes(data.region) ? data.country : "", data.region);
   const headingRef = useRef(null);
   const formRef = useRef(null);
 
@@ -138,7 +147,8 @@ export default function GetStarted() {
     if (loading) return;
     if (!valid) {
       setTried((t) => ({ ...t, [n]: true }));
-      formRef.current?.querySelector(`[name="${Object.keys(errors)[0]}"]`)?.focus();
+      const first = Object.keys(errors)[0];
+      formRef.current?.querySelector(`[name="${first}"], [data-field="${first}"]`)?.focus();
       return;
     }
     if (n < TOTAL) return go(n + 1, "fwd");
@@ -164,13 +174,12 @@ export default function GetStarted() {
     }
   };
 
-  const regionOptions = data.country === "United States" ? US_STATES : data.country === "Pakistan" ? PK_REGIONS : null;
 
   const review = [
     [1, "Business", [["Business name", data.businessName || "Not chosen yet"], ["Stage", STAGES.find(([k]) => k === data.stage)?.[1]], ["Entity", data.entity || "Not specified"], ["Industry", data.industry || "Not specified"]]],
-    [2, "Location", [["Country / region", data.country], ["State / province", data.region]]],
+    [2, "Location", [["Country / region", data.country], ["State / province", data.region], ["City", data.city || "Not provided"], ["ZIP / postal code", data.postalCode || "Not provided"]]],
     [3, "Services", [["Selected", data.services.map(serviceName).join(", ")]]],
-    [4, "Requirements", [["Requirements", data.requirements], ["Existing website", data.website || "None"], ["Timeline", data.timeline || "Not specified"]]],
+    [4, "Requirements", [["Requirements", data.requirements], ["Existing website", data.website || "None"], ["Reference website", data.referenceWebsite || "None"], ["Timeline", data.timeline || "Not specified"]]],
     [5, "Budget & Scope", [["Estimated budget", budgetName(data.budget)]]],
     [6, "Contact", [["Name", `${data.firstName} ${data.lastName}`.trim()], ["Email", data.email], ["Phone / WhatsApp", data.phone], ["Preferred contact", data.contactMethod || "No preference"]]],
   ];
@@ -223,49 +232,72 @@ export default function GetStarted() {
                     />
                     <div className="au-2col">
                       <Select id="gs-entity" label={<>Current / Intended Entity <Opt /></>} icon={<Building2 size={18} />} placeholder="Select entity type" options={ENTITIES} {...bindSelect("entity")} />
-                      <Field id="gs-industry" label={<>Business Industry <Opt /></>} icon={<Tag size={18} />} list="gs-industries" placeholder="e.g. Ecommerce & retail" maxLength={80} autoComplete="off" {...bind("industry")} />
+                      <SearchSelect
+                        id="gs-industry" field="industry" label={<>Business Industry <Opt /></>} icon={<Tag size={18} />}
+                        placeholder="Select or type your industry" searchPlaceholder="Search or type an industry" options={INDUSTRIES}
+                        allowCustom value={data.industry} onChange={(v) => set("industry", v.slice(0, 80))}
+                      />
                     </div>
                     {data.entity === "LLC" && (
                       <p className="gs-note"><Building2 size={16} aria-hidden="true" /><span>Forming an LLC? Use our <Link to={LLC_PATH} className="au-link">dedicated LLC application</Link> for a guided, step-by-step setup.</span></p>
                     )}
-                    <datalist id="gs-industries">{INDUSTRIES.map((x) => <option key={x} value={x} />)}</datalist>
                   </>
                 )}
 
                 {n === 2 && (
-                  <div className="au-2col">
-                    <Select
-                      id="gs-country" label={<>Country / Region <Req /></>} icon={<Globe size={18} />} placeholder="Select country" options={COUNTRIES}
-                      autoComplete="country-name" error={err("country")} name="country" value={data.country}
-                      onChange={(e) => {
-                        const country = e.target.value;
-                        const list = country === "United States" ? US_STATES : country === "Pakistan" ? PK_REGIONS : null;
-                        setData((d) => ({ ...d, country, region: list && !list.includes(d.region) ? "" : list ? d.region : "" }));
-                        touch("country");
-                      }}
-                    />
-                    {regionOptions || !data.country ? (
-                      <Select
-                        id="gs-region" label={<>State / Province / Region <Req /></>} icon={<MapPin size={18} />}
-                        placeholder={data.country ? "Select location" : "Select a country first"} options={regionOptions || []}
-                        disabled={!data.country} autoComplete="address-level1" error={err("region")} {...bindSelect("region")}
+                  <>
+                    <div className="au-2col">
+                      <SearchSelect
+                        id="gs-country" field="country" label={<>Country / Region <Req /></>} icon={<Globe size={18} />}
+                        placeholder="Select country" searchPlaceholder="Search countries" options={countries} value={data.country} error={err("country")}
+                        onChange={(country) => setData((d) => (d.country === country ? d : { ...d, country, region: "", city: "" }))}
+                        onBlur={() => touch("country")}
                       />
-                    ) : (
+                      {states.length || statesLoading || !data.country ? (
+                        <SearchSelect
+                          id="gs-region" field="region" label={<>State / Province <Req /></>} icon={<MapPin size={18} />}
+                          placeholder={!data.country ? "Select a country first" : statesLoading ? "Loading…" : "Select state / province"}
+                          searchPlaceholder="Search states / provinces" options={states} value={data.region} error={err("region")}
+                          disabled={!data.country || statesLoading}
+                          onChange={(region) => setData((d) => (d.region === region ? d : { ...d, region, city: "" }))}
+                          onBlur={() => touch("region")}
+                        />
+                      ) : (
+                        <Field
+                          id="gs-region" label={<>State / Province <Req /></>} icon={<MapPin size={18} />}
+                          placeholder="e.g. Ontario" autoComplete="address-level1" maxLength={80} error={err("region")} {...bind("region")}
+                        />
+                      )}
+                    </div>
+                    <div className="au-2col">
+                      {apiCities.list.length || apiCities.loading || !data.region ? (
+                        <SearchSelect
+                          id="gs-city" field="city" label={<>City <Opt /></>} icon={<Building2 size={18} />}
+                          placeholder={!data.region ? "Select a state first" : apiCities.loading ? "Loading…" : "Select or type your city"}
+                          searchPlaceholder="Search or type a city" options={apiCities.list} value={data.city} allowCustom
+                          disabled={!data.region || apiCities.loading} onChange={(v) => set("city", v.slice(0, 80))}
+                        />
+                      ) : (
+                        <Field
+                          id="gs-city" label={<>City <Opt /></>} icon={<Building2 size={18} />}
+                          placeholder="e.g. Toronto" autoComplete="address-level2" maxLength={80} {...bind("city")}
+                        />
+                      )}
                       <Field
-                        id="gs-region" label={<>Country & State / Region <Req /></>} icon={<MapPin size={18} />}
-                        placeholder="e.g. Ontario, Canada" autoComplete="address-level1" maxLength={80} error={err("region")} {...bind("region")}
+                        id="gs-postal" label={<>ZIP Code / Postal Code <Opt /></>} icon={<MapPinned size={18} />} autoComplete="postal-code"
+                        autoCapitalize="characters" spellCheck={false} maxLength={12} placeholder={POSTAL_HINTS[data.country] || "e.g. 12345"}
+                        hint="Leave blank if you don't have one." error={err("postalCode")} {...bind("postalCode")}
                       />
-                    )}
-                  </div>
+                    </div>
+                  </>
                 )}
 
                 {n === 3 && (
-                  <Choices icons={OPT_ICONS}
-                    type="checkbox" name="services" legend="Services" options={SERVICES} cols={3}
-                    isOn={(v) => data.services.includes(v)}
-                    onToggle={(v) => { setData((d) => ({ ...d, services: d.services.includes(v) ? d.services.filter((x) => x !== v) : [...d.services, v] })); touch("services"); }}
-                    error={err("services")}
-                    aside={<span className="gs-count" aria-live="polite">{data.services.length} selected</span>}
+                  <MultiSelect
+                    id="gs-services" field="services" label={<>Services <Req /></>} icon={<LayoutGrid size={18} />}
+                    placeholder="Select the services you need" options={SERVICES} icons={OPT_ICONS} selected={data.services} error={err("services")}
+                    onToggle={(v) => setData((d) => ({ ...d, services: d.services.includes(v) ? d.services.filter((x) => x !== v) : [...d.services, v] }))}
+                    onBlur={() => touch("services")}
                   />
                 )}
 
@@ -274,7 +306,7 @@ export default function GetStarted() {
                     {data.ref && <p className="gs-chip"><Info size={14} aria-hidden="true" /> You came from <b>{data.ref}</b>. We've noted it on your request.</p>}
                     <div className={`au-field${err("requirements") ? " is-err" : ""}`}>
                       <div className="au-field__top">
-                        <label htmlFor="gs-req">Business / Project Requirements <Req /></label>
+                        <label htmlFor="gs-req">Explain Your Business <Req /></label>
                         <span className="gs-count" aria-hidden="true">{data.requirements.length}/{REQ_MAX}</span>
                       </div>
                       <textarea
@@ -292,6 +324,13 @@ export default function GetStarted() {
                         error={err("website")} {...bind("website")}
                       />
                       <Select id="gs-timeline" label={<>Preferred Timeline <Opt /></>} icon={<Clock size={18} />} placeholder="Select timeline" options={TIMELINES} {...bindSelect("timeline")} />
+                    </div>
+                    <div className="au-2col">
+                      <Field
+                        id="gs-refsite" label={<>Adding new Website <Opt /></>} icon={<Link2 size={18} />} inputMode="url" autoComplete="off"
+                        autoCapitalize="none" spellCheck={false} placeholder="example.com" hint="A site whose style or features you like."
+                        error={err("referenceWebsite")} {...bind("referenceWebsite")}
+                      />
                     </div>
                   </>
                 )}
@@ -369,9 +408,9 @@ export default function GetStarted() {
                   )}
                 </button>
               </div>
-              <p id="gs-next-hint" className={`gs-hint${valid ? " is-hidden" : ""}`}>
+              {/* <p id="gs-next-hint" className={`gs-hint${valid ? " is-hidden" : ""}`}>
                 {n === TOTAL ? "Confirm the consent box to submit." : "Complete the required fields to continue."}
-              </p>
+              </p> */}
             </form>
           </section>
 
