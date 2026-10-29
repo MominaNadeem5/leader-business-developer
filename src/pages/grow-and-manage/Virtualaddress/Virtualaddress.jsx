@@ -225,7 +225,7 @@ export default function VirtualAddress() {
   const track = [...marquee, ...marquee];
 
   return (
-    <div className="svc va-page">
+    <div className="svc biz-page va-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="va-blob va-blob--a" aria-hidden="true" />
@@ -247,8 +247,8 @@ export default function VirtualAddress() {
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
                 {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
-                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
-                <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
+                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
+                <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#ffffff" color="#ffffff" /> Trustpilot</a>
                 <span className="llc-hero__sep" />
                 */}
                 <span className="llc-hero__trust-item"><ShieldCheck size={16} /> Secure mail handling</span>

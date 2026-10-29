@@ -190,7 +190,7 @@ function CertificateCard() {
 
 export default function Copyright() {
   return (
-    <div className="svc cr-page">
+    <div className="svc biz-page cr-page">
       <ServiceHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Business", to: "/business" }, { label: "Copyright Protection" }]}
         title="Protect your creative work with a copyright registration"

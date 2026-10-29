@@ -157,7 +157,7 @@ export function PulseGaugeVisual() {
 }
 
 /* ---------- Startup cost calculator: cost bars stack up, total counts ---------- */
-const COSTS = [["Formation", 450, "#2fa24f"], ["Equipment", 2400, "#0a3a2a"], ["Website", 900, "#c9a227"], ["Marketing", 1200, "#3b82f6"]];
+const COSTS = [["Formation", 450, "#2fa24f"], ["Equipment", 2400, "#000000"], ["Website", 900, "#2fa24f"], ["Marketing", 1200, "#2fa24f"]];
 export function CoinsVisual() {
   const tick = useTick(700);
   const n = REDUCED ? COSTS.length : Math.min(tick % 8, COSTS.length);
@@ -257,7 +257,7 @@ export function BooksVisual() {
       <div className="mv-card rv-books">
         <div className="mv-top"><BookOpen size={13} /> <small>Business guides</small><Sample /></div>
         <div className="rv-books__shelf" aria-hidden="true">
-          {["#2fa24f", "#0a3a2a", "#c9a227", "#3b82f6", "#1f7a3a"].map((c, i) => <span key={c} className={i === 1 ? "pull" : ""} style={{ background: c, "--i": i }} />)}
+          {["#2fa24f", "#000000", "#2fa24f", "#2fa24f", "#2fa24f"].map((c, i) => <span key={c} className={i === 1 ? "pull" : ""} style={{ background: c, "--i": i }} />)}
         </div>
         <div className="rv-books__open" aria-hidden="true">
           <div className="pg l"><b>LLC or Corporation?</b><i /><i /><i /></div>

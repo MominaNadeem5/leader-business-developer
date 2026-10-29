@@ -6,7 +6,7 @@ import Reveal from "../../components/service/Reveal";
 import { TiltCard } from "../merchant/MerchantPage";
 
 /* ---------- live checkout builder (gateway page) ---------- */
-const SWATCHES = ["#2fa24f", "#0a3a2a", "#2563eb", "#ea580c", "#7c3aed", "#db2777"];
+const SWATCHES = ["#2fa24f", "#000000", "#2fa24f", "#2fa24f", "#2fa24f", "#2fa24f"];
 const SHAPES = [["Rounded", 12], ["Pill", 999], ["Square", 4]];
 const METHODS = [
   ["card", "Cards", CreditCard],

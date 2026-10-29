@@ -36,10 +36,10 @@ export default function ServiceHero({ crumbs = [], title, subtitle, actions, vis
                 {/* Trustpilot rating hidden for now
                 <strong>{TRUST.label}</strong>
                 <span className="svc-hero__stars">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}
                 </span>
                 <a className="svc-hero__badge" href={TRUST.url} target="_blank" rel="noopener noreferrer">
-                  <Star size={12} fill="#fff" color="#fff" /> Trustpilot
+                  <Star size={12} fill="#ffffff" color="#ffffff" /> Trustpilot
                 </a>
                 <span className="svc-hero__sep" />
                 */}

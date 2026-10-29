@@ -34,7 +34,7 @@
   padding: 6px 18px 6px 7px;
   margin-bottom: 24px;
   border-radius: 999px;
-  background: rgba(46, 160, 90, 0.13);
+  background: rgb(var(--emerald-rgb) / 0.13);
   color: var(--color-primary);
   font-size: var(--fs-md);
   font-weight: var(--fw-medium);
@@ -113,7 +113,7 @@
   gap: 9px;
   padding-right: 22px;
   margin-right: 8px;
-  border-right: 1px solid rgba(20, 70, 50, 0.16);
+  border-right: 1px solid rgb(var(--black-rgb) / 0.16);
 }
 
 .hero__features li:last-child {
@@ -154,15 +154,15 @@
 .hero__ring {
   left: 32px;
   top: 42px;
-  background: linear-gradient(160deg, #cdebd6, #a9dcba);
+  background: var(--gradient-green-soft);
 }
 
 .hero__arch {
   left: 10px;
   top: 20px;
   overflow: hidden;
-  border: 5px solid #fff;
-  box-shadow: 0 34px 70px rgba(20, 90, 60, 0.25);
+  border: 5px solid var(--color-white);
+  box-shadow: 0 34px 70px rgb(var(--black-rgb) / 0.25);
 }
 
 .hero__arch img {
@@ -179,7 +179,7 @@
   top: 470px;
   width: 80px;
   height: 80px;
-  background-image: radial-gradient(#7cc796 2px, transparent 2.4px);
+  background-image: radial-gradient(var(--color-emerald) 2px, transparent 2.4px);
   background-size: 15px 15px;
 }
 
@@ -198,7 +198,7 @@
   left: 18px;
   top: 2px;
   z-index: 3;
-  color: #26803a;
+  color: var(--color-emerald);
 }
 
 .hero__note span {
@@ -234,8 +234,8 @@
   width: max-content;
   min-width: 170px;
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 20px 40px rgba(8, 50, 60, 0.18);
+  background: var(--color-white);
+  box-shadow: 0 20px 40px rgb(var(--black-rgb) / 0.18);
 }
 
 .hero__list li {
@@ -246,7 +246,7 @@
   white-space: nowrap;
   font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
-  color: #12314f;
+  color: var(--color-black);
 }
 
 .hero__list li span {
@@ -256,8 +256,8 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #2fa24f;
-  color: #fff;
+  background: var(--color-emerald);
+  color: var(--color-white);
 }
 
 /* grow faster */
@@ -271,8 +271,8 @@
   gap: 12px;
   padding: 12px 20px 12px 12px;
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 20px 40px rgba(8, 50, 60, 0.2);
+  background: var(--color-white);
+  box-shadow: 0 20px 40px rgb(var(--black-rgb) / 0.2);
 }
 
 .hero__grow b {
@@ -281,21 +281,21 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #dff4e8;
-  color: #1f7a3a;
+  background: var(--color-green-100);
+  color: var(--color-emerald);
 }
 
 .hero__grow strong {
   display: block;
   font-size: var(--fs-md);
-  color: #0a3a2a;
+  color: var(--color-black);
 }
 
 .hero__grow span {
   display: block;
   font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
-  color: #2a4a60;
+  color: var(--color-black);
   white-space: nowrap;
 }
 .hero__title{

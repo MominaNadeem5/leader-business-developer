@@ -339,7 +339,7 @@ export default function Compliance() {
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="svc cp-page">
+    <div className="svc biz-page cp-page">
       {/* HERO */}
       <section className="cp-hero" ref={heroRef}>
         <span className="cp-blob cp-blob--a" aria-hidden="true" />
@@ -361,8 +361,8 @@ export default function Compliance() {
               <div className="cp-hero__trust" style={{ "--d": 3 }}>
                 {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
-                <span className="cp-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
-                <a className="cp-hero__badge" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
+                <span className="cp-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
+                <a className="cp-hero__badge" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#ffffff" color="#ffffff" /> Trustpilot</a>
                 <span className="cp-hero__sep" />
                 */}
                 <span className="cp-hero__trust-item"><ShieldCheck size={16} /> Accuracy-first filing support</span>

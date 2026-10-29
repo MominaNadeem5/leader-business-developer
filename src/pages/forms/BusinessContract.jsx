@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Download, Check, ArrowRight, Handshake, HandCoins, UserCheck, Scale } from "lucide-react";
+import { Check, ArrowRight, Handshake, HandCoins, UserCheck, Scale } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
-import { Field, FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
+import { FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
 import { ContractVisual } from "./FormsVisual";
-import { FORMS_SEO, FORMS_START, DISCLAIMER, downloadDoc, fill } from "./forms";
+import { FORMS_SEO, FORMS_START, DISCLAIMER } from "./forms";
+import DocWizard from "./DocWizard";
+import { CONTRACT } from "./docConfigs";
 import "./Forms.css";
 
 const PATH = "/forms/contract";
@@ -48,57 +50,6 @@ const FAQS = [
 ];
 
 const CHECK_ITEMS = ["Full legal names and addresses of both parties", "Specific, measurable scope of work or goods", "Price, payment schedule, due dates and late fees", "Start date, end date and renewal terms", "Warranties and what happens if they're broken", "Limitation of liability and indemnities", "Confidentiality obligations", "Termination rights and notice periods", "Governing law and dispute resolution", "Signatures, names, titles and dates"];
-
-function ContractTemplate() {
-  const [v, setV] = useState({ partyA: "", partyB: "", state: "", scope: "", price: "", days: "15", start: "", notice: "30" });
-  const set = (k) => (val) => setV((o) => ({ ...o, [k]: val }));
-
-  const download = () => downloadDoc("business-contract.doc", "Business Contract", `
-<h1>Business Contract</h1>
-<p>This Business Contract ("Agreement") is entered into on ${fill(v.start)} between <b>${fill(v.partyA)}</b> ("Party A") and <b>${fill(v.partyB)}</b> ("Party B").</p>
-<h2>1. Scope</h2><p>${fill(v.scope, "Describe the goods or services, quantities, specifications and deadlines.")}</p>
-<h2>2. Price and Payment</h2><p>Party B will pay Party A ${fill(v.price)}. Invoices are due within ${fill(v.days)} days of receipt. Late payments may incur a fee of ____% per month.</p>
-<h2>3. Term</h2><p>This Agreement begins on ${fill(v.start)} and continues until the obligations are complete, unless terminated earlier under Section 7.</p>
-<h2>4. Warranties</h2><p>Each party warrants that it has authority to enter this Agreement. Party A warrants that goods or services will be provided in a professional manner and as described in Section 1.</p>
-<h2>5. Limitation of Liability</h2><p>Neither party is liable for indirect or consequential damages. Each party's total liability is limited to the amounts paid under this Agreement.</p>
-<h2>6. Confidentiality</h2><p>Each party will keep the other's confidential information private and use it only to perform this Agreement.</p>
-<h2>7. Termination</h2><p>Either party may terminate with ${fill(v.notice)} days' written notice, or immediately if the other party materially breaches and fails to cure within 10 days of notice.</p>
-<h2>8. Governing Law and Disputes</h2><p>This Agreement is governed by the laws of the State of ${fill(v.state)}. The parties will first try to resolve disputes through good-faith negotiation, then mediation.</p>
-<h2>9. Entire Agreement</h2><p>This is the entire agreement between the parties. Changes must be in writing and signed by both parties.</p>
-<table><tr><th>Party A: ${fill(v.partyA)}</th><th>Party B: ${fill(v.partyB)}</th></tr><tr><td>Signature:<br><br>Name & title:<br>Date:</td><td>Signature:<br><br>Name & title:<br>Date:</td></tr></table>`);
-
-  return (
-    <Reveal className="lf-c-tpl">
-      <div className="lf-c-tpl__form">
-        <h3>Fill in your contract</h3>
-        <p>Your answers update the preview. Leave a field blank to keep a fill-in line.</p>
-        <div className="lf-grid-2">
-          <Field label="Party A (provider/seller)" value={v.partyA} onChange={set("partyA")} placeholder="Bright Leaf LLC" />
-          <Field label="Party B (client/buyer)" value={v.partyB} onChange={set("partyB")} placeholder="Northwind Inc." />
-        </div>
-        <Field label="What's being provided?" value={v.scope} onChange={set("scope")} placeholder="500 branded gift boxes delivered by June 30" />
-        <div className="lf-grid-2">
-          <Field label="Total price" value={v.price} onChange={set("price")} placeholder="$6,000" />
-          <Field label="Payment due (days)" value={v.days} onChange={set("days")} inputMode="numeric" />
-          <Field label="Start date" type="date" value={v.start} onChange={set("start")} />
-          <Field label="Termination notice (days)" value={v.notice} onChange={set("notice")} inputMode="numeric" />
-        </div>
-        <Field label="Governing state" value={v.state} onChange={set("state")} placeholder="Texas" />
-        <button type="button" className="lf-btn" onClick={download}><Download size={17} /> Download as Word (.doc)</button>
-      </div>
-      <div className="lf-paper" aria-label="Contract preview">
-        <h4>Business Contract</h4>
-        <p>Between <mark>{v.partyA || "Party A"}</mark> and <mark>{v.partyB || "Party B"}</mark>, effective <mark>{v.start || "date"}</mark>.</p>
-        <p><b>1. Scope.</b> {v.scope || "Goods or services to be provided…"}</p>
-        <p><b>2. Payment.</b> <mark>{v.price || "$____"}</mark>, due within <mark>{v.days || "__"}</mark> days of invoice.</p>
-        <p><b>7. Termination.</b> <mark>{v.notice || "__"}</mark> days' written notice.</p>
-        <p><b>8. Governing law.</b> State of <mark>{v.state || "____"}</mark>.</p>
-        <p className="lf-paper__more">+ warranties, liability, confidentiality, entire agreement</p>
-        <div className="lf-paper__sign"><span>Party A signature</span><span>Party B signature</span></div>
-      </div>
-    </Reveal>
-  );
-}
 
 export default function BusinessContract() {
   const [clause, setClause] = useState(0);
@@ -180,8 +131,8 @@ export default function BusinessContract() {
       </Section>
 
       {/* template */}
-      <Section id="lf-template" title="Free business contract template" subtitle="Fill in the basics, preview your contract and download an editable Word file.">
-        <ContractTemplate />
+      <Section id="lf-template" title="Free business contract template" subtitle="Answer a few guided questions, review the finished contract and download an editable Word file.">
+        <DocWizard config={CONTRACT} />
         <LegalNote />
       </Section>
 

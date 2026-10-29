@@ -226,7 +226,7 @@ function AlertAnatomy() {
 
 export default function BrandWatch() {
   return (
-    <div className="svc bw-page">
+    <div className="svc biz-page bw-page">
       <ServiceHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Business", to: "/business" }, { label: "Brand Watch Alerts" }]}
         title="Spot copycats before they cost you customers"

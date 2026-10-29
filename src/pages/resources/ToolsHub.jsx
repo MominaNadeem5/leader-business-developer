@@ -7,6 +7,7 @@ import { ResHero, FaqBlock, RelatedLinks } from "./ResBits";
 import { ToolboxVisual } from "./ResourcesVisual";
 import { RES_SEO, FREE_TOOLS, LEARN_GUIDES, HUBS } from "./resources";
 import "../forms/Forms.css";
+import NextStepLlc from "./NextStepLlc";
 import "./Resources.css";
 
 const PATH = "/resources/tools";
@@ -32,7 +33,7 @@ const TABLE = [
 
 const FAQS = [
   ["Are these business tools really free?", "Yes. Every tool on this page is free to use as often as you like, with no sign-up, credit card or email required."],
-  ["Do the tools save or share my information?", "No. The tools run in your browser. A few conveniences, like saved name favorites, are stored only on your own device, and downloads are created locally. Nothing you type is sent to us."],
+  ["Do the tools save or share my information?", "Mostly no. The tools run in your browser, saved name favorites stay on your own device and downloads are created locally. The one exception is the name generator: when AI suggestions are on, its keywords, industry and style are sent to our server and to Google's Gemini API to create ideas. We don't store them with your name or contact details."],
   ["How accurate are the results?", "The tools give estimates and guidance based on common rules and your inputs. They're a strong starting point, but they don't replace official searches, quotes or professional advice for your specific situation."],
   ["Which tool should I use first?", "If you're just starting, use the name generator and name availability check together, then the startup cost calculator. If your business is already running, start with the compliance health check."],
   ["Can I use the tools on my phone?", "Yes. All four tools are designed to work on phones, tablets and desktops."],
@@ -99,6 +100,8 @@ export default function ToolsHub() {
           ))}
         </Reveal>
       </Section>
+
+      <NextStepLlc tool="hub" />
 
       <FaqBlock faqs={FAQS} title="Free tools FAQs" variant="numbered" />
 

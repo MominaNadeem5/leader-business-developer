@@ -82,12 +82,12 @@ export default function EcommerceIntegration() {
         <PlatformSplit
           items={[
             {
-              name: "Shopify", tone: "#5e8e3e", icon: <Store size={24} />, best: "Sellers who want an all-in-one hosted store",
+              name: "Shopify", tone: "#2fa24f", icon: <Store size={24} />, best: "Sellers who want an all-in-one hosted store",
               text: "A hosted platform: hosting, security and updates are handled for you, with a large app store for extra features.",
               points: ["Quick to launch, no server to manage", "Built-in payments in many countries", "Monthly plan plus app costs", "Less control over the underlying code"],
             },
             {
-              name: "WooCommerce", tone: "#7f54b3", icon: <Code2 size={24} />, best: "WordPress sites that want full control",
+              name: "WooCommerce", tone: "#2fa24f", icon: <Code2 size={24} />, best: "WordPress sites that want full control",
               text: "A free, open-source plugin for WordPress. You own the site and choose your hosting, themes and extensions.",
               points: ["Highly customizable", "Works with many payment plugins", "You manage hosting, updates and security", "Costs depend on hosting and extensions"],
             },

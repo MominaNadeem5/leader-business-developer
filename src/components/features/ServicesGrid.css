@@ -2,8 +2,8 @@
 
 .svc {
   /* background:
-    radial-gradient(700px 420px at 100% 0%, rgba(46, 160, 90, 0.08), transparent 70%),
-    radial-gradient(500px 360px at 0% 100%, rgba(46, 160, 90, 0.07), transparent 70%); */
+    radial-gradient(700px 420px at 100% 0%, rgb(var(--emerald-rgb) / 0.08), transparent 70%),
+    radial-gradient(500px 360px at 0% 100%, rgb(var(--emerald-rgb) / 0.07), transparent 70%); */
 }
 
 .svc__layout {
@@ -30,11 +30,11 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 14px;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-label);
   font-weight: var(--fw-bold);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-primary, #2a8a3e);
+  color: var(--color-primary, var(--color-emerald));
 }
 
 .svc__eyebrow::before {
@@ -47,24 +47,24 @@
 
 .svc__intro h2 {
   margin: 0 0 18px;
-  font-size: clamp(var(--fs-5xl), 2.6vw, var(--fs-7xl));
+  font-size: var(--fs-section-title);
   line-height: var(--lh-tight);
   font-weight: var(--fw-heavy);
   letter-spacing: -0.02em;
-  color: #123a3a;
+  color: var(--color-black);
 }
 
 .svc__intro h2 em {
   font-style: normal;
-  color: var(--color-primary, #2a8a3e);
+  color: var(--color-primary, var(--color-emerald));
 }
 
 .svc__intro p {
   margin: 0 0 26px;
   max-width: 440px;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-section-lead);
   line-height: var(--lh-relaxed);
-  color: var(--color-text-muted, #5d727c);
+  color: var(--color-text-secondary);
 }
 
 .svc__btn {
@@ -73,20 +73,20 @@
   gap: 10px;
   padding: 12px 24px;
   border-radius: 999px;
-  border: 1.5px solid rgba(46, 160, 90, 0.55);
-  background: rgba(255, 255, 255, 0.7);
-  color: #123a3a;
+  border: 1.5px solid rgb(var(--emerald-rgb) / 0.55);
+  background: rgb(var(--white-rgb) / 0.7);
+  color: var(--color-black);
   font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
   text-decoration: none;
-  box-shadow: 0 6px 16px rgba(20, 90, 60, 0.08);
+  box-shadow: 0 6px 16px rgb(var(--black-rgb) / 0.08);
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .svc__btn:hover {
-  background: #fff;
+  background: var(--color-white);
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(20, 90, 60, 0.14);
+  box-shadow: 0 10px 22px rgb(var(--black-rgb) / 0.14);
 }
 
 .svc__btn svg {
@@ -113,9 +113,9 @@
   min-height: 118px;
   padding: 20px 40px 20px 20px;
   border-radius: 18px;
-  background: #fff;
-  border: 1px solid rgba(20, 80, 60, 0.1);
-  box-shadow: 0 10px 28px rgba(20, 90, 60, 0.07);
+  background: var(--color-white);
+  border: 1px solid rgb(var(--black-rgb) / 0.1);
+  box-shadow: 0 10px 28px rgb(var(--black-rgb) / 0.07);
   text-decoration: none;
   color: inherit;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -130,8 +130,8 @@
 
 .svc__card:hover {
   transform: translateY(-4px);
-  border-color: rgba(46, 160, 90, 0.4);
-  box-shadow: 0 18px 38px rgba(20, 90, 60, 0.14);
+  border-color: rgb(var(--emerald-rgb) / 0.4);
+  box-shadow: 0 18px 38px rgb(var(--black-rgb) / 0.14);
 }
 
 .svc__icon {
@@ -142,8 +142,8 @@
   place-items: center;
   border-radius: 50%;
   font-size: var(--fs-5xl);
-  color: #17543a;
-  background: radial-gradient(circle at 30% 25%, #eaf8ef, #d3eedd);
+  color: var(--color-emerald);
+  background: var(--gradient-green-soft);
   transition: transform 0.25s ease;
 }
 
@@ -153,29 +153,29 @@
 
 .svc__body h4 {
   margin: 0 0 6px;
-  font-size: var(--fs-base);
+  font-size: var(--fs-card-title);
   font-weight: var(--fw-bold);
-  color: #123a3a;
+  color: var(--color-black);
 }
 
 .svc__body p {
   margin: 0;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-card-text);
   line-height: var(--lh-normal);
-  color: var(--color-text-muted, #5d727c);
+  color: var(--color-text-secondary);
 }
 
 .svc__arrow {
   position: absolute;
   right: 18px;
   bottom: 16px;
-  color: #123a3a;
+  color: var(--color-black);
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .svc__card:hover .svc__arrow {
   transform: translateX(4px);
-  color: var(--color-primary, #2a8a3e);
+  color: var(--color-primary, var(--color-emerald));
 }
 
 /* ---------- Responsive ---------- */

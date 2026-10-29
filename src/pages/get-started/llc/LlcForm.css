@@ -8,25 +8,25 @@
 .llc-3col > *, .llc-2col > * { min-width: 0; }
 
 /* conditional blocks */
-.llc-cond { margin: 4px 0 8px; padding: 4px 18px 8px; border-left: 3px solid var(--svc-green); background: #f7fbf8; border-radius: 0 14px 14px 0; animation: au-fade .3s ease both; }
+.llc-cond { margin: 4px 0 8px; padding: 4px 18px 8px; border-left: 3px solid var(--svc-green); background: var(--color-green-50); border-radius: 0 14px 14px 0; animation: au-fade .3s ease both; }
 .llc-cond .llc-sub:first-child { margin-top: 14px; }
 
 /* owners / managers */
-.llc-member { margin-bottom: 14px; padding: 16px 18px 4px; border: 1px solid var(--svc-line); border-radius: 16px; background: #fbfdfc; animation: au-rise .35s ease both; }
+.llc-member { margin-bottom: 14px; padding: 16px 18px 4px; border: 1px solid var(--svc-line); border-radius: 16px; background: var(--color-green-50); animation: au-rise .35s ease both; }
 .llc-member__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--svc-ink); font-size: var(--fs-base); }
 .llc-row { display: flex; align-items: flex-start; gap: 8px; }
 .llc-row > .au-field { flex: 1; min-width: 0; }
 .llc-row .llc-remove { margin-top: 30px; }
-.llc-remove { display: grid; place-items: center; flex: 0 0 auto; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: #b42318; cursor: pointer; transition: background-color .2s ease; }
-.llc-remove:hover { background: #fdecec; }
+.llc-remove { display: grid; place-items: center; flex: 0 0 auto; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: var(--color-black); cursor: pointer; transition: background-color .2s ease; }
+.llc-remove:hover { background: rgb(var(--black-rgb) / 0.04); }
 .llc-member__head .llc-remove { width: 34px; height: 34px; }
 .llc-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px; }
-.llc-add { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border: 1.5px dashed var(--svc-green); border-radius: 999px; background: #fff; color: var(--svc-green-dark); font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-bold); cursor: pointer; transition: background-color .2s ease; }
+.llc-add { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border: 1.5px dashed var(--svc-green); border-radius: 999px; background: var(--color-white); color: var(--svc-green-dark); font: inherit; font-size: var(--fs-sm); font-weight: var(--fw-bold); cursor: pointer; transition: background-color .2s ease; }
 .llc-add:hover { background: var(--svc-soft); }
 .llc-add--ghost { border-style: solid; border-color: var(--au-field); color: var(--svc-ink); }
 .llc-fill { margin: -6px 0 14px; }
-.llc-total { margin-left: auto; padding: 6px 12px; border-radius: 999px; background: #fff8e6; border: 1px solid #f3dea0; color: #5f4300; font-size: var(--fs-sm); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
-.llc-total.is-ok { background: var(--svc-soft); border-color: #ccebd5; color: var(--svc-green-dark); }
+.llc-total { margin-left: auto; padding: 6px 12px; border-radius: 999px; background: rgb(var(--black-rgb) / 0.04); border: 1px solid rgb(var(--emerald-rgb) / 0.2); color: var(--color-black); font-size: var(--fs-sm); font-weight: var(--fw-bold); font-variant-numeric: tabular-nums; }
+.llc-total.is-ok { background: var(--svc-soft); border-color: var(--color-green-100); color: var(--svc-green-dark); }
 .llc-tip h3 { display: flex; align-items: center; gap: 6px; }
 .llc-tip h3 svg { color: var(--svc-green); }
 .llc-tip p { margin: 0; }

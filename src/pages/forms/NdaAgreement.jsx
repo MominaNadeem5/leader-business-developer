@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ShieldCheck, Lock, ArrowRight, ArrowLeftRight, Download, Building2, UserPlus, Presentation, Code2,
+  ShieldCheck, ArrowRight, ArrowLeftRight, Building2, UserPlus, Presentation, Code2,
   Factory, Users, Megaphone, Coffee, Check, X, Info, Infinity as InfinityIcon,
 } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
-import { Field, Segmented, FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
+import { FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
 import { NdaVisual } from "./FormsVisual";
-import { FORMS_SEO, FORMS_START, DISCLAIMER, downloadDoc, fill, esc } from "./forms";
+import { FORMS_SEO, FORMS_START, DISCLAIMER } from "./forms";
+import DocWizard from "./DocWizard";
+import { NDA } from "./docConfigs";
 import "./Forms.css";
 
 const PATH = "/forms/templates/nda";
@@ -32,59 +34,6 @@ const FAQS = [
   ["Do I need an NDA if I already have a confidentiality clause in my contract?", "Not always. If the main agreement has a strong confidentiality clause, a separate NDA may be unnecessary. A standalone NDA is useful before any main contract exists, such as during early discussions, quotes or due diligence."],
   ["What can I do if someone breaks an NDA?", "Remedies may include a court order (injunction) to stop further disclosure, money damages for losses, and sometimes attorney's fees if the NDA provides for them. Act quickly and document the breach. An attorney can help you send a demand letter or seek an injunction."],
 ];
-
-function NdaTemplate() {
-  const [v, setV] = useState({ kind: "mutual", a: "", b: "", purpose: "", years: "2", state: "", employee: "no" });
-  const set = (k) => (val) => setV((o) => ({ ...o, [k]: val }));
-  const mutual = v.kind === "mutual";
-  const role = mutual ? "each party" : "the Receiving Party";
-
-  const download = () => downloadDoc(`${mutual ? "mutual" : "one-way"}-nda.doc`, "Non-Disclosure Agreement", `
-<h1>${mutual ? "Mutual " : ""}Non-Disclosure Agreement</h1>
-<p>This Agreement is made on ____________ between <b>${fill(v.a)}</b>${mutual ? "" : ' ("Disclosing Party")'} and <b>${fill(v.b)}</b>${mutual ? "" : ' ("Receiving Party")'}${mutual ? ' (each a "Party")' : ""}.</p>
-<h2>1. Purpose</h2><p>The parties wish to share information to ${fill(v.purpose, "evaluate a potential business relationship")} (the "Purpose").</p>
-<h2>2. Confidential Information</h2><p>"Confidential Information" means non-public business, technical, financial or customer information disclosed ${mutual ? "by either Party" : "by the Disclosing Party"}, in any form, that is marked confidential or would reasonably be understood to be confidential.</p>
-<h2>3. Exclusions</h2><p>Confidential Information does not include information that: (a) is or becomes public through no fault of the recipient; (b) was already known to the recipient without restriction; (c) is independently developed without use of the Confidential Information; or (d) is lawfully received from a third party without a duty of confidentiality.</p>
-<h2>4. Obligations</h2><p>${mutual ? "Each Party" : "The Receiving Party"} will use Confidential Information only for the Purpose, protect it with at least reasonable care, and share it only with employees or advisors who need to know it and are bound by similar duties.</p>
-<h2>5. Required Disclosure</h2><p>If disclosure is required by law or court order, ${role} will give prompt notice (where legally allowed) and disclose only what is required.</p>
-<h2>6. Term</h2><p>Confidentiality obligations last ${esc(v.years)} year(s) from the date of disclosure, except that obligations for trade secrets continue for as long as the information remains a trade secret under applicable law.</p>
-<h2>7. Return of Information</h2><p>On request, ${role} will return or destroy Confidential Information and confirm this in writing.</p>
-<h2>8. No License</h2><p>No ownership or license rights are granted except the limited right to use information for the Purpose.</p>
-<h2>9. Remedies</h2><p>Unauthorized disclosure may cause irreparable harm, and the disclosing party may seek injunctive relief in addition to other remedies.</p>
-${v.employee === "yes" ? "<h2>10. Whistleblower Immunity Notice</h2><p>Under 18 U.S.C. § 1833(b), an individual will not be held liable under any federal or state trade secret law for disclosing a trade secret (a) in confidence to a government official or an attorney solely for the purpose of reporting or investigating a suspected violation of law, or (b) in a complaint or other document filed under seal in a lawsuit or other proceeding.</p>" : ""}
-<h2>Governing Law</h2><p>This Agreement is governed by the laws of the State of ${fill(v.state)}.</p>
-<table><tr><th>${fill(v.a)}</th><th>${fill(v.b)}</th></tr><tr><td>Signature:<br><br>Name & title:<br>Date:</td><td>Signature:<br><br>Name & title:<br>Date:</td></tr></table>`);
-
-  return (
-    <Reveal className="lf-n-tpl">
-      <div className="lf-n-tpl__controls">
-        <Segmented label="NDA type" value={v.kind} onChange={set("kind")} options={[["mutual", "Mutual"], ["one", "One-way"]]} />
-        <div className="lf-grid-2">
-          <Field label={mutual ? "Party one" : "Disclosing party (you)"} value={v.a} onChange={set("a")} placeholder="Bright Leaf LLC" />
-          <Field label={mutual ? "Party two" : "Receiving party"} value={v.b} onChange={set("b")} placeholder="Northwind Studio" />
-        </div>
-        <Field label="Purpose of sharing" value={v.purpose} onChange={set("purpose")} placeholder="discuss a co-branded product launch" />
-        <div className="lf-grid-2">
-          <Segmented label="Confidentiality term" value={v.years} onChange={set("years")} options={[["1", "1 yr"], ["2", "2 yrs"], ["3", "3 yrs"], ["5", "5 yrs"]]} />
-          <Field label="Governing state" value={v.state} onChange={set("state")} placeholder="Delaware" />
-        </div>
-        <Segmented label="Is the recipient an employee or contractor?" value={v.employee} onChange={set("employee")} options={[["no", "No"], ["yes", "Yes, add DTSA notice"]]} />
-        <button type="button" className="lf-btn" onClick={download}><Download size={17} /> Download {mutual ? "mutual" : "one-way"} NDA (.doc)</button>
-      </div>
-      <div className="lf-n-tpl__summary" aria-live="polite">
-        <Lock size={22} />
-        <h3>Your NDA at a glance</h3>
-        <dl>
-          <dt>Type</dt><dd>{mutual ? "Mutual: both sides protected" : "One-way: only your information protected"}</dd>
-          <dt>Parties</dt><dd>{v.a || "Party one"} {mutual ? "⇄" : "→"} {v.b || "Party two"}</dd>
-          <dt>Purpose</dt><dd>{v.purpose || "Evaluate a potential business relationship"}</dd>
-          <dt>Term</dt><dd>{v.years} year{v.years === "1" ? "" : "s"}, trade secrets indefinitely</dd>
-          <dt>Includes</dt><dd>Standard exclusions, return of information, remedies{v.employee === "yes" ? ", whistleblower notice" : ""}</dd>
-        </dl>
-      </div>
-    </Reveal>
-  );
-}
 
 export default function NdaAgreement() {
   const [pick, setPick] = useState(0);
@@ -180,8 +129,8 @@ export default function NdaAgreement() {
       </Section>
 
       {/* template */}
-      <Section id="lf-template" title="Create your NDA" subtitle="Choose the type and term, add the details, and download an editable document.">
-        <NdaTemplate />
+      <Section id="lf-template" title="Create your NDA" subtitle="Choose the type, add the parties and terms, review the result and download an editable document.">
+        <DocWizard config={NDA} />
         <LegalNote />
       </Section>
 

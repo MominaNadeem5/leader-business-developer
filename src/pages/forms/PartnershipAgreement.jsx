@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Download, AlertTriangle, Check, X, Plus, Trash2, Users, PiggyBank, Vote,
+  ArrowRight, AlertTriangle, Check, X, Plus, Trash2, Users, PiggyBank, Vote,
   DoorOpen, Scale, Briefcase, Clock, HeartPulse,
 } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
-import { Field, Segmented, FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
+import { Segmented, FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
 import { PartnershipVisual } from "./FormsVisual";
-import { FORMS_SEO, FORMS_START, DISCLAIMER, downloadDoc, fill, esc } from "./forms";
+import { FORMS_SEO, FORMS_START, DISCLAIMER } from "./forms";
+import DocWizard from "./DocWizard";
+import { PARTNERSHIP } from "./docConfigs";
 import "./Forms.css";
 
 const PATH = "/forms/templates/partnership";
-const COLORS = ["#2fa24f", "#0a3a2a", "#c9a227", "#3b82f6"];
+const COLORS = ["#2fa24f", "#000000", "#2fa24f", "#2fa24f"];
 const money = (n) => `$${Math.round(n).toLocaleString()}`;
 
 const STRUCTURES = [
@@ -108,59 +110,6 @@ function SplitCalculator() {
   );
 }
 
-function PartnershipTemplate() {
-  const [step, setStep] = useState(0);
-  const [v, setV] = useState({ name: "", type: "General Partnership", state: "", purpose: "", partners: "", split: "", vote: "Majority", buyout: "Independent appraisal", start: "" });
-  const set = (k) => (val) => setV((o) => ({ ...o, [k]: val }));
-  const steps = ["Basics", "Money", "Rules"];
-
-  const download = () => {
-    const names = v.partners.split(",").map((s) => s.trim()).filter(Boolean);
-    downloadDoc("partnership-agreement.doc", "Partnership Agreement", `
-<h1>Partnership Agreement</h1>
-<p>This Partnership Agreement is made on ${fill(v.start)} by the partners listed below to form a ${esc(v.type)} named <b>${fill(v.name)}</b> (the "Partnership") under the laws of the State of ${fill(v.state)}.</p>
-<h2>1. Purpose</h2><p>The Partnership will ${fill(v.purpose, "describe the business activity")}.</p>
-<h2>2. Partners and Capital Contributions</h2><table><tr><th>Partner</th><th>Capital contribution</th><th>Ownership %</th></tr>${(names.length ? names : ["", ""]).map((n) => `<tr><td>${fill(n)}</td><td>$________</td><td>____%</td></tr>`).join("")}</table>
-<h2>3. Profits and Losses</h2><p>Profits and losses will be allocated ${fill(v.split, "in proportion to each partner's ownership percentage")}. Distributions will be made ________ (e.g. quarterly) as the partners decide.</p>
-<h2>4. Management and Voting</h2><p>Ordinary decisions require a ${esc(v.vote.toLowerCase())} vote of the partners. Unanimous consent is required to admit new partners, sell substantially all assets, borrow more than $________, or amend this Agreement.</p>
-<h2>5. Duties and Compensation</h2><p>Each partner will devote ________ hours per week to the business. No partner will receive a salary unless agreed in writing.</p>
-<h2>6. Withdrawal, Death or Disability</h2><p>A partner may withdraw with ________ days' written notice. The remaining partners may buy the departing partner's interest, valued by ${esc(v.buyout.toLowerCase())}, payable over ________ months.</p>
-<h2>7. Dispute Resolution</h2><p>Partners will try to resolve disputes by negotiation, then mediation, before any legal action.</p>
-<h2>8. Dissolution</h2><p>On dissolution, assets will be used to pay debts, then returned to partners according to their capital accounts.</p>
-<h2>Signatures</h2><table>${(names.length ? names : ["", ""]).map((n) => `<tr><td>${fill(n)}</td><td>Signature: ____________________</td><td>Date: ________</td></tr>`).join("")}</table>`);
-  };
-
-  return (
-    <Reveal className="lf-p-tpl">
-      <ol className="lf-p-steps">
-        {steps.map((s, i) => <li key={s} className={i === step ? "is-on" : i < step ? "is-done" : ""}><button type="button" onClick={() => setStep(i)}><span>{i < step ? <Check size={13} /> : i + 1}</span>{s}</button></li>)}
-      </ol>
-      <div className="lf-p-tpl__body" key={step}>
-        {step === 0 && <>
-          <Field label="Partnership name" value={v.name} onChange={set("name")} placeholder="Bright Leaf Partners" />
-          <Segmented label="Partnership type" value={v.type} onChange={set("type")} options={[["General Partnership", "General"], ["Limited Partnership", "Limited"], ["Limited Liability Partnership", "LLP"]]} />
-          <div className="lf-grid-2"><Field label="State" value={v.state} onChange={set("state")} placeholder="Florida" /><Field label="Start date" type="date" value={v.start} onChange={set("start")} /></div>
-          <Field label="Business purpose" value={v.purpose} onChange={set("purpose")} placeholder="operate a specialty bakery and catering business" />
-        </>}
-        {step === 1 && <>
-          <Field label="Partner names (comma separated)" value={v.partners} onChange={set("partners")} placeholder="Alex Rivera, Sam Chen" />
-          <Field label="How profits and losses are split" value={v.split} onChange={set("split")} placeholder="60% to Alex Rivera and 40% to Sam Chen" />
-          <p className="lf-small">Tip: use the split calculator above to agree percentages first.</p>
-        </>}
-        {step === 2 && <>
-          <Segmented label="Everyday decisions need" value={v.vote} onChange={set("vote")} options={[["Majority", "Majority"], ["Unanimous", "Unanimous"]]} />
-          <Segmented label="Buyout valuation method" value={v.buyout} onChange={set("buyout")} options={[["Independent appraisal", "Appraisal"], ["Agreed annual value", "Agreed value"], ["Book value", "Book value"]]} />
-        </>}
-      </div>
-      <div className="lf-p-tpl__nav">
-        <button type="button" className="svc-ghost-btn" disabled={step === 0} onClick={() => setStep(step - 1)}>Back</button>
-        {step < 2 ? <button type="button" className="lf-btn" onClick={() => setStep(step + 1)}>Next <ArrowRight size={16} /></button>
-          : <button type="button" className="lf-btn" onClick={download}><Download size={16} /> Download agreement (.doc)</button>}
-      </div>
-    </Reveal>
-  );
-}
-
 export default function PartnershipAgreement() {
   return (
     <div className="svc mc-page lf-page lf-partner">
@@ -226,8 +175,8 @@ export default function PartnershipAgreement() {
       </Section>
 
       {/* template */}
-      <Section id="lf-template" title="Build your partnership agreement" subtitle="Three quick steps, then download an editable Word document.">
-        <PartnershipTemplate />
+      <Section id="lf-template" title="Build your partnership agreement" subtitle="Add the partners and the rules you agree on, review the agreement and download an editable Word document.">
+        <DocWizard config={PARTNERSHIP} />
         <LegalNote />
       </Section>
 

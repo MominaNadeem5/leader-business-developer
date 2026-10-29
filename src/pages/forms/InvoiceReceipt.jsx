@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight, Download, Plus, Trash2, FileText, BadgeCheck, Send, CreditCard, Archive, FileClock, Check,
-} from "lucide-react";
+import { ArrowRight, FileText, BadgeCheck, Send, CreditCard, Archive, FileClock, Check, UserRound, CalendarDays, ListChecks, Download } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
-import { Field, Segmented, FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
+import { FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
 import { InvoiceVisual } from "./FormsVisual";
-import { FORMS_SEO, FORMS_START, DISCLAIMER, downloadDoc, fill, esc } from "./forms";
+import InvoiceEditor from "./InvoiceEditor";
+import { FORMS_SEO, FORMS_START, DISCLAIMER } from "./forms";
 import "./Forms.css";
 
 const PATH = "/forms/invoice";
-const usd = (n) => `$${(Number(n) || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 const ANNOTATIONS = [
   "Your business name, address and contact details",
@@ -34,71 +32,12 @@ const FAQS = [
   ["Can I charge a late fee on an unpaid invoice?", "Generally yes, if the fee was agreed in advance, for example in your contract or stated on the invoice before the work, and it complies with your state's limits on interest and fees. A common approach is 1% to 1.5% per month on overdue balances."],
 ];
 
-function InvoiceBuilder() {
-  const [mode, setMode] = useState("invoice");
-  const [v, setV] = useState({ from: "Bright Leaf Studio", fromAddr: "120 Main St, Austin, TX", to: "Northwind Inc.", toAddr: "45 Market Ave, Dallas, TX", num: "INV-2026-014", date: "", due: "Net 15", tax: 8.25, method: "Bank transfer" });
-  const [items, setItems] = useState([{ d: "Website design (5 pages)", q: 1, r: 2400 }, { d: "Logo refresh", q: 1, r: 650 }, { d: "Extra revision hours", q: 3, r: 85 }]);
-  const set = (k) => (val) => setV((o) => ({ ...o, [k]: val }));
-  const setItem = (i, k, val) => setItems((it) => it.map((x, j) => (j === i ? { ...x, [k]: val } : x)));
-  const sub = items.reduce((a, x) => a + (Number(x.q) || 0) * (Number(x.r) || 0), 0);
-  const tax = sub * ((Number(v.tax) || 0) / 100);
-  const total = sub + tax;
-  const isInv = mode === "invoice";
-  const docNum = isInv ? v.num : v.num.replace(/^INV/, "RCPT");
-
-  const download = () => downloadDoc(`${isInv ? "invoice" : "receipt"}-${docNum || "draft"}.doc`, isInv ? "Invoice" : "Receipt", `
-<table style="border:0"><tr><td style="border:0"><h1>${isInv ? "INVOICE" : "RECEIPT"}</h1><p><b>${fill(v.from)}</b><br>${fill(v.fromAddr)}</p></td>
-<td style="border:0" class="r"><p><b>${isInv ? "Invoice" : "Receipt"} #:</b> ${fill(docNum)}<br><b>Date:</b> ${fill(v.date)}<br>${isInv ? `<b>Terms:</b> ${esc(v.due)}` : `<b>Paid via:</b> ${esc(v.method)}<br><b>For invoice:</b> ${fill(v.num)}`}</p></td></tr></table>
-<h2>${isInv ? "Bill to" : "Received from"}</h2><p>${fill(v.to)}<br>${fill(v.toAddr)}</p>
-<table><tr><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr>
-${items.map((x) => `<tr><td>${fill(x.d)}</td><td class="r">${esc(x.q)}</td><td class="r">${usd(x.r)}</td><td class="r">${usd(x.q * x.r)}</td></tr>`).join("")}
-<tr><td colspan="3" class="r">Subtotal</td><td class="r">${usd(sub)}</td></tr>
-<tr><td colspan="3" class="r">Sales tax (${esc(v.tax)}%)</td><td class="r">${usd(tax)}</td></tr>
-<tr><td colspan="3" class="r"><b>${isInv ? "Total due" : "Total paid"}</b></td><td class="r"><b>${usd(total)}</b></td></tr></table>
-<p>${isInv ? `Payment due ${esc(v.due)}. Pay by ${esc(v.method)}. Late payments may incur a 1.5% monthly fee.` : "Thank you for your payment. Balance remaining: $0.00."}</p>`);
-
-  return (
-    <Reveal className="lf-i-build">
-      <div className="lf-i-build__form">
-        <Segmented label="Create a" value={mode} onChange={setMode} options={[["invoice", "Invoice"], ["receipt", "Receipt"]]} />
-        <div className="lf-grid-2">
-          <Field label="Your business" value={v.from} onChange={set("from")} />
-          <Field label="Client" value={v.to} onChange={set("to")} />
-          <Field label="Your address" value={v.fromAddr} onChange={set("fromAddr")} />
-          <Field label="Client address" value={v.toAddr} onChange={set("toAddr")} />
-          <Field label="Invoice number" value={v.num} onChange={set("num")} />
-          <Field label={isInv ? "Invoice date" : "Payment date"} type="date" value={v.date} onChange={set("date")} />
-          {isInv ? <Field label="Payment terms" value={v.due} onChange={set("due")} /> : <Field label="Payment method" value={v.method} onChange={set("method")} />}
-          <Field label="Sales tax %" type="number" min="0" step="0.25" value={v.tax} onChange={set("tax")} />
-        </div>
-        <div className="lf-i-items">
-          <span className="lf-seg-label">Line items</span>
-          {items.map((x, i) => (
-            <div key={i} className="lf-i-items__row">
-              <input aria-label="Description" value={x.d} onChange={(e) => setItem(i, "d", e.target.value)} />
-              <input aria-label="Quantity" type="number" min="0" value={x.q} onChange={(e) => setItem(i, "q", Number(e.target.value))} />
-              <input aria-label="Rate" type="number" min="0" value={x.r} onChange={(e) => setItem(i, "r", Number(e.target.value))} />
-              <button type="button" aria-label="Remove item" disabled={items.length <= 1} onClick={() => setItems((it) => it.filter((_, j) => j !== i))}><Trash2 size={15} /></button>
-            </div>
-          ))}
-          {items.length < 8 && <button type="button" className="lf-p-calc__add" onClick={() => setItems((it) => [...it, { d: "", q: 1, r: 0 }])}><Plus size={15} /> Add line</button>}
-        </div>
-      </div>
-      <div className="lf-i-sheet-wrap">
-        <div className={`lf-i-sheet ${isInv ? "" : "is-paid"}`}>
-          {!isInv && <span className="lf-i-stamp">PAID</span>}
-          <div className="lf-i-sheet__top"><div><b>{v.from || "Your Business"}</b><small>{v.fromAddr}</small></div><div className="r"><h4>{isInv ? "INVOICE" : "RECEIPT"}</h4><small>#{docNum}</small><small>{v.date || "Date"}</small></div></div>
-          <div className="lf-i-sheet__to"><small>{isInv ? "Bill to" : "Received from"}</small><b>{v.to || "Client"}</b><small>{v.toAddr}</small></div>
-          <table><thead><tr><th>Item</th><th>Qty</th><th>Amount</th></tr></thead>
-            <tbody>{items.map((x, i) => <tr key={i}><td>{x.d || "—"}</td><td>{x.q}</td><td>{usd(x.q * x.r)}</td></tr>)}</tbody></table>
-          <dl><dt>Subtotal</dt><dd>{usd(sub)}</dd><dt>Tax ({v.tax}%)</dt><dd>{usd(tax)}</dd><dt className="t">{isInv ? "Total due" : "Total paid"}</dt><dd className="t">{usd(total)}</dd></dl>
-          <p className="lf-i-sheet__foot">{isInv ? `Terms: ${v.due} · Pay by ${v.method}` : `Paid via ${v.method} · Ref ${v.num}`}</p>
-        </div>
-        <button type="button" className="lf-btn" onClick={download}><Download size={17} /> Download {isInv ? "invoice" : "receipt"} (.doc)</button>
-      </div>
-    </Reveal>
-  );
-}
+const STEPS = [
+  [UserRound, "Add your details", "Upload a logo and fill in your business and your customer's details."],
+  [CalendarDays, "Set the invoice basics", "Choose an invoice number, date, payment terms and due date."],
+  [ListChecks, "List what you're charging for", "Add each item with a quantity and rate, then apply tax, discounts and shipping."],
+  [Download, "Review and download", "Check the balance due, then download a PDF to send to your client."],
+];
 
 export default function InvoiceReceipt() {
   const [hot, setHot] = useState(null);
@@ -118,10 +57,19 @@ export default function InvoiceReceipt() {
         visual={<InvoiceVisual />}
       />
 
-      {/* builder comes straight after the banner */}
-      <Section id="lf-builder" title="Invoice & receipt generator" subtitle="Edit any field and the document updates instantly. Switch to a receipt once you've been paid.">
-        <InvoiceBuilder />
+      {/* the editor comes straight after the banner */}
+      <Section id="lf-builder" tone="gray" title="Free invoice generator" subtitle="Fill in the invoice below, pick your currency and download it as a PDF. No sign-up needed.">
+        <InvoiceEditor />
         <LegalNote className="lf-note--center" />
+      </Section>
+
+      {/* how it works */}
+      <Section title="How to make an invoice" subtitle="Four quick steps from a blank page to a professional invoice.">
+        <Reveal className="lf-iv-steps">
+          {STEPS.map(([Icon, title, text], i) => (
+            <div key={title} style={{ "--i": i }}><span><Icon size={20} /></span><em>{i + 1}</em><h3>{title}</h3><p>{text}</p></div>
+          ))}
+        </Reveal>
       </Section>
 
       {/* annotated sample */}

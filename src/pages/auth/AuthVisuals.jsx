@@ -9,7 +9,7 @@ const SPARKS = [
 /* Position lives on the <g> so the CSS transform on the path doesn't override it. */
 const Spark = ({ x, y, d, cls }) => (
   <g transform={`translate(${x} ${y})`}>
-    <path className={cls} style={{ "--d": `${d}s` }} d="M0-7 1.6-1.6 7 0 1.6 1.6 0 7-1.6 1.6-7 0-1.6-1.6Z" fill="#c9f5d6" />
+    <path className={cls} style={{ "--d": `${d}s` }} d="M0-7 1.6-1.6 7 0 1.6 1.6 0 7-1.6 1.6-7 0-1.6-1.6Z" fill="#dcfce7" />
   </g>
 );
 
@@ -20,38 +20,38 @@ export function LoginVisual() {
       <svg className="au-v__svg" viewBox="0 0 360 360" focusable="false">
         <defs>
           <linearGradient id="lv-shield" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#4fd174" />
-            <stop offset="1" stopColor="#1f7a3a" />
+            <stop offset="0" stopColor="#2fa24f" />
+            <stop offset="1" stopColor="#2fa24f" />
           </linearGradient>
           <radialGradient id="lv-glow">
-            <stop offset="0" stopColor="#3ebf5f" stopOpacity=".45" />
-            <stop offset="1" stopColor="#3ebf5f" stopOpacity="0" />
+            <stop offset="0" stopColor="#2fa24f" stopOpacity=".45" />
+            <stop offset="1" stopColor="#2fa24f" stopOpacity="0" />
           </radialGradient>
         </defs>
 
         <circle className="lv-glow" cx="180" cy="180" r="170" fill="url(#lv-glow)" />
-        <g fill="none" stroke="#5bbb5b" strokeWidth="1.5">
+        <g fill="none" stroke="#2fa24f" strokeWidth="1.5">
           <circle className="lv-ring" cx="180" cy="180" r="104" />
           <circle className="lv-ring lv-ring--2" cx="180" cy="180" r="104" />
           <circle className="lv-ring lv-ring--3" cx="180" cy="180" r="104" />
         </g>
         <g className="lv-orbit">
           <circle cx="180" cy="180" r="146" fill="none" stroke="rgba(255,255,255,.14)" strokeDasharray="2 8" />
-          <circle cx="180" cy="34" r="5" fill="#5bbb5b" />
-          <circle cx="326" cy="180" r="3.5" fill="#c9a227" />
-          <circle cx="76" cy="283" r="4" fill="#c9f5d6" />
+          <circle cx="180" cy="34" r="5" fill="#2fa24f" />
+          <circle cx="326" cy="180" r="3.5" fill="#2fa24f" />
+          <circle cx="76" cy="283" r="4" fill="#dcfce7" />
         </g>
 
         <g className="lv-shield">
           <path d="M180 66 264 99v78c0 55-36 94-84 115-48-21-84-60-84-115V99Z" fill="url(#lv-shield)" />
           <path d="M180 82 250 109v68c0 46-29 79-70 98" fill="none" stroke="rgba(255,255,255,.28)" strokeWidth="3" strokeLinecap="round" />
-          <path className="lv-shackle" d="M157 170v-22a23 23 0 0 1 46 0v22" fill="none" stroke="#fff" strokeWidth="10" strokeLinecap="round" />
-          <rect x="143" y="164" width="74" height="62" rx="13" fill="#fff" />
-          <g className="lv-keyhole" fill="#0a3a2a">
+          <path className="lv-shackle" d="M157 170v-22a23 23 0 0 1 46 0v22" fill="none" stroke="#ffffff" strokeWidth="10" strokeLinecap="round" />
+          <rect x="143" y="164" width="74" height="62" rx="13" fill="#ffffff" />
+          <g className="lv-keyhole" fill="#000000">
             <circle cx="180" cy="189" r="8" />
             <rect x="176" y="191" width="8" height="19" rx="4" />
           </g>
-          <path className="lv-check" d="M164 195l11 11 22-22" fill="none" stroke="#23843f" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+          <path className="lv-check" d="M164 195l11 11 22-22" fill="none" stroke="#2fa24f" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
         </g>
 
         {SPARKS.map(([x, y, d]) => <Spark key={`${x}-${y}`} x={x} y={y} d={d} cls="au-spark" />)}
@@ -89,8 +89,8 @@ export function RegisterVisual({ name = "", emailOk, passOk, terms }) {
     <div className={`au-v au-v--reg${live ? " is-live" : " is-demo"}`}>
       <svg className="au-v__svg" viewBox="0 0 360 360" focusable="false">
         <circle className="rv-halo" cx="180" cy="180" r="150" fill="none" stroke="rgba(255,255,255,.1)" strokeDasharray="1 7" strokeWidth="2" />
-        <circle cx="180" cy="180" r="112" fill="none" stroke="rgba(91,187,91,.22)" />
-        <g stroke="rgba(201,245,214,.28)" strokeDasharray="3 5" fill="none">
+        <circle cx="180" cy="180" r="112" fill="none" stroke="rgba(47, 162, 79, .22)" />
+        <g stroke="rgba(47, 162, 79, .28)" strokeDasharray="3 5" fill="none">
           <path className="rv-link" d="M124 112 74 46" />
           <path className="rv-link" d="M236 112 290 72" style={{ "--d": ".2s" }} />
           <path className="rv-link" d="M124 248 70 304" style={{ "--d": ".4s" }} />
@@ -147,12 +147,12 @@ export function ResetVisual({ step }) {
       <svg className="au-v__svg" viewBox="0 0 360 360" focusable="false">
         <defs>
           <radialGradient id="rs-glow">
-            <stop offset="0" stopColor="#3ebf5f" stopOpacity=".4" />
-            <stop offset="1" stopColor="#3ebf5f" stopOpacity="0" />
+            <stop offset="0" stopColor="#2fa24f" stopOpacity=".4" />
+            <stop offset="1" stopColor="#2fa24f" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="rs-key" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#f3d36b" />
-            <stop offset="1" stopColor="#c9a227" />
+            <stop offset="0" stopColor="#2fa24f" />
+            <stop offset="1" stopColor="#2fa24f" />
           </linearGradient>
         </defs>
 
@@ -160,7 +160,7 @@ export function ResetVisual({ step }) {
         <circle className="rs-dash" cx="180" cy="180" r="128" fill="none" stroke="rgba(255,255,255,.18)" strokeWidth="2" strokeDasharray="10 12" />
 
         {/* circular "reset" arrows, visible while the new password is being set */}
-        <g className="rs-arrows" fill="none" stroke="#5bbb5b" strokeWidth="5" strokeLinecap="round">
+        <g className="rs-arrows" fill="none" stroke="#2fa24f" strokeWidth="5" strokeLinecap="round">
           <path d="M180 76a104 104 0 0 1 98 70" />
           <path d="M271 132l8 15 13-11" strokeLinejoin="round" />
           <path d="M180 284a104 104 0 0 1-98-70" />
@@ -168,35 +168,35 @@ export function ResetVisual({ step }) {
         </g>
 
         {/* the dial with keyhole; turns when the key goes in */}
-        <circle cx="180" cy="180" r="70" fill="rgba(0,0,0,.18)" transform="translate(0 8)" />
+        <circle cx="180" cy="180" r="70" fill="rgba(0, 0, 0, .18)" transform="translate(0 8)" />
         <g className="rs-dial">
-          <circle cx="180" cy="180" r="70" fill="#fff" />
-          <g stroke="#cfe3d6" strokeWidth="4" strokeLinecap="round">
+          <circle cx="180" cy="180" r="70" fill="#ffffff" />
+          <g stroke="#dcfce7" strokeWidth="4" strokeLinecap="round">
             <path d="M180 120v10M180 230v10M120 180h10M230 180h10" />
           </g>
-          <g className="rs-keyhole" fill="#0a3a2a">
+          <g className="rs-keyhole" fill="#000000">
             <circle cx="180" cy="172" r="12" />
             <path d="M173 178h14l5 28h-24Z" />
           </g>
         </g>
         <circle className="rs-done" cx="180" cy="180" r="70" fill="#2fa24f" />
-        <path className="rs-check" d="M152 182l19 19 37-37" fill="none" stroke="#fff" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
+        <path className="rs-check" d="M152 182l19 19 37-37" fill="none" stroke="#ffffff" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
 
         {/* key */}
         <g className="rs-key">
           <circle cx="40" cy="300" r="22" fill="url(#rs-key)" />
-          <circle cx="40" cy="300" r="9" fill="#0a3a2a" />
+          <circle cx="40" cy="300" r="9" fill="#000000" />
           <path d="M60 300h66v10h-10v10h-10v-10h-8v8h-10v-8H60Z" fill="url(#rs-key)" />
         </g>
 
         {/* envelope that flies out when the link is sent */}
         <g className="rs-env">
-          <rect x="240" y="44" width="76" height="54" rx="9" fill="#fff" />
+          <rect x="240" y="44" width="76" height="54" rx="9" fill="#ffffff" />
           <path d="M243 50l35 26 35-26" fill="none" stroke="#2fa24f" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="312" cy="48" r="11" fill="#c9a227" />
-          <path d="M307 48l4 4 6-7" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="312" cy="48" r="11" fill="#2fa24f" />
+          <path d="M307 48l4 4 6-7" fill="none" stroke="#ffffff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
         </g>
-        <g className="rs-trail" fill="#c9f5d6">
+        <g className="rs-trail" fill="#dcfce7">
           <circle cx="214" cy="118" r="3" style={{ "--d": ".05s" }} />
           <circle cx="198" cy="136" r="2.4" style={{ "--d": ".12s" }} />
           <circle cx="186" cy="152" r="1.8" style={{ "--d": ".19s" }} />

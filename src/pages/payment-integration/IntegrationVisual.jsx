@@ -43,9 +43,9 @@ export function HubVisual() {
 /* ---------- gateway: branded checkout cycling themes ---------- */
 const THEMES = [
   { name: "Forest", color: "#2fa24f" },
-  { name: "Ocean", color: "#2563eb" },
-  { name: "Sunset", color: "#ea580c" },
-  { name: "Plum", color: "#7c3aed" },
+  { name: "Ocean", color: "#2fa24f" },
+  { name: "Sunset", color: "#2fa24f" },
+  { name: "Plum", color: "#2fa24f" },
 ];
 export function GatewayVisual() {
   const tick = useTick(1800);
@@ -73,7 +73,7 @@ export function GatewayVisual() {
 
 /* ---------- provider setup: connect three providers ---------- */
 const PROVIDERS = [
-  { name: "Stripe", tone: "#635bff" },
+  { name: "Stripe", tone: "#000000" },
   { name: "Square", tone: "#111827" },
   { name: "PayPal", tone: "#003087" },
 ];

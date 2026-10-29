@@ -6,7 +6,7 @@
 
 .br-mark {
   flex: 0 0 auto; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--svc-green), var(--svc-ink)); color: #fff; font-size: var(--fs-xs); font-weight: var(--fw-heavy); letter-spacing: .02em;
+  background: var(--color-emerald); color: var(--color-white); font-size: var(--fs-xs); font-weight: var(--fw-heavy); letter-spacing: .02em;
 }
 
 /* brand kit */
@@ -27,20 +27,20 @@
 .br-profile__head div { flex: 1; display: grid; }
 .br-profile__head b { font-size: var(--fs-md); color: var(--svc-ink); }
 .br-profile__head small { display: flex; align-items: center; gap: 4px; font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--svc-muted); }
-.br-profile__head small svg { color: #f4b740; fill: #f4b740; }
+.br-profile__head small svg { color: var(--color-emerald); fill: var(--color-emerald); }
 .br-profile__meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 4px; }
 .br-profile__meta span { display: flex; align-items: center; justify-content: center; gap: 4px; padding: 6px; border-radius: 999px; border: 1px solid var(--svc-line); font-size: var(--fs-2xs); font-weight: var(--fw-bold); color: var(--svc-green-dark); }
 .br-profile .ec-score { margin-top: 12px; }
 
 /* logo */
-.br-logo__stage { display: grid; place-items: center; height: 130px; margin-bottom: 10px; border-radius: 14px; background: radial-gradient(circle at 50% 40%, #f0fdf4, #f8faf9 70%); }
-.br-logo__mark { animation: br-pop .5s cubic-bezier(.2, .9, .3, 1.3) both; color: #fff; font-weight: var(--fw-heavy); }
-.br-logo__mark.is-round { display: grid; place-items: center; width: 78px; height: 78px; border-radius: 50%; background: var(--svc-ink); box-shadow: 0 0 0 5px #fff, 0 0 0 7px var(--svc-green); font-size: var(--fs-4xl); }
-.br-logo__mark.is-leaf { display: grid; place-items: center; width: 74px; height: 74px; border-radius: 0 50% 0 50%; background: linear-gradient(135deg, var(--svc-green), var(--svc-ink)); font-size: var(--fs-3xl); }
+.br-logo__stage { display: grid; place-items: center; height: 130px; margin-bottom: 10px; border-radius: 14px; background: radial-gradient(circle at 50% 40%, var(--color-green-50), var(--color-green-50) 70%); }
+.br-logo__mark { animation: br-pop .5s cubic-bezier(.2, .9, .3, 1.3) both; color: var(--color-white); font-weight: var(--fw-heavy); }
+.br-logo__mark.is-round { display: grid; place-items: center; width: 78px; height: 78px; border-radius: 50%; background: var(--color-black); box-shadow: 0 0 0 5px var(--color-white), 0 0 0 7px var(--svc-green); font-size: var(--fs-4xl); }
+.br-logo__mark.is-leaf { display: grid; place-items: center; width: 74px; height: 74px; border-radius: 0 50% 0 50%; background: var(--color-emerald); font-size: var(--fs-3xl); }
 .br-logo__mark.is-word { font-size: var(--fs-6xl); letter-spacing: -.03em; color: var(--svc-ink); }
 .br-logo__tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.br-logo__tabs span { padding: 6px; border-radius: 9px; background: #f1f5f3; text-align: center; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--svc-muted); transition: all .3s ease; }
-.br-logo__tabs span.is-on { background: var(--svc-green); color: #fff; }
+.br-logo__tabs span { padding: 6px; border-radius: 9px; background: var(--color-green-50); text-align: center; font-size: var(--fs-xs); font-weight: var(--fw-bold); color: var(--svc-muted); transition: all .3s ease; }
+.br-logo__tabs span.is-on { background: var(--svc-green); color: var(--color-white); }
 
 /* digital card */
 .br-card { perspective: 900px; }
@@ -48,25 +48,25 @@
 .br-card__inner.is-flipped { transform: rotateY(180deg); }
 .br-card__face {
   position: absolute; inset: 0; display: grid; align-content: center; gap: 2px; padding: 18px; border-radius: 16px; backface-visibility: hidden;
-  background: linear-gradient(140deg, var(--svc-ink), #145c3f); color: #fff;
+  background: linear-gradient(140deg, var(--color-black), var(--color-black)); color: var(--color-white);
 }
 .br-card__face .br-mark { margin-bottom: 8px; background: var(--svc-green); }
 .br-card__face b { font-size: var(--fs-lg); }
 .br-card__face small { font-size: var(--fs-xs); opacity: .8; }
 .br-card__face ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 4px; font-size: var(--fs-2xs); }
 .br-card__face li { display: flex; align-items: center; gap: 6px; }
-.br-card__back { transform: rotateY(180deg); place-items: center; text-align: center; background: #fff; color: var(--svc-ink); border: 1px solid var(--svc-line); }
+.br-card__back { transform: rotateY(180deg); place-items: center; text-align: center; background: var(--color-white); color: var(--svc-ink); border: 1px solid var(--svc-line); }
 .br-card__foot { display: flex; justify-content: flex-end; margin-top: 10px; }
 
 /* brand check */
-.br-fix { color: inherit; text-decoration: underline; text-decoration-color: #cfd8d3; text-underline-offset: 3px; }
+.br-fix { color: inherit; text-decoration: underline; text-decoration-color: rgb(var(--black-rgb) / 0.12); text-underline-offset: 3px; }
 .br-fix:hover { color: var(--svc-green-dark); text-decoration-color: currentColor; }
 
 /* signature builder */
 .br-dot { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 50%; vertical-align: 0; }
 .br-theme-seg button { text-transform: capitalize; }
-.br-sig { display: flex; gap: 14px; margin-bottom: 14px; padding: 18px; border-radius: 14px; background: #fff; border: 1px solid var(--svc-line); border-left: 4px solid var(--accent); transition: border-color .3s ease; }
-.br-sig__mark { flex: 0 0 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--ink); color: #fff; font-weight: var(--fw-heavy); transition: background .3s ease; }
+.br-sig { display: flex; gap: 14px; margin-bottom: 14px; padding: 18px; border-radius: 14px; background: var(--color-white); border: 1px solid var(--svc-line); border-left: 4px solid var(--accent); transition: border-color .3s ease; }
+.br-sig__mark { flex: 0 0 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--color-black); color: var(--color-white); font-weight: var(--fw-heavy); transition: background .3s ease; }
 .br-sig b { display: block; color: var(--ink); font-size: var(--fs-xl); overflow-wrap: anywhere; }
 .br-sig small { display: block; margin-bottom: 8px; color: var(--svc-muted); font-size: var(--fs-sm); overflow-wrap: anywhere; }
 .br-sig ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: var(--fs-sm); color: var(--svc-text); }

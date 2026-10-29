@@ -7,11 +7,12 @@ import { ResHero, FaqBlock, RelatedLinks, ResNote } from "./ResBits";
 import { CoinsVisual } from "./ResourcesVisual";
 import { RES_SEO, FREE_TOOLS, HUBS, downloadText } from "./resources";
 import "../forms/Forms.css";
+import NextStepLlc from "./NextStepLlc";
 import "./Resources.css";
 
 const PATH = "/resources/tools/cost-calculator";
 const usd = (n) => `$${Math.round(n).toLocaleString()}`;
-const COLORS = ["#2fa24f", "#0a3a2a", "#c9a227", "#3b82f6", "#e0457b", "#14b8a6", "#f97316", "#8b5cf6"];
+const COLORS = ["#2fa24f", "#000000", "#2fa24f", "#2fa24f", "#2fa24f", "#2fa24f", "#2fa24f", "#2fa24f"];
 
 /* Sample starting points only. Users edit every line. */
 const PRESETS = {
@@ -61,7 +62,7 @@ export default function CostCalculator() {
   const runway = moTotal * months;
   const contingency = (oneTotal + runway) * (buffer / 100);
   const total = oneTotal + runway + contingency;
-  const parts = [["One-time costs", oneTotal, "#2fa24f"], [`${months} months of expenses`, runway, "#0a3a2a"], ["Contingency", contingency, "#c9a227"]];
+  const parts = [["One-time costs", oneTotal, "#2fa24f"], [`${months} months of expenses`, runway, "#000000"], ["Contingency", contingency, "#2fa24f"]];
   let acc = 0;
   const conic = total ? parts.map(([, v, c]) => { const s = acc; acc += (v / total) * 100; return `${c} ${s}% ${acc}%`; }).join(", ") : "#e5efe8 0 100%";
 
@@ -145,6 +146,8 @@ export default function CostCalculator() {
           <div><h3>Startup costs may be tax deductible</h3><p>Federal tax rules generally let new businesses deduct up to <strong>$5,000</strong> of startup costs in the first year, reduced dollar-for-dollar once total startup costs exceed $50,000, with the remainder deducted over 15 years. Keep receipts for everything you spend before opening, and ask your tax professional how to claim it.</p></div>
         </Reveal>
       </Section>
+
+      <NextStepLlc tool="cost-calculator" />
 
       <FaqBlock faqs={FAQS} title="Startup cost FAQs" variant="cards" tone="gray" />
 

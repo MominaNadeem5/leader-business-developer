@@ -19,6 +19,9 @@ import "./styles/layout.css";
 // Shared phone rules for dropdowns / accordions (must load last)
 import "./styles/responsive.css";
 
+// Shared typography roles for every service page
+import "./styles/page-theme.css";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>

@@ -7,7 +7,7 @@
 /* layout helpers */
 .dba-page .dba-section { padding: 60px 0; }
 .dba-page .dba-section--gray { background: var(--llc-gray); }
-.dba-page .dba-section--soft { background: linear-gradient(135deg, #f0fdf4, #ecfdf5); padding: 40px 0; }
+.dba-page .dba-section--soft { background: var(--gradient-green-soft); padding: 40px 0; }
 .dba-page .dba-narrow { max-width: 820px; }
 .dba-page .dba-mt { margin-top: 32px; }
 .dba-page .dba-center-text { text-align: center; }
@@ -27,19 +27,19 @@
 .dba-page .dba-guarantee-link:hover { text-decoration: underline; }
 
 /* animated hero card */
-.dba-page .dba-card { padding: 12px; background: linear-gradient(160deg, #f6fffa, #ecfdf3); }
-.dba-page .dba-card__inner { position: relative; background: #fff; border-radius: 12px; padding: 18px 18px 16px; box-shadow: 0 6px 22px rgba(10, 58, 42, .08); animation: dba-in .5s ease both; }
+.dba-page .dba-card { padding: 12px; background: linear-gradient(160deg, var(--color-green-50), var(--color-green-50)); }
+.dba-page .dba-card__inner { position: relative; background: var(--color-white); border-radius: 12px; padding: 18px 18px 16px; box-shadow: 0 6px 22px rgb(var(--black-rgb) / .08); animation: dba-in .5s ease both; }
 .dba-page .dba-card__eyebrow { display: block; font-size: var(--fs-3xs); font-weight: var(--fw-bold); letter-spacing: .1em; text-transform: uppercase; color: var(--llc-muted); margin-bottom: 12px; }
 .dba-page .dba-card__row { display: flex; flex-direction: column; gap: 3px; padding: 10px 12px; border-radius: 10px; background: var(--llc-gray); }
 .dba-page .dba-card__row span { font-size: var(--fs-3xs); color: var(--llc-muted); }
 .dba-page .dba-card__row strong { font-size: var(--fs-base); color: var(--llc-ink); }
-.dba-page .dba-card__row.is-dba { background: #ecfdf3; border: 1px solid #bbf7d0; }
+.dba-page .dba-card__row.is-dba { background: var(--color-green-50); border: 1px solid var(--color-green-100); }
 .dba-page .dba-card__row.is-dba strong { display: inline-block; white-space: nowrap; overflow: hidden; width: fit-content; animation: dba-type 1s steps(20) .35s both; color: var(--llc-green-dark); }
 .dba-page .dba-card__arrow { display: flex; justify-content: center; margin: 4px 0; color: var(--llc-green); animation: dba-bob 1.4s ease-in-out infinite; }
 .dba-page .dba-card__checks { list-style: none; margin: 14px 0 0; padding: 12px 0 0; border-top: 1px solid var(--llc-line); display: grid; gap: 8px; }
 .dba-page .dba-card__checks li { display: flex; align-items: center; gap: 8px; font-size: var(--fs-sm); color: var(--llc-ink); font-weight: var(--fw-semibold); opacity: 0; animation: dba-pop .4s ease calc(1.3s + var(--k) * .5s) forwards; }
 .dba-page .dba-card__checks svg { color: var(--llc-green); }
-.dba-page .dba-card__checks em { margin-left: auto; font-style: normal; font-size: var(--fs-2xs); color: var(--llc-green-dark); background: #dcfce7; padding: 2px 8px; border-radius: 999px; }
+.dba-page .dba-card__checks em { margin-left: auto; font-style: normal; font-size: var(--fs-2xs); color: var(--llc-green-dark); background: var(--color-green-100); padding: 2px 8px; border-radius: 999px; }
 .dba-page .dba-card__stamp { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border: 2px solid var(--llc-green); color: var(--llc-green); border-radius: 6px; font-size: var(--fs-3xs); font-weight: var(--fw-heavy); letter-spacing: .08em; text-transform: uppercase; transform: rotate(-8deg); opacity: 0; animation: dba-stamp .5s cubic-bezier(.2, 1.6, .4, 1) 3s forwards; }
 @keyframes dba-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @keyframes dba-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
@@ -48,7 +48,7 @@
 @keyframes dba-stamp { from { opacity: 0; transform: rotate(-8deg) scale(2); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
 
 /* guarantee */
-.dba-page .dba-guarantee { margin: 36px auto 0; max-width: 860px; display: flex; align-items: center; gap: 18px; background: #fff; border: 1px solid #bbf7d0; border-radius: 18px; padding: 20px 28px; box-shadow: 0 10px 28px rgba(47, 162, 79, .12); scroll-margin-top: 100px; }
+.dba-page .dba-guarantee { margin: 36px auto 0; max-width: 860px; display: flex; align-items: center; gap: 18px; background: var(--color-white); border: 1px solid var(--color-green-100); border-radius: 18px; padding: 20px 28px; box-shadow: 0 10px 28px rgb(var(--emerald-rgb) / .12); scroll-margin-top: 100px; }
 .dba-page .dba-guarantee svg { color: var(--llc-green); flex-shrink: 0; }
 .dba-page .dba-guarantee p { margin: 0; line-height: var(--lh-normal); }
 .dba-page .dba-guarantee strong { color: var(--llc-ink); }
@@ -56,16 +56,16 @@
 /* what is a DBA */
 .dba-page .dba-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
 .dba-page .dba-split p { line-height: var(--lh-loose); margin: 0 0 12px; }
-.dba-page .dba-diagram { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 32px; border-radius: 20px; background: linear-gradient(135deg, #f0fdf4, #dcfce7); color: var(--llc-green); }
-.dba-page .dba-diagram__tag { width: 100%; background: #fff; border-radius: 12px; padding: 14px 18px; font-size: var(--fs-xs); color: var(--llc-muted); box-shadow: 0 6px 16px rgba(10, 58, 42, .08); }
+.dba-page .dba-diagram { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 32px; border-radius: 20px; background: var(--gradient-green-soft); color: var(--llc-green); }
+.dba-page .dba-diagram__tag { width: 100%; background: var(--color-white); border-radius: 12px; padding: 14px 18px; font-size: var(--fs-xs); color: var(--llc-muted); box-shadow: 0 6px 16px rgb(var(--black-rgb) / .08); }
 .dba-page .dba-diagram__tag strong { display: block; font-size: var(--fs-2xl); margin-top: 2px; color: var(--llc-ink); }
 .dba-page .dba-diagram__tag.is-brand { border: 2px solid var(--llc-green); }
 .dba-page .dba-diagram__tag.is-brand strong { color: var(--llc-green-dark); }
 
 /* chips + callout */
 .dba-page .dba-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
-.dba-page .dba-chips span { padding: 8px 16px; background: #fff; border: 1px solid #bbf7d0; border-radius: 999px; font-weight: var(--fw-semibold); font-size: var(--fs-md); color: var(--llc-green-dark); }
-.dba-page .dba-callout { text-align: center; background: #fff; border: 1px solid var(--llc-line); border-radius: 20px; padding: 36px 32px; box-shadow: 0 10px 30px rgba(10, 58, 42, .06); }
+.dba-page .dba-chips span { padding: 8px 16px; background: var(--color-white); border: 1px solid var(--color-green-100); border-radius: 999px; font-weight: var(--fw-semibold); font-size: var(--fs-md); color: var(--llc-green-dark); }
+.dba-page .dba-callout { text-align: center; background: var(--color-white); border: 1px solid var(--llc-line); border-radius: 20px; padding: 36px 32px; box-shadow: 0 10px 30px rgb(var(--black-rgb) / .06); }
 .dba-page .dba-callout p { max-width: 600px; margin: 0 auto 22px; line-height: var(--lh-relaxed); }
 
 /* steps actions */
@@ -78,14 +78,14 @@
 
 /* testimonials */
 .dba-page .dba-testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 420px)); justify-content: center; gap: 22px; }
-.dba-page .dba-testimonial { margin: 0; background: #fff; border: 1px solid var(--llc-line); border-radius: 18px; padding: 28px; box-shadow: 0 8px 24px rgba(10, 58, 42, .07); }
-.dba-page .dba-testimonial svg { color: #bbf7d0; }
+.dba-page .dba-testimonial { margin: 0; background: var(--color-white); border: 1px solid var(--llc-line); border-radius: 18px; padding: 28px; box-shadow: 0 8px 24px rgb(var(--black-rgb) / .07); }
+.dba-page .dba-testimonial svg { color: var(--color-green-100); }
 .dba-page .dba-testimonial blockquote { margin: 10px 0 18px; font-style: italic; line-height: var(--lh-relaxed); }
 .dba-page .dba-testimonial figcaption strong { display: block; color: var(--llc-ink); }
 .dba-page .dba-testimonial figcaption span { font-size: var(--fs-md); color: var(--llc-muted); }
 
 /* questions */
-.dba-page .dba-ask__card { background: #fff; border-radius: 18px; padding: 30px; text-align: center; border: 1px solid var(--llc-line); box-shadow: 0 8px 24px rgba(10, 58, 42, .06); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.dba-page .dba-ask__card { background: var(--color-white); border-radius: 18px; padding: 30px; text-align: center; border: 1px solid var(--llc-line); box-shadow: 0 8px 24px rgb(var(--black-rgb) / .06); display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .dba-page .dba-ask__card > svg { color: var(--llc-green); }
 .dba-page .dba-ask__card h3 { margin: 0; color: var(--llc-ink); font-size: var(--fs-3xl); }
 .dba-page .dba-ask__card h3 a { color: var(--llc-green-dark); text-decoration: none; }

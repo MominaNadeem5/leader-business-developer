@@ -42,6 +42,14 @@
   --fs-button: var(--fs-base);
   --fs-input: var(--fs-md);   /* text + placeholder inside form fields */
 
+  /* Section text styles (shared by the landing sections and the service pages) */
+  --fs-label: var(--fs-xs);                                          /* eyebrow / small caps label */
+  --fs-section-title: clamp(var(--fs-5xl), 2.6vw, var(--fs-7xl));    /* section h2 */
+  --fs-section-lead: var(--fs-lg);                                   /* paragraph under a section title */
+  --fs-card-title: var(--fs-base);                                   /* card heading */
+  --fs-card-text: var(--fs-sm);                                      /* card description */
+  --fs-list-item: var(--fs-md);                                      /* checklist / bullet text */
+
   /* ---------- Font weights ---------- */
   --fw-regular: 400;
   --fw-medium: 500;

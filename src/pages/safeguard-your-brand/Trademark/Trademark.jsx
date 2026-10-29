@@ -235,7 +235,7 @@ function MarkExplorer() {
 
 export default function Trademark() {
   return (
-    <div className="svc tm-page">
+    <div className="svc biz-page tm-page">
       <ServiceHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Business", to: "/business" }, { label: "Trademark Registration" }]}
         title="Protect your brand name with a federal trademark"

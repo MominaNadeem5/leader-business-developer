@@ -31,10 +31,10 @@
   z-index: 2;
   padding: 26px 22px 24px;
   border-radius: 26px;
-  background: linear-gradient(145deg, #1a6a68 0%, #0f4348 55%, #08303a 100%);
+  background: linear-gradient(145deg, #1f7a3a 0%, #0a3a2a 55%, #0a3a2a 100%);
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow:
-    0 30px 60px rgba(0, 35, 43, 0.34),
+    0 30px 60px rgba(10, 58, 42, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow: hidden;
   opacity: 0;
@@ -86,8 +86,8 @@
   gap: 7px;
   padding: 7px 13px;
   border-radius: 999px;
-  background: rgba(61, 211, 132, 0.14);
-  color: #58df91;
+  background: rgba(62, 191, 95, 0.14);
+  color: #3ebf5f;
   font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
   opacity: 0;
@@ -97,10 +97,10 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #57e18e;
+  background: #3ebf5f;
   box-shadow:
-    0 0 0 3px rgba(87, 225, 142, 0.12),
-    0 0 12px rgba(87, 225, 142, 0.45);
+    0 0 0 3px rgba(62, 191, 95, 0.12),
+    0 0 12px rgba(62, 191, 95, 0.45);
 }
 
 /* =========================
@@ -122,7 +122,7 @@
   /* right padding bada: popups overlap karein to "Done" na dhake */
   padding: 0 54px 0 14px;
   border-radius: 13px;
-  background: rgba(3, 38, 47, 0.65);
+  background: rgba(10, 58, 42, 0.65);
   color: rgba(255, 255, 255, 0.9);
   font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
@@ -149,8 +149,8 @@
 }
 
 .case__dot.is-done {
-  color: #063c2b;
-  background: #54df8d;
+  color: #0a3a2a;
+  background: #3ebf5f;
   opacity: 0;
 }
 
@@ -202,8 +202,8 @@
   width: 0%;
   height: 100%;
   border-radius: inherit;
-  background: #55df91;
-  box-shadow: 0 0 12px rgba(85, 223, 145, 0.45);
+  background: #3ebf5f;
+  box-shadow: 0 0 12px rgba(62, 191, 95, 0.45);
 }
 
 /* =========================
@@ -225,11 +225,11 @@
   padding: 9px 16px 9px 9px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.97);
-  color: #173740;
+  color: #0a3a2a;
   font-size: var(--fs-sm);
   font-weight: var(--fw-semibold);
   box-shadow:
-    0 16px 32px rgba(0, 30, 40, 0.22),
+    0 16px 32px rgba(10, 58, 42, 0.22),
     0 2px 8px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
   opacity: 0;
@@ -243,8 +243,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 9px;
-  background: #eaf8f2;
-  color: #087e68;
+  background: #f0fdf4;
+  color: #1f7a3a;
 }
 
 /* =========================
@@ -378,8 +378,8 @@
 }
 
 @keyframes pillPulse {
-  0%, 100% { box-shadow: 0 0 0 rgba(82, 223, 143, 0); }
-  50%      { box-shadow: 0 0 18px rgba(82, 223, 143, 0.15); }
+  0%, 100% { box-shadow: 0 0 0 rgba(62, 191, 95, 0); }
+  50%      { box-shadow: 0 0 18px rgba(62, 191, 95, 0.15); }
 }
 
 @keyframes stepReveal {

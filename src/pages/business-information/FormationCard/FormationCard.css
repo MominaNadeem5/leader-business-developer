@@ -1,7 +1,7 @@
 /* Animated formation card (hero right side) */
 .llc-flow {
   padding: 22px;
-  background: linear-gradient(160deg, #f6fffa 0%, #ecfdf3 100%);
+  background: linear-gradient(160deg, var(--color-green-50) 0%, var(--color-green-50) 100%);
   animation: flow-float 6s ease-in-out infinite;
 }
 
@@ -11,10 +11,10 @@
 }
 
 .llc-flow__inner {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 14px;
   padding: 22px 20px 20px;
-  box-shadow: 0 6px 24px rgba(10, 58, 42, 0.08);
+  box-shadow: 0 6px 24px rgb(var(--black-rgb) / 0.08);
 }
 
 .llc-flow__top {
@@ -32,7 +32,7 @@
 .llc-flow__eyebrow {
   display: block;
   font-size: var(--fs-2xs);
-  color: #6b7280;
+  color: var(--color-text-secondary);
   margin-bottom: 4px;
 }
 
@@ -41,7 +41,7 @@
   font-size: var(--fs-lg);
   line-height: var(--lh-snug);
   font-weight: var(--fw-bold);
-  color: #0a3a2a;
+  color: var(--color-black);
 }
 
 .llc-flow__badge {
@@ -51,8 +51,8 @@
   flex-shrink: 0;
   padding: 7px 12px;
   border-radius: 999px;
-  background: #0a3a2a;
-  color: #fff;
+  background: var(--color-black);
+  color: var(--color-white);
   font-size: var(--fs-3xs);
   font-weight: var(--fw-heavy);
   letter-spacing: 0.06em;
@@ -60,25 +60,25 @@
 }
 
 .llc-flow__badge.is-done {
-  background: #2fa24f;
+  background: var(--color-emerald);
 }
 
 .llc-flow__dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fbbf24;
+  background: var(--color-emerald);
   animation: flow-pulse 1.4s ease-in-out infinite;
 }
 
 .llc-flow__badge.is-done .llc-flow__dot {
-  background: #fff;
+  background: var(--color-white);
   animation: none;
 }
 
 @keyframes flow-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-  50% { box-shadow: 0 0 0 5px rgba(251, 191, 36, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgb(var(--emerald-rgb) / 0.7); }
+  50% { box-shadow: 0 0 0 5px rgb(var(--emerald-rgb) / 0); }
 }
 
 /* Progress */
@@ -87,13 +87,13 @@
   grid-template-columns: repeat(6, 1fr);
   gap: 6px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #eef0f2;
+  border-bottom: 1px solid rgb(var(--black-rgb) / 0.1);
 }
 
 .llc-flow__bar {
   height: 4px;
   border-radius: 4px;
-  background: #e5e7eb;
+  background: rgb(var(--black-rgb) / 0.1);
   overflow: hidden;
 }
 
@@ -102,7 +102,7 @@
   height: 100%;
   width: 0;
   border-radius: 4px;
-  background: #0a3a2a;
+  background: var(--color-black);
   transition: width 0.6s ease, background 0.3s ease;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .llc-flow__step.is-current .llc-flow__fill {
-  background: linear-gradient(90deg, #d4a017, #fbbf24);
+  background: linear-gradient(90deg, var(--color-emerald), var(--color-emerald));
   animation: flow-fill 2.6s linear forwards;
 }
 
@@ -124,16 +124,16 @@
   display: block;
   margin-top: 8px;
   font-size: var(--fs-3xs);
-  color: #9ca3af;
+  color: var(--color-text-secondary);
   transition: color 0.3s ease;
 }
 
 .llc-flow__step.is-complete .llc-flow__label {
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 .llc-flow__step.is-current .llc-flow__label {
-  color: #0a3a2a;
+  color: var(--color-black);
   font-weight: var(--fw-bold);
 }
 
@@ -153,13 +153,13 @@
   font-weight: var(--fw-bold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--color-text-secondary);
 }
 
 .llc-flow__meta strong {
   font-size: var(--fs-sm);
   line-height: var(--lh-snug);
-  color: #0a3a2a;
+  color: var(--color-black);
 }
 
 @keyframes flow-fade {

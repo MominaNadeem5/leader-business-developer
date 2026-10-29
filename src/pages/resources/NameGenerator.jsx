@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Copy, Check, RefreshCw, SearchCheck, Sparkles, Trash2, Wand2, ListFilter, Trophy } from "lucide-react";
 import Seo from "../../components/common/Seo";
@@ -6,7 +6,9 @@ import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { ResHero, Segmented, FaqBlock, RelatedLinks, ResNote } from "./ResBits";
 import { SlotVisual } from "./ResourcesVisual";
 import { RES_SEO, FREE_TOOLS, HUBS, store } from "./resources";
+import { fetchNameIdeas, AI_NAMES_ENABLED } from "./nameIdeasApi";
 import "../forms/Forms.css";
+import NextStepLlc from "./NextStepLlc";
 import "./Resources.css";
 
 const PATH = "/resources/tools/name-generator";
@@ -86,7 +88,7 @@ function generate(keywords, industry, style, seed, maxLen) {
 
 const FAQS = [
   ["Are the names from this generator free to use?", "Yes, you're free to use any name the generator suggests. But the generator doesn't check legal availability. Before you commit, confirm the name with your state's business registry, search federal trademarks, and check domains and social handles."],
-  ["How does the business name generator work?", "It combines your keywords with word banks tuned to your chosen industry and style, using patterns that real brands use: suffixes, prefixes, compound words and blends. Change any input or press “More ideas” for a fresh batch."],
+  ["How does the business name generator work?", "When our AI service is available, your keywords, industry, style and length limit are sent to it and it suggests original names. If it isn't available, the generator falls back to word banks tuned to your industry and style, using patterns that real brands use: suffixes, prefixes, compound words and blends. Change any input or press “More ideas” for a fresh batch."],
   ["How many keywords should I enter?", "Two to four works best. Use words tied to what you do, the feeling you want, or where you're based. Mix literal words, like “bake”, with emotional ones, like “sunny”, for more interesting combinations."],
   ["Can I save the names I like?", "Yes. Tap the heart on any suggestion to add it to your shortlist. Favorites are saved in this browser, so they'll still be here when you come back on the same device."],
   ["What should I do after choosing a name?", "Run it through our name availability check, ask a few potential customers how it sounds, and then secure it: register the business or a DBA, buy the domain and claim social handles before someone else does."],
@@ -101,7 +103,30 @@ export default function NameGenerator() {
   const [favs, setFavs] = useState(() => store.get(FAV_KEY, []));
   const [copied, setCopied] = useState("");
   useEffect(() => store.set(FAV_KEY, favs), [favs]);
-  const names = useMemo(() => generate(kw, industry, style, seed, maxLen), [kw, industry, style, seed, maxLen]);
+  const localNames = useMemo(() => generate(kw, industry, style, seed, maxLen), [kw, industry, style, seed, maxLen]);
+
+  /* AI suggestions from the Laravel/Gemini endpoint. The built-in generator above is shown immediately and stays as the
+     fallback whenever the AI service is off, slow, rate-limited or returns too few usable names. */
+  const [ai, setAi] = useState(null); // { key, names } for the inputs they were made for
+  const [loading, setLoading] = useState(false);
+  const shownRef = useRef([]);
+  const inputKey = `${kw}|${industry}|${style}|${maxLen}|${seed}`;
+  useEffect(() => {
+    if (!AI_NAMES_ENABLED) return undefined;
+    const ctl = new AbortController();
+    const forKey = `${kw}|${industry}|${style}|${maxLen}|${seed}`;
+    const t = setTimeout(async () => {
+      setLoading(true);
+      const result = await fetchNameIdeas({ keywords: kw, industry, style, maxLen, variation: seed, exclude: shownRef.current }, ctl.signal);
+      if (ctl.signal.aborted) return;
+      setLoading(false);
+      setAi(result && result.length >= 8 ? { key: forKey, names: result } : null);
+    }, 600);
+    return () => { clearTimeout(t); ctl.abort(); };
+  }, [kw, industry, style, maxLen, seed]);
+  const aiActive = Boolean(ai && ai.key === inputKey);
+  const names = aiActive ? ai.names : localNames;
+  useEffect(() => { shownRef.current = names.slice(0, 40); }, [names]);
   const fav = (n) => setFavs((f) => (f.includes(n) ? f.filter((x) => x !== n) : [...f, n]));
   const copy = async (n) => { try { await navigator.clipboard.writeText(n); setCopied(n); setTimeout(() => setCopied(""), 1400); } catch { /* clipboard blocked */ } };
 
@@ -135,7 +160,7 @@ export default function NameGenerator() {
             <button type="button" className="lf-btn" onClick={() => setSeed((s) => s + 1)}><RefreshCw size={16} /> More ideas</button>
           </div>
           <div className="rs-gen__results">
-            <div className="rs-gen__head"><Sparkles size={16} /><b>{names.length} ideas</b><small>Tap ♥ to shortlist</small></div>
+            <div className="rs-gen__head"><Sparkles size={16} /><b>{names.length} ideas</b><small>{loading ? "Refreshing ideas with AI… · " : aiActive ? "AI suggestions · " : ""}Tap ♥ to shortlist</small></div>
             <div className="rs-gen__grid" key={`${seed}${style}${industry}`}>
               {names.map((n, i) => (
                 <div key={n} className={`rs-gen__card ${favs.includes(n) ? "is-fav" : ""}`} style={{ "--i": i }}>
@@ -157,7 +182,7 @@ export default function NameGenerator() {
             <div>{favs.map((f) => <span key={f}>{f}<Link to={`/resources/tools/name-check?name=${encodeURIComponent(f)}`}>Check</Link><button type="button" aria-label={`Remove ${f}`} onClick={() => fav(f)}><Trash2 size={13} /></button></span>)}</div>
           </Reveal>
         )}
-        <ResNote>Suggestions are generated automatically and aren't checked for legal availability or trademark conflicts.</ResNote>
+        <ResNote>Suggestions are generated automatically and aren't checked for legal availability or trademark conflicts. When AI suggestions are on, only your keywords, industry, style and length limit are sent to Google's Gemini API.</ResNote>
       </Section>
 
       {/* how it works */}
@@ -180,6 +205,8 @@ export default function NameGenerator() {
         </Reveal>
         <p className="lf-small">Want the theory behind great names? Read our guide to <Link to="/resources/learn/business-name">picking a business name</Link>.</p>
       </Section>
+
+      <NextStepLlc tool="name-generator" />
 
       <FaqBlock faqs={FAQS} title="Name generator FAQs" variant="accordion" />
 

@@ -1,0 +1,429 @@
+/* Guided legal-document questionnaire (DocWizard.jsx). Uses the shared design tokens only. */
+.lf-wiz {
+  max-width: 1080px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* ---------- progress ---------- */
+.lf-wiz__top { margin-bottom: 20px; scroll-margin-top: 100px; }
+
+.lf-wiz__count {
+  margin: 0 0 10px;
+  font-size: var(--fs-md);
+  color: var(--color-text-secondary);
+}
+
+.lf-wiz__count b { color: var(--color-black); font-weight: var(--fw-bold); }
+
+.lf-wiz__bar {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-green-100);
+  overflow: hidden;
+}
+
+.lf-wiz__bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-emerald);
+  transition: width var(--transition-base);
+}
+
+.lf-wiz__steps {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.lf-wiz__steps li { flex: 1 1 0; min-width: 0; }
+
+.lf-wiz__steps button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 6px;
+  border: 0;
+  border-bottom: 3px solid rgb(var(--black-rgb) / 0.1);
+  background: none;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-secondary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.lf-wiz__steps button:disabled { cursor: default; opacity: 0.6; }
+
+.lf-wiz__steps button span {
+  flex: 0 0 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gradient-green-soft);
+  color: var(--color-black);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+}
+
+.lf-wiz__steps em {
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lf-wiz__steps .is-on button { border-color: var(--color-emerald); color: var(--color-black); }
+.lf-wiz__steps .is-on button span,
+.lf-wiz__steps .is-done button span { background: var(--color-emerald); color: var(--color-white); }
+.lf-wiz__steps .has-issue button { border-color: var(--color-black); color: var(--color-black); }
+.lf-wiz__steps .has-issue button span { background: var(--color-black); color: var(--color-white); }
+
+.lf-wiz__restored {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- card + fields ---------- */
+.lf-wiz__card {
+  padding: 28px 28px 24px;
+  background: var(--color-white);
+  border: 1px solid rgb(var(--black-rgb) / 0.1);
+  border-radius: var(--radius-3xl);
+  box-shadow: 0 14px 34px rgb(var(--black-rgb) / 0.07);
+}
+
+.lf-wiz__title {
+  margin: 0 0 6px;
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-black);
+}
+
+.lf-wiz__intro {
+  margin: 0 0 18px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.lf-wiz__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 16px;
+}
+
+.lf-wiz__field { min-width: 0; margin-bottom: 14px; }
+.lf-wiz__field--full { grid-column: 1 / -1; }
+
+.lf-wiz__heading {
+  grid-column: 1 / -1;
+  margin: 10px 0 2px;
+  padding-top: 14px;
+  border-top: 1px solid rgb(var(--black-rgb) / 0.1);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--color-black);
+}
+
+.lf-wiz__grid > .lf-wiz__heading:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+.lf-wiz__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  color: var(--color-black);
+}
+
+.lf-wiz__label em {
+  font-style: normal;
+  font-weight: var(--fw-regular);
+  color: var(--color-text-secondary);
+}
+
+.lf-wiz__field input[type="text"],
+.lf-wiz__field input[type="email"],
+.lf-wiz__field input[type="tel"],
+.lf-wiz__field input[type="date"],
+.lf-wiz__field select,
+.lf-wiz__field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border: 1.5px solid rgb(var(--black-rgb) / 0.2);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  font: inherit;
+  font-size: var(--fs-input);
+  color: var(--color-black);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.lf-wiz__field textarea { resize: vertical; line-height: var(--lh-normal); }
+
+.lf-wiz__field input:focus,
+.lf-wiz__field select:focus,
+.lf-wiz__field textarea:focus {
+  outline: none;
+  border-color: var(--color-emerald);
+  box-shadow: 0 0 0 4px rgb(var(--emerald-rgb) / 0.18);
+}
+
+.lf-wiz__field.has-error input[type="text"],
+.lf-wiz__field.has-error input[type="email"],
+.lf-wiz__field.has-error input[type="tel"],
+.lf-wiz__field.has-error input[type="date"],
+.lf-wiz__field.has-error select,
+.lf-wiz__field.has-error textarea { border: 2px solid var(--color-black); }
+
+.lf-wiz__affix {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid rgb(var(--black-rgb) / 0.2);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.lf-wiz__affix:focus-within { border-color: var(--color-emerald); box-shadow: 0 0 0 4px rgb(var(--emerald-rgb) / 0.18); }
+.lf-wiz__field.has-error .lf-wiz__affix { border: 2px solid var(--color-black); }
+
+.lf-wiz__affix span {
+  display: grid;
+  place-items: center;
+  padding: 0 12px;
+  background: var(--gradient-green-soft);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-secondary);
+}
+
+.lf-wiz__field .lf-wiz__affix input { border: 0; border-radius: 0; box-shadow: none; min-width: 0; flex: 1; }
+.lf-wiz__field .lf-wiz__affix input:focus { box-shadow: none; }
+
+.lf-wiz__help {
+  margin: 6px 0 0;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--color-text-secondary);
+}
+
+.lf-wiz__error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 0;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-black);
+}
+
+.lf-wiz__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-left: 4px solid var(--color-black);
+  border-radius: var(--radius-sm);
+  background: rgb(var(--black-rgb) / 0.04);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-black);
+}
+
+/* choice pills */
+.lf-wiz__pills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.lf-wiz__pills label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border: 1.5px solid rgb(var(--black-rgb) / 0.2);
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.lf-wiz__pills label:hover { border-color: rgb(var(--emerald-rgb) / 0.6); }
+
+.lf-wiz__pills label.is-on {
+  border-color: var(--color-emerald);
+  background: var(--gradient-green-soft);
+  color: var(--color-black);
+}
+
+.lf-wiz__pills input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.lf-wiz__pills label:focus-within { outline: 3px solid rgb(var(--emerald-rgb) / 0.45); outline-offset: 2px; }
+.lf-wiz__pills span { display: inline-flex; align-items: center; gap: 6px; }
+
+.lf-wiz__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--color-black);
+  cursor: pointer;
+}
+
+.lf-wiz__check input { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--color-emerald); }
+
+/* repeatable groups */
+.lf-wiz__group .lf-wiz__heading { border-top: 0; padding-top: 0; margin-top: 0; }
+
+.lf-wiz__item {
+  margin: 0 0 14px;
+  padding: 16px 16px 6px;
+  border: 1px solid rgb(var(--black-rgb) / 0.12);
+  border-radius: var(--radius-xl);
+  background: rgb(var(--black-rgb) / 0.02);
+}
+
+.lf-wiz__item legend {
+  padding: 0 8px;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+  color: var(--color-emerald);
+}
+
+.lf-wiz__add { margin-top: 4px; }
+
+.lf-wiz__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-emerald);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lf-wiz__item .lf-wiz__link { margin: 0 0 12px; }
+
+/* navigation row */
+.lf-wiz__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgb(var(--black-rgb) / 0.1);
+}
+
+.lf-wiz__nav .svc-ghost-btn:disabled { opacity: 0.4; cursor: default; }
+.lf-wiz__saved { flex: 1; text-align: center; font-size: var(--fs-xs); color: var(--color-text-secondary); }
+
+/* ---------- review ---------- */
+.lf-wiz__review {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.lf-wiz__sum { margin-bottom: 16px; }
+
+.lf-wiz__sum header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--color-green-100);
+}
+
+.lf-wiz__sum h4 { margin: 0; font-size: var(--fs-lg); font-weight: var(--fw-bold); color: var(--color-black); }
+
+.lf-wiz__sum dl { margin: 0; }
+.lf-wiz__sum dl > div { display: grid; grid-template-columns: 38% 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgb(var(--black-rgb) / 0.06); }
+.lf-wiz__sum dt { font-size: var(--fs-sm); color: var(--color-text-secondary); }
+.lf-wiz__sum dd { margin: 0; font-size: var(--fs-md); font-weight: var(--fw-semibold); color: var(--color-black); overflow-wrap: anywhere; }
+
+.lf-wiz__docwrap { position: sticky; top: 90px; }
+
+.lf-wiz__paper {
+  max-height: 560px;
+  overflow: auto;
+  padding: 28px 26px;
+  background: var(--color-white);
+  border: 1px solid rgb(var(--black-rgb) / 0.12);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 14px 34px rgb(var(--black-rgb) / 0.08);
+  font-family: var(--font-serif);
+  font-size: var(--fs-md);
+  line-height: var(--lh-relaxed);
+  color: var(--color-black);
+}
+
+.lf-wiz__paper h1 { margin: 0 0 14px; text-align: center; font-size: var(--fs-3xl); letter-spacing: 0.06em; text-transform: uppercase; }
+.lf-wiz__paper h2 { margin: 16px 0 4px; font-size: var(--fs-base); }
+.lf-wiz__paper p { margin: 0 0 8px; }
+.lf-wiz__paper table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: var(--fs-sm); }
+.lf-wiz__paper th, .lf-wiz__paper td { padding: 6px 8px; border: 1px solid rgb(var(--black-rgb) / 0.3); text-align: left; vertical-align: top; }
+.lf-wiz__paper .r { text-align: right; }
+
+.lf-wiz__legal {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-green-soft);
+  border: 1px solid rgb(var(--emerald-rgb) / 0.25);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--color-text-secondary);
+}
+
+.lf-wiz__legal svg { flex: 0 0 auto; margin-top: 2px; color: var(--color-emerald); }
+.lf-wiz__legal b { color: var(--color-black); }
+.lf-wiz__reset { margin-top: 12px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .lf-wiz__review { grid-template-columns: 1fr; }
+  .lf-wiz__docwrap { position: static; }
+}
+
+@media (max-width: 640px) {
+  .lf-wiz__card { padding: 20px 16px 18px; }
+  .lf-wiz__grid { grid-template-columns: 1fr; }
+  .lf-wiz__field--half { grid-column: 1 / -1; }
+  .lf-wiz__steps li:not(.is-on) em { display: none; }
+  .lf-wiz__steps li:not(.is-on) { flex: 0 0 auto; }
+  .lf-wiz__steps .is-on { flex: 1 1 auto; }
+  .lf-wiz__nav { flex-wrap: wrap; }
+  .lf-wiz__saved { order: 3; flex-basis: 100%; }
+  .lf-wiz__sum dl > div { grid-template-columns: 1fr; gap: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lf-wiz__bar i { transition: none; }
+}

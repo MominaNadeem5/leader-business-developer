@@ -59,7 +59,7 @@ export function BrandCheck() {
 }
 
 /* ---------- email signature / digital card builder (email page) ---------- */
-const THEMES = { green: ["#0a3a2a", "#2fa24f"], navy: ["#1e2a4a", "#3b82f6"], plum: ["#3b1f3a", "#c0508a"], charcoal: ["#222", "#f4b740"] };
+const THEMES = { green: ["#000000", "#2fa24f"], navy: ["#000000", "#2fa24f"], plum: ["#000000", "#2fa24f"], charcoal: ["#222", "#2fa24f"] };
 
 export function SignatureBuilder() {
   const [name, setName] = useState("Jordan Lee");

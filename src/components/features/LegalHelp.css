@@ -176,3 +176,20 @@
 @media (max-width: 480px) {
   .home .container.legal-container { padding-left: 16px; padding-right: 16px; }
 }
+
+/* intro paragraph + eyebrow follow the same text styles as the other landing sections */
+.legal__content > p {
+  font-size: var(--fs-section-lead);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.legal__content .eyebrow {
+  gap: 10px;
+  font-size: var(--fs-label);
+  letter-spacing: 0.14em;
+}
+
+.legal__content .eyebrow::before {
+  width: 26px;
+}

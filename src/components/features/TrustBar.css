@@ -5,11 +5,11 @@
   margin: 0 auto;
   padding: 16px 16px;
   border-radius: 24px;
-  background: linear-gradient(180deg, #ffffff 0%, #f6fbf8 100%);
-  border: 1px solid rgba(46, 160, 90, 0.12);
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-green-50) 100%);
+  border: 1px solid rgb(var(--emerald-rgb) / 0.12);
   box-shadow:
-    0 18px 40px rgba(20, 90, 60, 0.1),
-    0 2px 6px rgba(20, 90, 60, 0.04);
+    0 18px 40px rgb(var(--black-rgb) / 0.1),
+    0 2px 6px rgb(var(--black-rgb) / 0.04);
 }
 
 .trust__list {
@@ -22,9 +22,9 @@
 }
 .trust__div{
    background:
-    radial-gradient(800px 520px at 82% 45%, rgba(46, 160, 90, 0.12), transparent 70%),
-    radial-gradient(500px 380px at 0% 100%, rgba(46, 160, 90, 0.08), transparent 70%),
-    var(--color-hero-from, #f7fbf8);
+    radial-gradient(800px 520px at 82% 45%, rgb(var(--emerald-rgb) / 0.12), transparent 70%),
+    radial-gradient(500px 380px at 0% 100%, rgb(var(--emerald-rgb) / 0.08), transparent 70%),
+    var(--color-hero-from, var(--color-green-50));
     padding: 24px 0px;
     border-radius: 16px
 }
@@ -57,8 +57,8 @@
   background: linear-gradient(
     180deg,
     transparent,
-    rgba(20, 70, 50, 0.16) 25%,
-    rgba(20, 70, 50, 0.16) 75%,
+    rgb(var(--black-rgb) / 0.16) 25%,
+    rgb(var(--black-rgb) / 0.16) 75%,
     transparent
   );
 }
@@ -69,17 +69,17 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: var(--color-primary, #1f7a4a);
-  background: radial-gradient(circle at 30% 25%, #eaf8ef, #d3eedd);
+  color: var(--color-primary, var(--color-emerald));
+  background: var(--gradient-green-soft);
   box-shadow:
-    0 8px 18px rgba(46, 160, 90, 0.18),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    0 8px 18px rgb(var(--emerald-rgb) / 0.18),
+    inset 0 0 0 1px rgb(var(--white-rgb) / 0.7);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .trust__item:hover .trust__icon {
   transform: translateY(-3px);
-  box-shadow: 0 12px 22px rgba(46, 160, 90, 0.26);
+  box-shadow: 0 12px 22px rgb(var(--emerald-rgb) / 0.26);
 }
 
 .trust__text {
@@ -93,12 +93,12 @@
 
 .trust__text b {
   font-weight: var(--fw-bold);
-  color: #153a47;
+  color: var(--color-black);
 }
 
 .trust__text span {
   font-weight: var(--fw-medium);
-  color: #5d727c;
+  color: var(--color-text-secondary);
 }
 
 /* ===== Responsive ===== */

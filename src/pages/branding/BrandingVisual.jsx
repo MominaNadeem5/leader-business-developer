@@ -5,7 +5,7 @@ import { Sample, Chip } from "../merchant/MerchantVisual";
 /* Animated hero mockups for the Branding pages.
    Every name, number and screen shown is a sample, and each card is labelled as one. */
 
-const SWATCHES = ["#0a3a2a", "#2fa24f", "#f4b740", "#f1f5f3"];
+const SWATCHES = ["#000000", "#2fa24f", "#2fa24f", "#f0fdf4"];
 
 /* ---------- overview: a brand kit coming together ---------- */
 export function BrandKitVisual() {

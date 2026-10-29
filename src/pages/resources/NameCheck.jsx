@@ -14,6 +14,7 @@ import {
   US_STATES, ENTITIES, HAS_API, validateForm, checkAvailability, variations, slugOf, coreName, registryLink, hasDirectRegistryLink,
 } from "./availability";
 import "../forms/Forms.css";
+import NextStepLlc from "./NextStepLlc";
 import "./Resources.css";
 import "./NameCheck.css";
 
@@ -414,6 +415,8 @@ export default function NameCheck() {
           ))}
         </Reveal>
       </Section>
+
+      <NextStepLlc tool="name-check" />
 
       <FaqBlock faqs={FAQS} title="Name availability FAQs" variant="grid" />
 

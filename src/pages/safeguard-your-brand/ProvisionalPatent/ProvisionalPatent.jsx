@@ -215,7 +215,7 @@ function FeePicker() {
 
 export default function ProvisionalPatent() {
   return (
-    <div className="svc pp-page">
+    <div className="svc biz-page pp-page">
       <ServiceHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Business", to: "/business" }, { label: "Patent-Pending Filing" }]}
         title="Get your invention to patent pending, fast"

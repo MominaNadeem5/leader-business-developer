@@ -31,3 +31,30 @@
   .nav__links li { padding: 10px 0; }
   .nav__link.is-active::after { display: none }
 }
+/* ===== Landing page: consistent section rhythm =====
+   Every content section gets the same vertical padding and a shared minimum height, with its
+   content centred, so no section looks much shorter or taller than its neighbours. */
+.home > .section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.home > .section > * {
+  width: 100%;
+}
+
+@media (min-width: 961px) {
+  .home > .section:not([style]) {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 960px) {
+  .home > .section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}

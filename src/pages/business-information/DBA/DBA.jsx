@@ -123,7 +123,7 @@ export default function StartDBA() {
   const [heroRef, heroInView] = useInView();
 
   return (
-    <div className="svc llc-page dba-page">
+    <div className="svc biz-page llc-page dba-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <div className="container">
@@ -142,7 +142,7 @@ export default function StartDBA() {
               </div>
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
                 {/* Trustpilot rating hidden for now
-                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />)}</span>
+                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
                 <strong>Excellent</strong>
                 <span className="llc-hero__badge">Trustpilot</span>
                 <span className="llc-hero__sep" />

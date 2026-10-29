@@ -115,7 +115,7 @@ export default function StartLLC() {
   };
 
   return (
-    <div className="svc llc-page">
+    <div className="svc biz-page llc-page">
       {/* HERO (compact) */}
       <section className="llc-hero" ref={heroRef}>
         
@@ -123,7 +123,7 @@ export default function StartLLC() {
           
           <div className={`llc-hero__content ${heroInView ? "is-in" : ""}`}>
             <h1 className="llc-hero__title" style={{ "--d": 0 }}>
-              Whether you're ready to form an LLC on your own—or want advice every step of the way—we've got your back.
+              Form your LLC your way, with expert help at every step.
             </h1>
             <p className="llc-hero__subtitle" style={{ "--d": 1 }}>
               Have questions? Call <a href={`tel:${CONTACT.phone}`}>{CONTACT.phone}</a> or email{" "}
@@ -140,7 +140,7 @@ export default function StartLLC() {
 
             <div className="llc-hero__trust" style={{ "--d": 3 }}>
               {/* Trustpilot rating hidden for now
-              <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />)}</span>
+              <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
               <strong>Excellent</strong>
               <span className="llc-hero__badge">Trustpilot</span>
               <span className="llc-hero__sep" />

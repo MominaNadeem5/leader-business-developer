@@ -1,19 +1,19 @@
 /* ===== Payment Feature ===== */
 
 .pay {
-  --pay-green: var(--color-primary, #1f7a3a);
-  --pay-ink: var(--color-heading, #0c2447);
+  --pay-green: var(--color-primary, var(--color-emerald));
+  --pay-ink: var(--color-heading, var(--color-black));
   position: relative;
   overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   align-items: stretch;
   border-radius: 28px;
-  border: 1px solid rgba(46, 160, 90, 0.14);
+  border: 1px solid rgb(var(--emerald-rgb) / 0.14);
   background:
-    radial-gradient(520px 320px at 0% 0%, rgba(46, 160, 90, 0.1), transparent 70%),
-    linear-gradient(135deg, #f2faf5 0%, #f9fdfb 100%);
-  box-shadow: 0 22px 50px rgba(20, 90, 60, 0.08);
+    radial-gradient(520px 320px at 0% 0%, rgb(var(--emerald-rgb) / 0.1), transparent 70%),
+    var(--gradient-green-soft);
+  box-shadow: 0 22px 50px rgb(var(--black-rgb) / 0.08);
 }
 
 /* ---------- Left ---------- */
@@ -22,7 +22,7 @@
   position: relative;
   z-index: 2;
   align-self: center;
-  padding: 44px 0 44px 44px;
+  padding: 32px 0 32px 44px;
 }
 
 .pay__eyebrow {
@@ -62,9 +62,9 @@
 .pay__text > p {
   max-width: 420px;
   margin: 0 0 26px;
-  font-size: var(--fs-xl);
+  font-size: var(--fs-section-lead);
   line-height: var(--lh-relaxed);
-  color: #25406a;
+  color: var(--color-text-secondary);
 }
 
 /* platforms card */
@@ -75,10 +75,10 @@
   max-width: 440px;
   margin-top: 26px;
   padding: 16px 20px;
-  background: #fff;
-  border: 1px solid rgba(20, 80, 60, 0.08);
+  background: var(--color-white);
+  border: 1px solid rgb(var(--black-rgb) / 0.08);
   border-radius: 18px;
-  box-shadow: 0 12px 28px rgba(20, 90, 60, 0.08);
+  box-shadow: 0 12px 28px rgb(var(--black-rgb) / 0.08);
   text-decoration: none;
   color: inherit;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -86,7 +86,7 @@
 
 .pay__note:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 36px rgba(20, 90, 60, 0.14);
+  box-shadow: 0 18px 36px rgb(var(--black-rgb) / 0.14);
 }
 
 .pay__note .icon {
@@ -96,8 +96,8 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: #1c6b45;
-  background: radial-gradient(circle at 30% 25%, #eaf8ef, #cfeedb);
+  color: var(--color-black);
+  background: var(--gradient-green-soft);
 }
 
 .pay__note-txt b {
@@ -109,9 +109,9 @@
 .pay__note-txt small {
   display: block;
   margin-top: 2px;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-card-text);
   line-height: var(--lh-compact);
-  color: #3d5a82;
+  color: var(--color-text-secondary);
 }
 
 .pay__note-chev {
@@ -146,8 +146,8 @@
   object-fit: cover;
   object-position: left center;
   z-index: -1;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%);
-          mask-image: linear-gradient(to right, transparent 0, #000 14%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, var(--color-black) 14%);
+          mask-image: linear-gradient(to right, transparent 0, var(--color-black) 14%);
 }
 
 /* businesses card: peeche white card, rows aage nikli hui */
@@ -157,10 +157,10 @@
   flex: 0 1 256px;
   min-width: 0;
   padding: 18px 20px 22px;
-  background: #fff;
+  background: var(--color-white);
   border-radius: 18px;
-  border: 1px solid rgba(20, 80, 60, 0.08);
-  box-shadow: 0 24px 50px rgba(10, 50, 40, 0.18);
+  border: 1px solid rgb(var(--black-rgb) / 0.08);
+  box-shadow: 0 24px 50px rgb(var(--black-rgb) / 0.18);
 }
 
 .biz__title {
@@ -178,10 +178,10 @@
   gap: 10px;
   margin: 0 -40px 14px -20px;
   padding: 9px 12px 9px 9px;
-  background: #fff;
-  border: 1px solid rgba(20, 80, 60, 0.07);
+  background: var(--color-white);
+  border: 1px solid rgb(var(--black-rgb) / 0.07);
   border-radius: 14px;
-  box-shadow: 0 14px 30px rgba(10, 50, 40, 0.16);
+  box-shadow: 0 14px 30px rgb(var(--black-rgb) / 0.16);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -191,7 +191,7 @@
 
 .biz__row:hover {
   transform: translateX(6px);
-  box-shadow: 0 18px 36px rgba(10, 50, 40, 0.22);
+  box-shadow: 0 18px 36px rgb(var(--black-rgb) / 0.22);
 }
 
 .biz__row img {
@@ -218,13 +218,13 @@
   white-space: nowrap;
   font-size: var(--fs-xs);
   font-weight: var(--fw-medium);
-  color: #2a5a8c;
+  color: var(--color-text-secondary);
 }
 
 .biz__ok svg {
   flex: none;
   font-size: var(--fs-lg);
-  color: #2fa24f;
+  color: var(--color-emerald);
 }
 
 .biz__chev {
@@ -238,10 +238,10 @@
   flex: 0 1 284px;
   min-width: 0;
   padding: 22px 20px 20px;
-  background: #fff;
+  background: var(--color-white);
   border-radius: 16px;
-  border-top: 4px solid #1f8a3d;
-  box-shadow: 0 28px 56px rgba(10, 50, 40, 0.22);
+  border-top: 4px solid var(--color-emerald);
+  box-shadow: 0 28px 56px rgb(var(--black-rgb) / 0.22);
 }
 
 .checkout__head {
@@ -256,7 +256,7 @@
 
 .checkout__head svg {
   font-size: var(--fs-3xl);
-  color: #1f8a3d;
+  color: var(--color-emerald);
 }
 
 .checkout__prod {
@@ -275,7 +275,7 @@
 
 .checkout__skel {
   padding: 14px 12px;
-  border: 1px solid #e3e8ee;
+  border: 1px solid rgb(var(--black-rgb) / 0.1);
   border-radius: 10px;
 }
 
@@ -283,7 +283,7 @@
   height: 9px;
   margin-bottom: 11px;
   border-radius: 5px;
-  background: #e3e7ec;
+  background: rgb(var(--black-rgb) / 0.1);
 }
 
 .sk:last-child {
@@ -293,11 +293,11 @@
 .field {
   margin-top: 10px;
   padding: 11px 14px;
-  background: #fff;
-  border: 1px solid #dfe5ec;
+  background: var(--color-white);
+  border: 1px solid rgb(var(--black-rgb) / 0.1);
   border-radius: 8px;
   font-size: var(--fs-sm);
-  color: #8693a3;
+  color: var(--color-text-secondary);
 }
 
 .fields2 {
@@ -312,8 +312,8 @@
   padding: 13px;
   border: 0;
   border-radius: 8px;
-  background: linear-gradient(180deg, #1f8a3d, #17702f);
-  color: #fff;
+  background: var(--color-emerald);
+  color: var(--color-white);
   font: var(--fw-bold) var(--fs-md)/1 inherit;
   font-family: inherit;
   cursor: pointer;
@@ -321,8 +321,9 @@
 }
 
 .checkout__btn:hover {
+  background: var(--color-emerald);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(23, 112, 47, 0.3);
+  box-shadow: 0 10px 20px rgb(var(--emerald-rgb) / 0.3);
 }
 
 .checkout__note {
@@ -332,12 +333,12 @@
   margin-top: 16px;
   font-size: var(--fs-xs);
   line-height: var(--lh-compact);
-  color: #3d5a82;
+  color: var(--color-text-secondary);
 }
 
 .checkout__note svg {
   flex: none;
-  color: #0c2447;
+  color: var(--color-black);
 }
 
 /* ---------- Scroll animation ---------- */
@@ -412,8 +413,8 @@
     padding: 36px 32px;
   }
   .pay__bg {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%);
-            mask-image: linear-gradient(to bottom, transparent 0, #000 12%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, var(--color-black) 12%);
+            mask-image: linear-gradient(to bottom, transparent 0, var(--color-black) 12%);
   }
 }
 

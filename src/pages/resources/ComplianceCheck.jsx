@@ -7,6 +7,7 @@ import { ResHero, Segmented, FaqBlock, RelatedLinks, ResNote } from "./ResBits";
 import { PulseGaugeVisual } from "./ResourcesVisual";
 import { RES_SEO, FREE_TOOLS, HUBS, downloadText } from "./resources";
 import "../forms/Forms.css";
+import NextStepLlc from "./NextStepLlc";
 import "./Resources.css";
 
 const PATH = "/resources/tools/compliance-check";
@@ -141,6 +142,8 @@ export default function ComplianceCheck() {
         </Reveal>
         <p className="lf-small">Each item is weighted by how serious the consequences of missing it are. Want the full picture? Read <Link to="/resources/learn/compliance">staying compliant</Link>.</p>
       </Section>
+
+      <NextStepLlc tool="compliance-check" />
 
       <FaqBlock faqs={FAQS} title="Compliance check FAQs" variant="twocol" tone="gray" />
 

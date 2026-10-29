@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Download, Flag, CircleDot, CheckCircle2, X, Check, AlertOctagon, ListChecks, Package, Wallet,
+  ArrowRight, Flag, CircleDot, CheckCircle2, X, Check, AlertOctagon, ListChecks, Package, Wallet,
 } from "lucide-react";
 import Seo from "../../components/common/Seo";
 import { Reveal, Section, ServiceFooter } from "../../components/service";
 import { Segmented, FaqBlock, LegalNote, RelatedForms, FormHero } from "./FormBits";
 import { ServiceVisual } from "./FormsVisual";
-import { FORMS_SEO, FORMS_START, DISCLAIMER, downloadDoc, fill } from "./forms";
+import { FORMS_SEO, FORMS_START, DISCLAIMER } from "./forms";
+import DocWizard from "./DocWizard";
+import { SERVICE } from "./docConfigs";
 import "./Forms.css";
 
 const PATH = "/forms/templates/service-agreement";
@@ -88,44 +90,6 @@ function MilestonePlanner() {
 }
 
 /* Fill-in-the-blanks template: inputs sit inside the agreement text. */
-function Blank({ value, onChange, placeholder, w = 10 }) {
-  return <input className="lf-blank" value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} style={{ width: `${Math.max(w, (value || placeholder).length + 1)}ch` }} aria-label={placeholder} />;
-}
-
-function ServiceTemplate() {
-  const [v, setV] = useState({ provider: "", client: "", service: "", out: "", fee: "", deposit: "", due: "15", revisions: "2", deadline: "", notice: "14", state: "" });
-  const set = (k) => (val) => setV((o) => ({ ...o, [k]: val }));
-
-  const download = () => downloadDoc("service-agreement.doc", "Service Agreement", `
-<h1>Service Agreement</h1>
-<p>This Service Agreement is between <b>${fill(v.provider)}</b> ("Provider") and <b>${fill(v.client)}</b> ("Client"), effective ____________.</p>
-<h2>1. Services and Scope</h2><p>Provider will perform the following services: ${fill(v.service)}. Out of scope: ${fill(v.out, "anything not listed above")}. Additional work requires a written change order signed by both parties.</p>
-<h2>2. Deliverables and Acceptance</h2><p>Final deliverables are due by ${fill(v.deadline)}, subject to Client providing materials on time. The fee includes ${fill(v.revisions)} rounds of revisions. Client will approve or request changes within 5 business days of each delivery; no response counts as approval.</p>
-<h2>3. Fees and Payment</h2><p>Client will pay ${fill(v.fee)}, with a non-refundable deposit of ${fill(v.deposit)} due before work begins and the balance invoiced at agreed milestones. Invoices are due within ${fill(v.due)} days. Late payments accrue 1.5% per month.</p>
-<h2>4. Ownership</h2><p>Upon receipt of full payment, Provider assigns to Client all rights in the final deliverables. Provider keeps its pre-existing tools and know-how and may display the work in its portfolio unless Client objects in writing.</p>
-<h2>5. Independent Contractor</h2><p>Provider is an independent contractor and controls the manner and means of performing the services. Provider is responsible for its own taxes and equipment.</p>
-<h2>6. Confidentiality</h2><p>Each party will keep the other's non-public information confidential.</p>
-<h2>7. Termination</h2><p>Either party may terminate with ${fill(v.notice)} days' written notice. Client will pay for all work performed through the termination date, plus 25% of the remaining fee as a cancellation fee.</p>
-<h2>8. Limitation of Liability</h2><p>Provider's total liability is limited to fees paid under this Agreement. Neither party is liable for indirect or consequential damages.</p>
-<h2>9. Governing Law</h2><p>This Agreement is governed by the laws of the State of ${fill(v.state)}.</p>
-<table><tr><th>Provider: ${fill(v.provider)}</th><th>Client: ${fill(v.client)}</th></tr><tr><td>Signature:<br><br>Date:</td><td>Signature:<br><br>Date:</td></tr></table>`);
-
-  return (
-    <Reveal className="lf-s-tpl">
-      <div className="lf-s-tpl__doc">
-        <h3>Service Agreement</h3>
-        <p>This agreement is between <Blank value={v.provider} onChange={set("provider")} placeholder="Provider name" /> ("Provider") and <Blank value={v.client} onChange={set("client")} placeholder="Client name" /> ("Client").</p>
-        <p><b>Services.</b> Provider will <Blank value={v.service} onChange={set("service")} placeholder="design a 5-page website" w={22} />. Not included: <Blank value={v.out} onChange={set("out")} placeholder="copywriting, hosting" w={16} />.</p>
-        <p><b>Deliverables.</b> Final work is due by <Blank value={v.deadline} onChange={set("deadline")} placeholder="April 30" /> with <Blank value={v.revisions} onChange={set("revisions")} placeholder="2" w={3} /> revision rounds included.</p>
-        <p><b>Payment.</b> Client will pay <Blank value={v.fee} onChange={set("fee")} placeholder="$6,000" w={8} />, with a <Blank value={v.deposit} onChange={set("deposit")} placeholder="$2,400" w={8} /> deposit before work starts. Invoices are due within <Blank value={v.due} onChange={set("due")} placeholder="15" w={3} /> days.</p>
-        <p><b>Termination.</b> Either party may end this agreement with <Blank value={v.notice} onChange={set("notice")} placeholder="14" w={3} /> days' written notice. Governed by the laws of <Blank value={v.state} onChange={set("state")} placeholder="State" />.</p>
-        <p className="lf-s-tpl__more">The download adds: acceptance, ownership on payment, contractor status, confidentiality, liability cap and signature blocks.</p>
-      </div>
-      <button type="button" className="lf-btn" onClick={download}><Download size={17} /> Download service agreement (.doc)</button>
-    </Reveal>
-  );
-}
-
 export default function ServiceAgreement() {
   const [tab, setTab] = useState("scope");
   const p = PILLARS[tab];
@@ -187,8 +151,8 @@ export default function ServiceAgreement() {
       </Section>
 
       {/* template */}
-      <Section id="lf-template" title="Fill-in-the-blanks service agreement" subtitle="Type straight into the agreement below, then download the complete version.">
-        <ServiceTemplate />
+      <Section id="lf-template" title="Build your service agreement" subtitle="Answer the guided questions, review the agreement and download the complete version.">
+        <DocWizard config={SERVICE} />
         <LegalNote />
       </Section>
 

@@ -207,7 +207,7 @@ export default function StateFederalFilings() {
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="svc sf-page">
+    <div className="svc biz-page sf-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="sf-blob sf-blob--a" aria-hidden="true" />
@@ -230,8 +230,8 @@ export default function StateFederalFilings() {
               {/* Trustpilot rating hidden for now
               <div className="llc-hero__trust" style={{ "--d": 4 }}>
                 <strong>{TRUST_LABEL}</strong>
-                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
-                <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
+                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
+                <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#ffffff" color="#ffffff" /> Trustpilot</a>
               </div>
               */}
             </div>

@@ -1,25 +1,25 @@
 /* ===== DBA application (/get-started/dba): extras on top of GetStarted.css / LlcForm.css ===== */
 
 .dba-state { align-items: flex-start; }
-.dba-state.is-unknown { background: #fff8e6; border-color: #f3dea0; }
-.dba-state.is-unknown svg { color: #8a6a24; }
+.dba-state.is-unknown { background: rgb(var(--black-rgb) / 0.04); border-color: rgb(var(--emerald-rgb) / 0.2); }
+.dba-state.is-unknown svg { color: var(--color-black); }
 
 /* thank-you */
 .dba-ty { max-width: 720px; }
 .dba-ty h1 span { overflow-wrap: anywhere; }
-.dba-ty__demo { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 22px; padding: 16px; border-radius: 14px; background: #fef2f2; border: 1px solid #fecaca; text-align: left; color: #7f1d1d; }
-.dba-ty__demo svg { flex: none; margin-top: 2px; color: #dc2626; }
+.dba-ty__demo { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 22px; padding: 16px; border-radius: 14px; background: rgb(var(--black-rgb) / 0.05); border: 1px solid rgb(var(--black-rgb) / 0.2); text-align: left; color: var(--color-black); }
+.dba-ty__demo svg { flex: none; margin-top: 2px; color: var(--color-black); }
 .dba-ty__demo p { margin: 0; font-size: var(--fs-md); line-height: var(--lh-normal); }
-.dba-ty__demo code { padding: 1px 6px; border-radius: 6px; background: #fee2e2; font-size: .92em; }
+.dba-ty__demo code { padding: 1px 6px; border-radius: 6px; background: rgb(var(--black-rgb) / 0.06); font-size: .92em; }
 .dba-ty__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 26px; padding: 0; text-align: left; }
-.dba-ty__facts div { padding: 12px 16px; border: 1px solid var(--svc-line); border-radius: 14px; background: #fbfbf9; min-width: 0; }
+.dba-ty__facts div { padding: 12px 16px; border: 1px solid var(--svc-line); border-radius: 14px; background: rgb(var(--black-rgb) / 0.03); min-width: 0; }
 .dba-ty__facts dt { margin: 0 0 2px; color: var(--svc-muted); font-size: var(--fs-xs); font-weight: var(--fw-bold); letter-spacing: .05em; text-transform: uppercase; }
 .dba-ty__facts dd { margin: 0; color: var(--svc-ink); font-weight: var(--fw-bold); overflow-wrap: anywhere; }
 .dba-ty__h { margin: 0 0 14px; color: var(--svc-ink); font-size: var(--fs-2xl); text-align: left; }
 .dba-ty__steps { display: grid; gap: 10px; margin: 0 0 22px; padding: 0; list-style: none; text-align: left; }
-.dba-ty__steps li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border: 1px solid var(--svc-line); border-radius: 14px; background: #fff; animation: au-rise .4s ease both; }
+.dba-ty__steps li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border: 1px solid var(--svc-line); border-radius: 14px; background: var(--color-white); animation: au-rise .4s ease both; }
 .dba-ty__steps li:nth-child(2) { animation-delay: .08s; } .dba-ty__steps li:nth-child(3) { animation-delay: .16s; } .dba-ty__steps li:nth-child(4) { animation-delay: .24s; }
-.dba-ty__steps li > span { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 10px; background: #e8efeb; color: var(--svc-green-dark); }
+.dba-ty__steps li > span { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--color-green-100); color: var(--svc-green-dark); }
 .dba-ty__steps b { display: block; color: var(--svc-ink); }
 .dba-ty__steps small { display: block; margin-top: 2px; color: var(--svc-muted); font-size: var(--fs-sm); line-height: var(--lh-normal); }
 

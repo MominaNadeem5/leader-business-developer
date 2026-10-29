@@ -362,7 +362,7 @@ const faqs = [
 
 export default function NameCheck() {
   return (
-    <div className="svc nc-page">
+    <div className="svc biz-page nc-page">
       <ServiceHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Business", to: "/business" }, { label: "Quick Free Name Check" }]}
         title="Free business name & trademark check"

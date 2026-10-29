@@ -213,7 +213,7 @@ export default function EinItin() {
   const [heroRef, heroInView] = useInView();
 
   return (
-    <div className="svc ein-page">
+    <div className="svc biz-page ein-page">
       {/* HERO */}
       <section className="llc-hero" ref={heroRef}>
         <span className="ein-blob ein-blob--a" aria-hidden="true" />
@@ -235,8 +235,8 @@ export default function EinItin() {
               <div className="llc-hero__trust" style={{ "--d": 3 }}>
                 {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
-                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
-                <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
+                <span className="llc-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
+                <a className="llc-hero__badge corp-tp" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#ffffff" color="#ffffff" /> Trustpilot</a>
                 <span className="llc-hero__sep" />
                 */}
                 <a href="#ein-guarantee" className="dba-guarantee-link"><ShieldCheck size={16} /> Learn about our guarantee</a>

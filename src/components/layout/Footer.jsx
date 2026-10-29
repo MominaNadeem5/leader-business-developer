@@ -1,17 +1,30 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Button from "../common/Button";
 import logo from "../../assets/logo.png";
-import visa from "../../assets/visa.svg";
-import mastercard from "../../assets/pay.svg";
-import amex from "../../assets/american-express.svg";
-import discover from "../../assets/discover.svg";
-import paypal from "../../assets/paypal.svg";
-import gpay from "../../assets/g-pay.svg";
-import { Phone, Mail, Lock, Check, CreditCard, Landmark, ArrowUp } from "lucide-react";
+import {
+  PaymentVisa,
+  PaymentMastercard,
+  PaymentAmericanexpress,
+  PaymentDiscover,
+  PaymentPaypal,
+  PaymentGooglePay,
+} from "@tabler/payments-react";
+import { Lock, Check, CreditCard, Landmark, ArrowUp } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import "./Footer.css";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubscribed(true);
+    setEmail("");
+  };
+
   const companyLinks = [
     { label: "About Us", to: "/about" },
     { label: "Our Services", to: "/services" },
@@ -56,12 +69,12 @@ export default function Footer() {
   ];
 
   const paymentMethods = [
-    { name: "Visa", icon: visa },
-    { name: "Mastercard", icon: mastercard },
-    { name: "American Express", icon: amex },
-    { name: "Discover", icon: discover },
-    { name: "PayPal", icon: paypal },
-    { name: "Google Pay", icon: gpay },
+    { name: "Visa", Logo: PaymentVisa },
+    { name: "Mastercard", Logo: PaymentMastercard },
+    { name: "American Express", Logo: PaymentAmericanexpress, variant: "dark" },
+    { name: "Discover", Logo: PaymentDiscover },
+    { name: "PayPal", Logo: PaymentPaypal },
+    { name: "Google Pay", Logo: PaymentGooglePay },
     { name: "Credit & debit cards", Icon: CreditCard },
     { name: "Bank payments", Icon: Landmark },
   ];
@@ -74,9 +87,27 @@ export default function Footer() {
 
   return (
     <footer className="footer">
-      {/* Main Footer Section */}
+      {/* Newsletter */}
+      <div className="container footer__newsletter">
+        <h3 className="footer__newsletter-title">Get helpful tips and info from our newsletter!</h3>
+        <form className="footer__newsletter-form" onSubmit={handleSubscribe}>
+          <label htmlFor="footer-newsletter-email" className="footer__sr">Email address</label>
+          <input
+            id="footer-newsletter-email"
+            type="email"
+            required
+            placeholder="name@email.com"
+            value={email}
+            onChange={(e) => { setEmail(e.target.value); setSubscribed(false); }}
+          />
+          <button type="submit">Sign up</button>
+        </form>
+        {subscribed && <p className="footer__newsletter-msg" role="status">Thanks for subscribing!</p>}
+      </div>
+
+      {/* Main Footer Section: four columns */}
       <div className="container footer__main">
-        {/* Brand */}
+        {/* Column 1: Brand */}
         <div className="footer__col footer__col--brand">
           <div className="footer__logo-card">
             <img src={logo} alt="Leader Business Developer" className="footer__logo" />
@@ -104,42 +135,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Links */}
-        <div className="footer__col footer__col--links">
-          {linkGroups.map((group) => (
-            <div className="footer__links-group" key={group.title}>
-              <h4 className="footer__heading">{group.title}</h4>
-              <ul className="footer__link-list">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    <Link to={link.to}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Contact */}
-        <div className="footer__col footer__col--contact">
-          <h4 className="footer__heading">Contact Us</h4>
-          <div className="footer__contact-card">
-            <div className="footer__contact-item">
-              <span className="footer__contact-icon"><Phone size={18} /></span>
-              <div>
-                <strong>Phone</strong>
-                <a href="tel:+18155668220">+1 (815) 566-8220</a>
-              </div>
-            </div>
-            <div className="footer__contact-item">
-              <span className="footer__contact-icon"><Mail size={18} /></span>
-              <div>
-                <strong>Email</strong>
-                <a href="mailto:support@leaderbusinessdeveloper.com">support@leaderbusinessdeveloper.com</a>
-              </div>
-            </div>
+        {/* Columns 2-4: Company, Popular Services, Support & Legal */}
+        {linkGroups.map((group) => (
+          <div className="footer__col footer__links-group" key={group.title}>
+            <h4 className="footer__heading">{group.title}</h4>
+            <ul className="footer__link-list">
+              {group.links.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        ))}
       </div>
 
       {/* Payment Methods Section */}
@@ -156,8 +164,8 @@ export default function Footer() {
           </div>
           <div className="footer__payment-methods">
             {paymentMethods.map((method) => (
-              <div key={method.name} className="footer__payment-icon" title={method.name}>
-                {method.icon ? <img src={method.icon} alt={method.name} /> : <method.Icon size={24} aria-label={method.name} />}
+              <div key={method.name} className={`footer__payment-icon${method.Logo ? " footer__payment-icon--logo" : ""}`} title={method.name}>
+                {method.Logo ? <method.Logo size={44} variant={method.variant} role="img" aria-label={method.name} /> : <method.Icon size={24} aria-label={method.name} />}
               </div>
             ))}
           </div>

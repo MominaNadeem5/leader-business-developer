@@ -231,7 +231,7 @@ function CoverageRings() {
 
 export default function TrademarkSearch() {
   return (
-    <div className="svc ts-page">
+    <div className="svc biz-page ts-page">
       <ServiceHero
         crumbs={[{ label: "Home", to: "/" }, { label: "Business", to: "/business" }, { label: "Deep Trademark Search" }]}
         title="Search before you file. Know your name is safe."

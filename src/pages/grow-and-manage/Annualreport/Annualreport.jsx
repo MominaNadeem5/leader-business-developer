@@ -371,7 +371,7 @@ export default function AnnualReport() {
   const marquee = [...strip, ...strip];
 
   return (
-    <div className="svc ar-page">
+    <div className="svc biz-page ar-page">
       {/* HERO */}
       <section className="ar-hero" ref={heroRef}>
         <span className="ar-blob ar-blob--a" aria-hidden="true" />
@@ -393,8 +393,8 @@ export default function AnnualReport() {
               <div className="ar-hero__trust" style={{ "--d": 3 }}>
                 {/* Trustpilot rating hidden for now
                 <strong>{TRUST_LABEL}</strong>
-                <span className="ar-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#00b67a" color="#00b67a" />)}</span>
-                <a className="ar-hero__badge" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#fff" color="#fff" /> Trustpilot</a>
+                <span className="ar-hero__stars">{[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#2fa24f" color="#2fa24f" />)}</span>
+                <a className="ar-hero__badge" href={TRUSTPILOT_URL} target="_blank" rel="noopener noreferrer"><Star size={12} fill="#ffffff" color="#ffffff" /> Trustpilot</a>
                 <span className="ar-hero__sep" />
                 */}
                 <span className="ar-hero__trust-item"><ShieldCheck size={16} /> Accuracy-first filing support</span>
