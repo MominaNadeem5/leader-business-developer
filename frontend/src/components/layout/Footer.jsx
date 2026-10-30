@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Button from "../common/Button";
 import logo from "../../assets/logo.png";
+import amexLogo from "../../assets/amex-logo.png";
 import {
   PaymentVisa,
   PaymentMastercard,
-  PaymentAmericanexpress,
   PaymentDiscover,
   PaymentPaypal,
   PaymentGooglePay,
@@ -13,6 +12,10 @@ import {
 import { Lock, Check, CreditCard, Landmark, ArrowUp } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import "./Footer.css";
+
+function AmexLogo({ "aria-label": label }) {
+  return <img className="footer__amex" src={amexLogo} alt={label} />;
+}
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -41,6 +44,7 @@ export default function Footer() {
     { label: "Merchant Solutions", to: "/merchant" },
     { label: "WordPress Development", to: "/website/wordpress" },
     { label: "Shopify Development", to: "/website/shopify" },
+    { label: "E-commerce Setup", to: "/website/ecommerce-setup" },
     { label: "CRM Integration", to: "/integrations/crm" },
     { label: "Business Automation", to: "/integrations/automation" },
   ];
@@ -71,7 +75,7 @@ export default function Footer() {
   const paymentMethods = [
     { name: "Visa", Logo: PaymentVisa },
     { name: "Mastercard", Logo: PaymentMastercard },
-    { name: "American Express", Logo: PaymentAmericanexpress, variant: "dark" },
+    { name: "American Express", Logo: AmexLogo },
     { name: "Discover", Logo: PaymentDiscover },
     { name: "PayPal", Logo: PaymentPaypal },
     { name: "Google Pay", Logo: PaymentGooglePay },
@@ -165,7 +169,7 @@ export default function Footer() {
           <div className="footer__payment-methods">
             {paymentMethods.map((method) => (
               <div key={method.name} className={`footer__payment-icon${method.Logo ? " footer__payment-icon--logo" : ""}`} title={method.name}>
-                {method.Logo ? <method.Logo size={44} variant={method.variant} role="img" aria-label={method.name} /> : <method.Icon size={24} aria-label={method.name} />}
+                {method.Logo ? <method.Logo size={44} role="img" aria-label={method.name} /> : <method.Icon size={24} aria-label={method.name} />}
               </div>
             ))}
           </div>

@@ -64,6 +64,7 @@ import DomainHosting from "./pages/website/DomainHosting";
 import WordPressSetup from "./pages/website/WordPressSetup";
 import ShopifySetup from "./pages/website/ShopifySetup";
 import WebsiteMaintenance from "./pages/website/WebsiteMaintenance";
+import EcommerceSetup from "./pages/website/EcommerceSetup";
 import BrandingServices from "./pages/branding/BrandingServices";
 import ProfileOptimization from "./pages/branding/ProfileOptimization";
 import LogoDesign from "./pages/branding/LogoDesign";
@@ -207,6 +208,7 @@ export default function App() {
           <Route path="/website/domain-hosting" element={<DomainHosting />} />
           <Route path="/website/wordpress" element={<WordPressSetup />} />
           <Route path="/website/shopify" element={<ShopifySetup />} />
+          <Route path="/website/ecommerce-setup" element={<EcommerceSetup />} />
           <Route path="/website/maintenance" element={<WebsiteMaintenance />} />
 
           {/* Branding & Digital Identity */}

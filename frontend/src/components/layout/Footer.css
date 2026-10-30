@@ -2,8 +2,8 @@
 
 footer.footer {
   --ft-line: rgb(var(--white-rgb) / 0.14);
-  --ft-text: rgb(var(--white-rgb) / 0.86);
-  --ft-muted: rgb(var(--white-rgb) / 0.7);
+  --ft-text: var(--color-white);
+  --ft-muted: var(--color-white);
   --ft-glass: rgb(var(--white-rgb) / 0.07);
   --ft-glass-strong: rgb(var(--white-rgb) / 0.12);
   --ft-accent: var(--color-white);
@@ -422,6 +422,18 @@ footer.footer::after {
   inset: 7px;
   width: calc(100% - 14px);
   height: calc(100% - 14px);
+  object-fit: contain;
+}
+
+/* Amex artwork fills the whole card like the other logos */
+.footer__payment-icon .footer__amex {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border-radius: 10px;
+  background: #0071ce;
   object-fit: contain;
 }
 

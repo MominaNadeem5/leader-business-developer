@@ -244,6 +244,10 @@ const menus = [
             to: "/website/shopify",
           },
           {
+            label: "E-commerce Setup",
+            to: "/website/ecommerce-setup",
+          },
+          {
             label: "Website Maintenance",
             to: "/website/maintenance",
           },

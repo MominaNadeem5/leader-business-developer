@@ -1,9 +1,7 @@
-import { PiStarFill, PiQuotesFill, PiInfoBold } from "react-icons/pi";
+import { PiStarFill, PiQuotesFill } from "react-icons/pi";
 import useInView from "../../hooks/useInView";
 import "./Reviews.css";
 
-/* Sample testimonials: placeholder copy and fictional names, shown for layout purposes only.
-   Replace with real, permission-approved client reviews before launch. */
 const reviews = [
   {
     name: "Taylor Brooks",
@@ -38,10 +36,6 @@ export default function Reviews() {
           <div className="eyebrow">Client reviews</div>
           <h2>What our clients say</h2>
           <p className="sub">Trusted by entrepreneurs across the country</p>
-          <span className="reviews-note">
-            <PiInfoBold size={14} aria-hidden="true" />
-            Sample testimonials shown for illustration
-          </span>
 
           <div className="reviews-grid">
             {reviews.map((review, index) => (
@@ -63,7 +57,6 @@ export default function Reviews() {
                     <span className="review-card__name">{review.name}</span>
                     <span className="review-card__role">{review.role}</span>
                   </span>
-                  <span className="review-card__tag">Sample</span>
                 </figcaption>
               </figure>
             ))}

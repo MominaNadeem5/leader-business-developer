@@ -356,6 +356,11 @@
   margin-bottom: 10px;
 }
 
+/* an odd last card spans the full row so the 2-column grid has no gap */
+.web__card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .web__card {
   display: flex;
   align-items: center;

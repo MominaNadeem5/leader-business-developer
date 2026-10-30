@@ -1,4 +1,4 @@
-import { Globe, LayoutTemplate, ShoppingBag, Wrench } from "lucide-react";
+import { Globe, LayoutTemplate, ShoppingBag, ShoppingCart, Wrench } from "lucide-react";
 
 /* The pages in the navbar's "Website Setup" dropdown.
    Used for the overview cards and the "related services" links on each page. */
@@ -6,6 +6,7 @@ export const WEBSITE_SERVICES = [
   { path: "/website/domain-hosting", title: "Domain & Hosting Setup", short: "The right domain, reliable hosting, SSL and professional email, configured properly.", icon: Globe },
   { path: "/website/wordpress", title: "WordPress Setup", short: "A fast, secure, easy-to-edit WordPress website built around your business.", icon: LayoutTemplate },
   { path: "/website/shopify", title: "Shopify Setup", short: "A ready-to-sell Shopify store with theme, products, payments and shipping set up.", icon: ShoppingBag },
+  { path: "/website/ecommerce-setup", title: "E-commerce Setup", short: "A complete online store with platform, products, checkout, payments, shipping and taxes ready to go.", icon: ShoppingCart },
   { path: "/website/maintenance", title: "Website Maintenance", short: "Updates, backups, security and uptime monitoring so your site stays healthy.", icon: Wrench },
 ];
 
@@ -35,6 +36,11 @@ export const WEBSITE_SEO = {
     title: "Shopify Store Setup Services | Leader Business",
     description: "Shopify store setup: theme customization, products and collections, payments, shipping, taxes, apps and launch, so you can start selling online fast.",
     keywords: ["Shopify store setup", "Shopify setup service", "Shopify theme customization", "Shopify product upload", "launch a Shopify store", "Shopify expert"],
+  },
+  "/website/ecommerce-setup": {
+    title: "E-commerce Setup Services for Online Stores | Leader Business",
+    description: "E-commerce setup services: platform, storefront, products, payments, shipping and taxes configured so your online store is ready to sell from launch day.",
+    keywords: ["ecommerce setup", "online store setup", "ecommerce store setup service", "launch an online store", "Shopify or WooCommerce setup", "small business ecommerce"],
   },
   "/website/maintenance": {
     title: "Website Maintenance Services & Plans | Leader Business",

@@ -4,6 +4,7 @@ import {
   PiGlobeBold,
   PiLayoutBold,
   PiShoppingBagBold,
+  PiShoppingCartBold,
   PiWrenchBold,
   PiCheckCircleBold,
 } from "react-icons/pi";
@@ -16,6 +17,7 @@ const websiteServices = [
   { title: "WordPress Setup", text: "Flexible, easy-to-manage business sites.", Icon: PiLayoutBold, to: "/website/wordpress" },
   { title: "Shopify Setup", text: "Launch an online store ready to sell.", Icon: PiShoppingBagBold, to: "/website/shopify" },
   { title: "Website Maintenance", text: "Updates, backups and ongoing care.", Icon: PiWrenchBold, to: "/website/maintenance" },
+  { title: "E-commerce Setup", text: "Products, checkout, shipping and marketplaces.", Icon: PiShoppingCartBold, to: "/website/ecommerce-setup" },
 ];
 
 const points = ["Professional, mobile-friendly design", "Payments and business tools connected", "Support from setup to launch"];
