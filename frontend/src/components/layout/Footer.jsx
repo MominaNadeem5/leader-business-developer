@@ -39,7 +39,7 @@ export default function Footer() {
 
   const popularServices = [
     { label: "LLC & Company Registration", to: "/business/llc" },
-    { label: "EIN Assistance", to: "/business/ein" },
+    { label: "EIN and ITIN Assistance", to: "/business/ein" },
     { label: "Business Bank Guidance", to: "/banking" },
     { label: "Merchant Solutions", to: "/merchant" },
     { label: "WordPress Development", to: "/website/wordpress" },
@@ -117,7 +117,7 @@ export default function Footer() {
             <img src={logo} alt="Leader Business Developer" className="footer__logo" />
           </div>
           <p className="footer__description">
-            Leader Business Developer helps entrepreneurs start and run U.S. businesses with confidence. From LLC and corporation formation to EIN assistance, state and federal filings, and ongoing compliance support, we handle the paperwork so you can focus on growth.
+            Leader Business Developer helps entrepreneurs start and run U.S. businesses with confidence. From LLC and corporation formation to EIN and ITIN assistance, state and federal filings, and ongoing compliance support, we handle the paperwork so you can focus on growth.
           </p>
           <ul className="footer__points">
             {footerPoints.map((point) => (
